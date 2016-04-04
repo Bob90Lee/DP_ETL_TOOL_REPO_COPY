@@ -17,6 +17,8 @@ namespace DP_ETL_TOOL
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
+            System.Console.Out.WriteLine("Hello World!");
         }
     }
 }
