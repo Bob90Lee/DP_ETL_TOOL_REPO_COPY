@@ -16,20 +16,28 @@ namespace DP_ETL_TOOL
         {
             InitializeComponent();
 
-            MenuStrip menuBar = new MenuStrip();
+            exitToolStripMenuItem.Click += new EventHandler(ExitApplication);
 
-
-            menuBar.Items.Add("Exit", null, new EventHandler(MenuBarClickHandler));
-            menuBar.Items.Add("Fuck off");
-            menuBar.Items.Add("monkey");
-
-            this.Controls.Add(menuBar);
         }
 
-        private void MenuBarClickHandler(object sender, EventArgs e)
+        private void ExitApplication(object sender, EventArgs e)
         {
             Application.Exit();
+
+            
         }
+
+        private void workplaceTab_Click(object sender, EventArgs e)
+        {
+            Button b = new Button();
+            b.Text = "XXX";
+            b.BackColor = Color.Red;
+            b.Visible = true;
+            b.SetBounds(this.Width - 300, this.Height - 100, 100, 50);
+            
+            workplaceTab.Controls.Add(b);
+        }
+
 
     }
 }

@@ -19,10 +19,7 @@ namespace DP_ETL_TOOL
             Application.SetCompatibleTextRenderingDefault(false);
 
             Form main = new MainForm();
-            main.Text = "ETL Toolkit";
-
-            main.SetBounds(0, 0, 640, 480);
-            main.FormBorderStyle = FormBorderStyle.Sizable;
+            main.Text = "ETL Tool";
 
             Application.Run(main);            
 
