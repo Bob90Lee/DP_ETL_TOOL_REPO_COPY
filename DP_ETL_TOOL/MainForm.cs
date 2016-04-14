@@ -18,25 +18,17 @@ namespace DP_ETL_TOOL
 
             exitToolStripMenuItem.Click += new EventHandler(ExitApplication);
 
+            codeEdit.SelectionTabs = new int[] { 30, 60, 90, 120 };
         }
 
         private void ExitApplication(object sender, EventArgs e)
         {
             Application.Exit();
 
-            
-        }
 
-        private void workplaceTab_Click(object sender, EventArgs e)
-        {
-            Button b = new Button();
-            b.Text = "XXX";
-            b.BackColor = Color.Red;
-            b.Visible = true;
-            b.SetBounds(this.Width - 300, this.Height - 100, 100, 50);
-            
-            workplaceTab.Controls.Add(b);
         }
+        
+
 
 
     }

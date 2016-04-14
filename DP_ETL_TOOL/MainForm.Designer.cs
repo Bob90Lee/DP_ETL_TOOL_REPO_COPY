@@ -30,6 +30,7 @@
         {
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,24 +38,27 @@
             this.designerTab = new System.Windows.Forms.TabPage();
             this.leftTabs = new System.Windows.Forms.TabControl();
             this.rightTabs = new System.Windows.Forms.TabControl();
-            this.workplaceTab = new System.Windows.Forms.TabPage();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.visualTab = new System.Windows.Forms.TabPage();
+            this.codeTab = new System.Windows.Forms.TabPage();
+            this.codeEdit = new System.Windows.Forms.RichTextBox();
+            this.codeControl = new System.Windows.Forms.RichTextBox();
             this.MainMenu.SuspendLayout();
             this.leftTabs.SuspendLayout();
             this.rightTabs.SuspendLayout();
+            this.codeTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.applicationToolStripMenuItem,
-            this.settingsToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem,
+            this.settingsToolStripMenuItem,
+            this.applicationToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(1129, 24);
+            this.MainMenu.Size = new System.Drawing.Size(880, 24);
             this.MainMenu.TabIndex = 0;
             // 
             // applicationToolStripMenuItem
@@ -64,6 +68,12 @@
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
             this.applicationToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
             this.applicationToolStripMenuItem.Text = "Application";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
             // 
             // settingsToolStripMenuItem
             // 
@@ -96,7 +106,7 @@
             this.designerTab.Location = new System.Drawing.Point(4, 22);
             this.designerTab.Name = "designerTab";
             this.designerTab.Padding = new System.Windows.Forms.Padding(3);
-            this.designerTab.Size = new System.Drawing.Size(137, 460);
+            this.designerTab.Size = new System.Drawing.Size(137, 449);
             this.designerTab.TabIndex = 0;
             this.designerTab.Text = "Designer";
             // 
@@ -107,43 +117,71 @@
             this.leftTabs.Location = new System.Drawing.Point(0, 24);
             this.leftTabs.Name = "leftTabs";
             this.leftTabs.SelectedIndex = 0;
-            this.leftTabs.Size = new System.Drawing.Size(145, 486);
+            this.leftTabs.Size = new System.Drawing.Size(145, 475);
             this.leftTabs.TabIndex = 1;
+            this.leftTabs.TabStop = false;
             // 
             // rightTabs
             // 
-            this.rightTabs.Controls.Add(this.workplaceTab);
+            this.rightTabs.Controls.Add(this.visualTab);
+            this.rightTabs.Controls.Add(this.codeTab);
             this.rightTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightTabs.Location = new System.Drawing.Point(145, 24);
             this.rightTabs.Name = "rightTabs";
             this.rightTabs.SelectedIndex = 0;
-            this.rightTabs.Size = new System.Drawing.Size(984, 486);
+            this.rightTabs.Size = new System.Drawing.Size(735, 475);
             this.rightTabs.TabIndex = 2;
+            this.rightTabs.TabStop = false;
             // 
-            // workplaceTab
+            // visualTab
             // 
-            this.workplaceTab.AutoScroll = true;
-            this.workplaceTab.BackColor = System.Drawing.Color.White;
-            this.workplaceTab.Location = new System.Drawing.Point(4, 22);
-            this.workplaceTab.Name = "workplaceTab";
-            this.workplaceTab.Padding = new System.Windows.Forms.Padding(3);
-            this.workplaceTab.Size = new System.Drawing.Size(976, 460);
-            this.workplaceTab.TabIndex = 0;
-            this.workplaceTab.Text = "Workplace";
-            this.workplaceTab.Click += new System.EventHandler(this.workplaceTab_Click);
+            this.visualTab.AutoScroll = true;
+            this.visualTab.BackColor = System.Drawing.Color.White;
+            this.visualTab.Location = new System.Drawing.Point(4, 22);
+            this.visualTab.Name = "visualTab";
+            this.visualTab.Padding = new System.Windows.Forms.Padding(3);
+            this.visualTab.Size = new System.Drawing.Size(976, 460);
+            this.visualTab.TabIndex = 0;
+            this.visualTab.Text = "Visual";
             // 
-            // exitToolStripMenuItem
+            // codeTab
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.codeTab.Controls.Add(this.codeEdit);
+            this.codeTab.Controls.Add(this.codeControl);
+            this.codeTab.Location = new System.Drawing.Point(4, 22);
+            this.codeTab.Name = "codeTab";
+            this.codeTab.Size = new System.Drawing.Size(727, 449);
+            this.codeTab.TabIndex = 1;
+            this.codeTab.Text = "Code";
+            this.codeTab.UseVisualStyleBackColor = true;
+            // 
+            // codeEdit
+            // 
+            this.codeEdit.AcceptsTab = true;
+            this.codeEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.codeEdit.Location = new System.Drawing.Point(40, 0);
+            this.codeEdit.Name = "codeEdit";
+            this.codeEdit.Size = new System.Drawing.Size(687, 449);
+            this.codeEdit.TabIndex = 0;
+            this.codeEdit.Text = "";
+            // 
+            // codeControl
+            // 
+            this.codeControl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.codeControl.Location = new System.Drawing.Point(0, 0);
+            this.codeControl.Name = "codeControl";
+            this.codeControl.ReadOnly = true;
+            this.codeControl.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.codeControl.Size = new System.Drawing.Size(40, 449);
+            this.codeControl.TabIndex = 0;
+            this.codeControl.Text = "";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1129, 510);
+            this.ClientSize = new System.Drawing.Size(880, 499);
             this.Controls.Add(this.rightTabs);
             this.Controls.Add(this.leftTabs);
             this.Controls.Add(this.MainMenu);
@@ -154,6 +192,7 @@
             this.MainMenu.PerformLayout();
             this.leftTabs.ResumeLayout(false);
             this.rightTabs.ResumeLayout(false);
+            this.codeTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,7 +202,7 @@
 
         private System.Windows.Forms.MenuStrip MainMenu;
         private System.Windows.Forms.TabControl rightTabs;
-        private System.Windows.Forms.TabPage workplaceTab;
+        private System.Windows.Forms.TabPage visualTab;
         private System.Windows.Forms.TabControl leftTabs;
         private System.Windows.Forms.TabPage designerTab;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
@@ -172,6 +211,9 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applicationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.TabPage codeTab;
+        private System.Windows.Forms.RichTextBox codeEdit;
+        private System.Windows.Forms.RichTextBox codeControl;
     }
 }
 
