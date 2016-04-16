@@ -15,9 +15,9 @@ namespace DP_ETL_TOOL
     {
 
         private List<TableControl> tables = new List<TableControl>();
-        private List<JoinEntity> joins = new List<JoinEntity>();
+        private List<JoinControl> joins = new List<JoinControl>();
 
-        private JoinEntity currentJoin = new JoinEntity();
+        private JoinControl currentJoin = new JoinControl();
 
         private bool activatedJoin = false;
 
@@ -68,34 +68,24 @@ namespace DP_ETL_TOOL
 
                     if (activatedJoin)
                     {
-                        currentJoin.setChildEntity(tc.getTableEntity());
+                        currentJoin.setChildEntity(tc);
                     }
                     else
                     {
-                        currentJoin.setMainTable(tc.getTableEntity());
+                        currentJoin.setMainTable(tc);
                     }
 
                     activatedJoin = !activatedJoin;
-
-                    if (activatedJoin)
-                    {
-                        //designerList.SelectionMode = SelectionMode.None;
-                        
-                    }
-                    else
-                    {
-                        //designerList.SelectionMode = SelectionMode.One;
-                    }
 
                 }
                 
                 if( currentJoin.getMainTable() != null && currentJoin.getChildTable() != null)
                 {
                     joins.Add(currentJoin);
-                    currentJoin.setMainTable(null);
-                    currentJoin.setChildEntity(null);
+                    visualPanel.Controls.Add(currentJoin);
+                    currentJoin = new JoinControl();
                 }  
-            }   
+            }
         }
 
         private void PopulateObjectList(ListBox b)

@@ -96,6 +96,13 @@ namespace DP_ETL_TOOL.Controls
             this.isDragged = false;
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            //e.Graphics.Clear(Color.White);
+        }
+
         public TableEntity getTableEntity()
         {
             return tableEntity;
@@ -114,6 +121,8 @@ namespace DP_ETL_TOOL.Controls
             Control senderControl = (Control)sender;
             senderControl.Parent.Parent.Dispose();
         }
+
+        
 
     }
 }

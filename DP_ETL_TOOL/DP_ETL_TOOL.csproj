@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\JoinEntity.cs" />
+    <Compile Include="Controls\JoinControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TableEntity.cs" />
     <Compile Include="Controls\TableControl.cs">
       <SubType>Component</SubType>
