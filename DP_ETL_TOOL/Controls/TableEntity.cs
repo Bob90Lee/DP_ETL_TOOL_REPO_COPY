@@ -13,6 +13,11 @@ namespace DP_ETL_TOOL.Controls
         private List<Column> columns;
         private List<Index> indexes = new List<Index>();
 
+        public TableEntity()
+        {
+            this.tableName = "TableNEW" + new Random().Next(0, 1000);
+        }
+
         public TableEntity(String tableName)
         {
             this.tableName = tableName;
@@ -83,7 +88,7 @@ namespace DP_ETL_TOOL.Controls
         public void removeColumn(String name)
         {
             foreach (Column column in columns) {
-                if  (column.getName().Contains(name.ToUpper())) {
+                if (column.getName().Contains(name.ToUpper())) {
                     columns.Remove(column);
                 }
             }
@@ -98,6 +103,26 @@ namespace DP_ETL_TOOL.Controls
                     indexes.Remove(index);
                 }
             }
+        }
+
+        public String getName()
+        {
+            return tableName;
+        }
+
+        public String getSchema()
+        {
+            return tableSchema;
+        }
+
+        public List<Column> getColumns()
+        {
+            return columns;
+        }
+
+        public List<Index> getIndexes()
+        {
+            return indexes;
         }
     }
 

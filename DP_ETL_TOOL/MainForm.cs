@@ -24,7 +24,7 @@ namespace DP_ETL_TOOL
             exitToolStripMenuItem.Click += new EventHandler(ExitApplication);
 
             visualPanel.AllowDrop = true;
-            visualPanel.Click += new EventHandler(VisualTabClickEvent);
+            visualPanel.MouseClick += new MouseEventHandler(VisualTabClickEvent);
 
             codeEdit.SelectionTabs = new int[] { 30, 60, 90, 120 };
 
@@ -40,16 +40,18 @@ namespace DP_ETL_TOOL
         {
             Application.Exit();
 
-
         }
 
-        private void VisualTabClickEvent(object sender, EventArgs e)
-        {
-            TableControl tc = new TableControl();
-            visuals.Add(tc);
-            tc.Text = (comps.SelectedItem.ToString() + visuals.Count.ToString());
-            tc.Location = visualTab.PointToClient(Control.MousePosition);
-            visualPanel.Controls.Add(tc);
+        private void VisualTabClickEvent(object sender, MouseEventArgs e)
+        {            
+            if (e.Button == MouseButtons.Right && comps.SelectedItem == comps.Items[0]) // table
+            {
+                TableControl tc = new TableControl();
+                visuals.Add(tc);
+                tc.Location = visualTab.PointToClient(Control.MousePosition);
+                visualPanel.Controls.Add(tc);
+            }
+
         }
 
         private void PopulateComps()
