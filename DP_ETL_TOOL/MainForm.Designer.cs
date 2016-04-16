@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.MainMenu = new System.Windows.Forms.MenuStrip();
-            this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.snippetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designerTab = new System.Windows.Forms.TabPage();
             this.leftTabs = new System.Windows.Forms.TabControl();
             this.rightTabs = new System.Windows.Forms.TabControl();
@@ -42,44 +42,26 @@
             this.codeTab = new System.Windows.Forms.TabPage();
             this.codeEdit = new System.Windows.Forms.RichTextBox();
             this.codeControl = new System.Windows.Forms.RichTextBox();
+            this.visualPanel = new System.Windows.Forms.Panel();
             this.MainMenu.SuspendLayout();
             this.leftTabs.SuspendLayout();
             this.rightTabs.SuspendLayout();
+            this.visualTab.SuspendLayout();
             this.codeTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolsToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.settingsToolStripMenuItem,
             this.applicationToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.toolsToolStripMenuItem,
+            this.snippetsToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(880, 24);
             this.MainMenu.TabIndex = 0;
-            // 
-            // applicationToolStripMenuItem
-            // 
-            this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
-            this.applicationToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
-            this.applicationToolStripMenuItem.Text = "Application";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // toolsToolStripMenuItem
             // 
@@ -93,15 +75,34 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // aboutToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // applicationToolStripMenuItem
+            // 
+            this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
+            this.applicationToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.applicationToolStripMenuItem.Text = "Application";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // snippetsToolStripMenuItem
+            // 
+            this.snippetsToolStripMenuItem.Name = "snippetsToolStripMenuItem";
+            this.snippetsToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.snippetsToolStripMenuItem.Text = "Snippets";
             // 
             // designerTab
             // 
-            this.designerTab.AutoScroll = true;
             this.designerTab.BackColor = System.Drawing.Color.White;
             this.designerTab.Location = new System.Drawing.Point(4, 22);
             this.designerTab.Name = "designerTab";
@@ -137,10 +138,11 @@
             // 
             this.visualTab.AutoScroll = true;
             this.visualTab.BackColor = System.Drawing.Color.White;
+            this.visualTab.Controls.Add(this.visualPanel);
             this.visualTab.Location = new System.Drawing.Point(4, 22);
             this.visualTab.Name = "visualTab";
             this.visualTab.Padding = new System.Windows.Forms.Padding(3);
-            this.visualTab.Size = new System.Drawing.Size(976, 460);
+            this.visualTab.Size = new System.Drawing.Size(727, 449);
             this.visualTab.TabIndex = 0;
             this.visualTab.Text = "Visual";
             // 
@@ -176,6 +178,14 @@
             this.codeControl.TabIndex = 0;
             this.codeControl.Text = "";
             // 
+            // visualPanel
+            // 
+            this.visualPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.visualPanel.Location = new System.Drawing.Point(3, 3);
+            this.visualPanel.Name = "visualPanel";
+            this.visualPanel.Size = new System.Drawing.Size(721, 443);
+            this.visualPanel.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -192,6 +202,7 @@
             this.MainMenu.PerformLayout();
             this.leftTabs.ResumeLayout(false);
             this.rightTabs.ResumeLayout(false);
+            this.visualTab.ResumeLayout(false);
             this.codeTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -207,13 +218,14 @@
         private System.Windows.Forms.TabPage designerTab;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem snippetsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applicationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.TabPage codeTab;
         private System.Windows.Forms.RichTextBox codeEdit;
         private System.Windows.Forms.RichTextBox codeControl;
+        private System.Windows.Forms.Panel visualPanel;
     }
 }
 
