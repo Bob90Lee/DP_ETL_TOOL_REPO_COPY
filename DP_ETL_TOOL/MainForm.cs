@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DP_ETL_TOOL.Controls;
 
 namespace DP_ETL_TOOL
 {
@@ -14,6 +15,7 @@ namespace DP_ETL_TOOL
     {
         ListBox comps = new ListBox();
 
+        List<TableControl> visuals = new List<TableControl>();
 
         public MainForm()
         {
@@ -30,9 +32,7 @@ namespace DP_ETL_TOOL
             designerTab.Controls.Add(comps);
             PopulateComps();
 
-            /* l1.MouseMove += new MouseEventHandler(l1_MouseMove);
-            l1.MouseDown += new MouseEventHandler(l1_MouseDown);
-            l1.MouseUp += new MouseEventHandler(l1_MouseUp);*/
+
 
         }
 
@@ -45,15 +45,19 @@ namespace DP_ETL_TOOL
 
         private void VisualTabClickEvent(object sender, EventArgs e)
         {
-            //l1.BorderStyle = BorderStyle.FixedSingle;
-            //l1.Text = "HABADABA";
-            //visualPanel.Controls.Add( l1 );
+            TableControl tc = new TableControl();
+            visuals.Add(tc);
+            tc.Text = (comps.SelectedItem.ToString() + visuals.Count.ToString());
+            tc.Location = visualTab.PointToClient(Control.MousePosition);
+            visualPanel.Controls.Add(tc);
         }
 
         private void PopulateComps()
         {
             comps.Items.Add("Table");
             comps.Items.Add("Inner join");
+
+            comps.SelectedItem = comps.Items[0];
         }
 
         
