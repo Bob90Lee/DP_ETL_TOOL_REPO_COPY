@@ -29,21 +29,23 @@
         private void InitializeComponent()
         {
             this.MainMenu = new System.Windows.Forms.MenuStrip();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snippetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designerTab = new System.Windows.Forms.TabPage();
             this.leftTabs = new System.Windows.Forms.TabControl();
             this.rightTabs = new System.Windows.Forms.TabControl();
             this.visualTab = new System.Windows.Forms.TabPage();
+            this.visualPanel = new System.Windows.Forms.Panel();
             this.codeTab = new System.Windows.Forms.TabPage();
             this.codeEdit = new System.Windows.Forms.RichTextBox();
             this.codeControl = new System.Windows.Forms.RichTextBox();
-            this.visualPanel = new System.Windows.Forms.Panel();
+            this.designerList = new System.Windows.Forms.ListBox();
             this.MainMenu.SuspendLayout();
+            this.designerTab.SuspendLayout();
             this.leftTabs.SuspendLayout();
             this.rightTabs.SuspendLayout();
             this.visualTab.SuspendLayout();
@@ -63,24 +65,6 @@
             this.MainMenu.Size = new System.Drawing.Size(880, 24);
             this.MainMenu.TabIndex = 0;
             // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.toolsToolStripMenuItem.Text = "Tools";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // 
             // applicationToolStripMenuItem
             // 
             this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -92,8 +76,20 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // snippetsToolStripMenuItem
             // 
@@ -101,9 +97,16 @@
             this.snippetsToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.snippetsToolStripMenuItem.Text = "Snippets";
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
             // designerTab
             // 
             this.designerTab.BackColor = System.Drawing.Color.White;
+            this.designerTab.Controls.Add(this.designerList);
             this.designerTab.Location = new System.Drawing.Point(4, 22);
             this.designerTab.Name = "designerTab";
             this.designerTab.Padding = new System.Windows.Forms.Padding(3);
@@ -146,6 +149,14 @@
             this.visualTab.TabIndex = 0;
             this.visualTab.Text = "Visual";
             // 
+            // visualPanel
+            // 
+            this.visualPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.visualPanel.Location = new System.Drawing.Point(3, 3);
+            this.visualPanel.Name = "visualPanel";
+            this.visualPanel.Size = new System.Drawing.Size(721, 443);
+            this.visualPanel.TabIndex = 0;
+            // 
             // codeTab
             // 
             this.codeTab.Controls.Add(this.codeEdit);
@@ -178,13 +189,14 @@
             this.codeControl.TabIndex = 0;
             this.codeControl.Text = "";
             // 
-            // visualPanel
+            // designerList
             // 
-            this.visualPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.visualPanel.Location = new System.Drawing.Point(3, 3);
-            this.visualPanel.Name = "visualPanel";
-            this.visualPanel.Size = new System.Drawing.Size(721, 443);
-            this.visualPanel.TabIndex = 0;
+            this.designerList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.designerList.FormattingEnabled = true;
+            this.designerList.Location = new System.Drawing.Point(3, 3);
+            this.designerList.Name = "designerList";
+            this.designerList.Size = new System.Drawing.Size(131, 443);
+            this.designerList.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -200,6 +212,7 @@
             this.Text = "ETL Tool";
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
+            this.designerTab.ResumeLayout(false);
             this.leftTabs.ResumeLayout(false);
             this.rightTabs.ResumeLayout(false);
             this.visualTab.ResumeLayout(false);
@@ -226,6 +239,7 @@
         private System.Windows.Forms.RichTextBox codeEdit;
         private System.Windows.Forms.RichTextBox codeControl;
         private System.Windows.Forms.Panel visualPanel;
+        private System.Windows.Forms.ListBox designerList;
     }
 }
 

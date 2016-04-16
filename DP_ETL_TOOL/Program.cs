@@ -21,9 +21,8 @@ namespace DP_ETL_TOOL
             Form main = new MainForm();
             main.Text = "ETL Tool";
 
-            Application.Run(main);            
+            Application.Run(main);
 
-            System.Console.Out.WriteLine("Hello World!");
         }
 
 
