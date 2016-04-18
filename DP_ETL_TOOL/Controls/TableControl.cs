@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DP_ETL_TOOL.Forms;
+using System.Text;
+using System.Collections.Generic;
 
 namespace DP_ETL_TOOL.Controls
 {
@@ -31,38 +33,7 @@ namespace DP_ETL_TOOL.Controls
 
         protected override void OnDoubleClick(EventArgs e)
         {
-            EditObjectForm editForm = new EditObjectForm();
-            editForm.Text = this.Text;
-            
-            FlowLayoutPanel flp = new FlowLayoutPanel();
-            editForm.Controls.Add(flp);
-            flp.Dock = DockStyle.Fill;
-
-            TextBox tbTableName = new TextBox();
-            Button bDeleteTable = new Button();
-
-            tbTableName.Text = tableEntity.getName();
-            tbTableName.Height = 50;
-            tbTableName.Width = 300;
-
-            bDeleteTable.Text = "Delete table";
-            bDeleteTable.Height = 50;
-            bDeleteTable.Width = 300;
-
-            tbTableName.TextChanged += new EventHandler(changeTableName);
-            bDeleteTable.Click += new EventHandler(deleteTable);
-
-
-            flp.Controls.Add(tbTableName);
-            flp.Controls.Add(bDeleteTable);
-
-            editForm.StartPosition = FormStartPosition.CenterParent;
-            editForm.SetBounds(0, 0, 325, 125);
-
-
-            tbTableName.KeyDown += new KeyEventHandler(DialogKeyEvent);
-
-            editForm.ShowDialog(this);
+            CreateTableEditGUI(tableEntity);            
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -130,13 +101,84 @@ namespace DP_ETL_TOOL.Controls
 
         private void DialogKeyEvent(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Escape)
             {
                 Control s = (Control)sender;
                 s.Parent.Parent.Dispose(); // this is not very nice, but works
             }
         }
 
+        private void CreateTableEditGUI(TableEntity te)
+        {
+
+            StringBuilder sb = new StringBuilder();
+
+            EditObjectForm editForm = new EditObjectForm();
+            editForm.Text = this.Text;
+
+            populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
+            populateComboBoxColumnType((ComboBox)editForm.Controls["combColumnType"]);
+
+            editForm.Controls["tbTableName"].Text = te.getName();
+            editForm.Controls["tbSchemaName"].Text = te.getSchema();
+
+            editForm.Controls["btnAdd"].Click += (sender, args) => {
+                ComboBox cb = (ComboBox)editForm.Controls["combColumnType"];
+
+                if (editForm.Controls["tbColumnName"].Text.ToString().Length > 0 && cb.SelectedItem != null && editForm.Controls["tbColumnLength"].Text.ToString().Length > 0)
+                {
+                    int length = 0;
+                    int.TryParse(editForm.Controls["tbColumnLength"].Text, out length);
+
+                    te.addColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedText, length);
+
+                    populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
+                }
+            };
+
+
+            editForm.Controls["btnRemove"].Click += (sender, args) =>
+            {
+                ComboBox cb = (ComboBox)editForm.Controls["combColumn"];
+
+                if (cb.SelectedItem != null)
+                {
+
+                    te.removeColumn(cb.SelectedItem.ToString());
+
+                    populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
+                }
+
+                Console.WriteLine("IT WORKS");
+            };
+
+            editForm.KeyDown += new KeyEventHandler(DialogKeyEvent);
+
+            editForm.ShowDialog(this);
+        }
+
+        private void populateComboBoxColumnType(ComboBox cb)
+        {
+            cb.Items.Add("VARCHAR2");
+            cb.Items.Add("NUMBER");
+        }
+
+        private void populateComboBoxColumn(ComboBox cb, TableEntity te)
+        {
+            cb.Items.Clear();
+
+            List<Column> columns = te.getColumns();
+
+            if( columns != null)
+            {
+                foreach (Column c in columns)
+                {
+                    cb.Items.Add(c.getName());
+                }
+            }
+
+
+        }
 
     }
 }

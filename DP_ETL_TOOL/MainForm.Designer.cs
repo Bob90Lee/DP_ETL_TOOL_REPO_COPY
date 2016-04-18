@@ -36,6 +36,7 @@
             this.snippetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designerTab = new System.Windows.Forms.TabPage();
+            this.designerList = new System.Windows.Forms.ListBox();
             this.leftTabs = new System.Windows.Forms.TabControl();
             this.rightTabs = new System.Windows.Forms.TabControl();
             this.visualTab = new System.Windows.Forms.TabPage();
@@ -43,7 +44,15 @@
             this.codeTab = new System.Windows.Forms.TabPage();
             this.codeEdit = new System.Windows.Forms.RichTextBox();
             this.codeControl = new System.Windows.Forms.RichTextBox();
-            this.designerList = new System.Windows.Forms.ListBox();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oracleSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
             this.leftTabs.SuspendLayout();
@@ -68,6 +77,10 @@
             // applicationToolStripMenuItem
             // 
             this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.exportToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
             this.applicationToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
@@ -76,11 +89,13 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // settingsToolStripMenuItem
             // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modulesToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -93,12 +108,17 @@
             // 
             // snippetsToolStripMenuItem
             // 
+            this.snippetsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tableToolStripMenuItem,
+            this.viewToolStripMenuItem});
             this.snippetsToolStripMenuItem.Name = "snippetsToolStripMenuItem";
             this.snippetsToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.snippetsToolStripMenuItem.Text = "Snippets";
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -113,6 +133,15 @@
             this.designerTab.Size = new System.Drawing.Size(137, 449);
             this.designerTab.TabIndex = 0;
             this.designerTab.Text = "Designer";
+            // 
+            // designerList
+            // 
+            this.designerList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.designerList.FormattingEnabled = true;
+            this.designerList.Location = new System.Drawing.Point(3, 3);
+            this.designerList.Name = "designerList";
+            this.designerList.Size = new System.Drawing.Size(131, 443);
+            this.designerList.TabIndex = 0;
             // 
             // leftTabs
             // 
@@ -189,14 +218,61 @@
             this.codeControl.TabIndex = 0;
             this.codeControl.Text = "";
             // 
-            // designerList
+            // newToolStripMenuItem
             // 
-            this.designerList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.designerList.FormattingEnabled = true;
-            this.designerList.Location = new System.Drawing.Point(3, 3);
-            this.designerList.Name = "designerList";
-            this.designerList.Size = new System.Drawing.Size(131, 443);
-            this.designerList.TabIndex = 0;
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Text = "New";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            // 
+            // modulesToolStripMenuItem
+            // 
+            this.modulesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.oracleSQLToolStripMenuItem});
+            this.modulesToolStripMenuItem.Name = "modulesToolStripMenuItem";
+            this.modulesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.modulesToolStripMenuItem.Text = "Modules";
+            // 
+            // oracleSQLToolStripMenuItem
+            // 
+            this.oracleSQLToolStripMenuItem.Name = "oracleSQLToolStripMenuItem";
+            this.oracleSQLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.oracleSQLToolStripMenuItem.Text = "Oracle SQL";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // tableToolStripMenuItem
+            // 
+            this.tableToolStripMenuItem.Name = "tableToolStripMenuItem";
+            this.tableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tableToolStripMenuItem.Text = "Table";
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewToolStripMenuItem.Text = "View";
             // 
             // MainForm
             // 
@@ -240,6 +316,15 @@
         private System.Windows.Forms.RichTextBox codeControl;
         private System.Windows.Forms.Panel visualPanel;
         private System.Windows.Forms.ListBox designerList;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modulesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oracleSQLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

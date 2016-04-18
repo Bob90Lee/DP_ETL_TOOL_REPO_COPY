@@ -17,6 +17,8 @@ namespace DP_ETL_TOOL.Controls
 
         Control thisParent = null;
 
+        Enums.JoinType joinType = Enums.JoinType.Left;
+
         protected override CreateParams CreateParams
         {
             get
@@ -27,7 +29,7 @@ namespace DP_ETL_TOOL.Controls
             }
         }
 
-        public JoinControl(Control parent)
+        public JoinControl(Control parent, Enums.JoinType jt)
         {
             Size = new Size(1000, 1000);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
@@ -37,6 +39,8 @@ namespace DP_ETL_TOOL.Controls
             this.Enabled = false;
 
             thisParent = parent;
+
+            this.joinType = jt;
         }
 
         public void setMainTable(TableControl te)
@@ -103,7 +107,29 @@ namespace DP_ETL_TOOL.Controls
                 g.FillRectangle(new SolidBrush(Color.FromArgb(255, this.BackColor)), bounds);
             }
             else {
-                Pen pen = new Pen(Color.Red, 3);
+
+                Pen pen;
+
+                switch (joinType)
+                {
+                    case Enums.JoinType.Left :
+                        {
+                            pen = new Pen(Color.Red, 3);
+                            break;
+                        }
+                    case Enums.JoinType.Inner:
+                        {
+                            pen = new Pen(Color.Green, 3);
+                            break;
+                        }
+                    default:
+                        {
+                            pen = new Pen(Color.Black, 3);
+                            break;
+                        }
+
+                }
+
                 g.DrawLine(pen, mainTable.Bounds.X + mainTable.Width / 2, mainTable.Bounds.Y + mainTable.Height / 2, childTable.Bounds.X + childTable.Width / 2, childTable.Bounds.Y + childTable.Height / 2);
             }
 

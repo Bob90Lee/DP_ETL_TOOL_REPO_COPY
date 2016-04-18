@@ -57,7 +57,7 @@ namespace DP_ETL_TOOL
         private void TableClick(object sender, MouseEventArgs e)
         {            
 
-            if (e.Button == MouseButtons.Right && designerList.SelectedItem == designerList.Items[1]) // left join
+            if (e.Button == MouseButtons.Right && designerList.SelectedItem != designerList.Items[0]) // join
             {
                 Control senderControl = (Control)sender;
 
@@ -72,7 +72,26 @@ namespace DP_ETL_TOOL
                     }
                     else
                     {
-                        currentJoin = new JoinControl(visualPanel);
+                        Enums.JoinType jt;
+
+                        if (designerList.SelectedItem == designerList.Items[1])
+                        {
+                            jt = Enums.JoinType.Left;
+                        }
+                        else if (designerList.SelectedItem == designerList.Items[2])
+                        {
+                            jt = Enums.JoinType.Inner;
+                        }
+                        else if (designerList.SelectedItem == designerList.Items[3])
+                        {
+                            jt = Enums.JoinType.Right;
+                        }
+                        else
+                        {
+                            jt = Enums.JoinType.Full;
+                        }
+
+                        currentJoin = new JoinControl(visualPanel, jt);
                         currentJoin.setMainTable(tc);
                         activatedJoin = true;
                     }
@@ -86,6 +105,7 @@ namespace DP_ETL_TOOL
                     activatedJoin = false;
                 }  
             }
+
         }
 
         private void PopulateObjectList(ListBox b)
@@ -94,6 +114,7 @@ namespace DP_ETL_TOOL
             b.Items.Add("Left join");
             b.Items.Add("Inner join");
             b.Items.Add("Right join");
+            b.Items.Add("Full join");
 
             b.SelectedItem = b.Items[0];
         }
@@ -109,6 +130,5 @@ namespace DP_ETL_TOOL
                 }
             }
         }
-
     }
 }

@@ -10,7 +10,7 @@ namespace DP_ETL_TOOL.Controls
     {
         private String tableName;
         private String tableSchema;
-        private List<Column> columns;
+        private List<Column> columns = new List<Column>();
         private List<Index> indexes = new List<Index>();
 
         public TableEntity()
@@ -87,9 +87,14 @@ namespace DP_ETL_TOOL.Controls
 
         public void removeColumn(String name)
         {
-            foreach (Column column in columns) {
-                if (column.getName().Contains(name.ToUpper())) {
-                    columns.Remove(column);
+            if ( columns != null)
+            {
+                foreach (Column column in columns)
+                {
+                    if (column.getName().Contains(name.ToUpper()))
+                    {
+                        columns.Remove(column);
+                    }
                 }
             }
         }

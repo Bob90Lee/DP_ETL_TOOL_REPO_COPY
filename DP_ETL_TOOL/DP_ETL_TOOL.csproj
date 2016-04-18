@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Types\Enums.cs" />
     <Compile Include="Controls\JoinControl.cs">
       <SubType>Component</SubType>
     </Compile>

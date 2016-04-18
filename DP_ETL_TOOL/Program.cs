@@ -9,7 +9,7 @@ namespace DP_ETL_TOOL
     static class Program
     {
         /// <summary>
-        /// Boris Ledecky - Diplomova praca - ETL Tool
+        /// Boris Ledecky - Diplomova praca - ETL Toolkit
         /// </summary>
         /// 
         [STAThread]
@@ -19,7 +19,7 @@ namespace DP_ETL_TOOL
             Application.SetCompatibleTextRenderingDefault(false);
 
             Form main = new MainForm();
-            main.Text = "ETL Tool";
+            main.Text = "ETL Toolkit";
 
             Application.Run(main);
 
