@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DP_ETL_TOOL.Controls;
 
@@ -17,7 +11,9 @@ namespace DP_ETL_TOOL
         private List<TableControl> tables = new List<TableControl>();
         private List<JoinControl> joins = new List<JoinControl>();
 
-        private JoinControl currentJoin = new JoinControl();
+        private JoinControl currentJoin;
+
+        Control dummy = new Control();
 
         private bool activatedJoin = false;
 
@@ -28,11 +24,13 @@ namespace DP_ETL_TOOL
             exitToolStripMenuItem.Click += new EventHandler(ExitApplication);
 
             visualPanel.AllowDrop = true;
-            visualPanel.MouseClick += new MouseEventHandler(VisualTabClickEvent);
+            visualPanel.MouseClick += new MouseEventHandler(VisualPanelClickEvent);
 
             codeEdit.SelectionTabs = new int[] { 30, 60, 90, 120 };
 
             PopulateObjectList(designerList);
+
+            designerList.SelectedValueChanged += new EventHandler(DesignerListValueChanged);
 
         }
 
@@ -42,10 +40,11 @@ namespace DP_ETL_TOOL
 
         }
 
-        private void VisualTabClickEvent(object sender, MouseEventArgs e)
+        private void VisualPanelClickEvent(object sender, MouseEventArgs e)
         {            
             if (e.Button == MouseButtons.Right && designerList.SelectedItem == designerList.Items[0]) // table
             {
+
                 TableControl tc = new TableControl();
                 tc.MouseClick += new MouseEventHandler(TableClick);
                 tables.Add(tc);
@@ -69,13 +68,14 @@ namespace DP_ETL_TOOL
                     if (activatedJoin)
                     {
                         currentJoin.setChildEntity(tc);
+                        activatedJoin = false;
                     }
                     else
                     {
+                        currentJoin = new JoinControl(visualPanel);
                         currentJoin.setMainTable(tc);
+                        activatedJoin = true;
                     }
-
-                    activatedJoin = !activatedJoin;
 
                 }
                 
@@ -83,7 +83,7 @@ namespace DP_ETL_TOOL
                 {
                     joins.Add(currentJoin);
                     visualPanel.Controls.Add(currentJoin);
-                    currentJoin = new JoinControl();
+                    activatedJoin = false;
                 }  
             }
         }
@@ -98,9 +98,16 @@ namespace DP_ETL_TOOL
             b.SelectedItem = b.Items[0];
         }
 
-        private void OnSelectedChangeObjectList(ListBox b)
+        private void DesignerListValueChanged(object sender, EventArgs e)
         {
-            activatedJoin = false;
+            visualPanel.BringToFront();
+
+            foreach (Control c in visualPanel.Controls){
+                if (c is JoinControl)
+                {
+                    c.Enabled = false;
+                }
+            }
         }
 
     }

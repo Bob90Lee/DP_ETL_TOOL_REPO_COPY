@@ -59,11 +59,17 @@ namespace DP_ETL_TOOL.Controls
             editForm.StartPosition = FormStartPosition.CenterParent;
             editForm.SetBounds(0, 0, 325, 125);
 
+
+            tbTableName.KeyDown += new KeyEventHandler(DialogKeyEvent);
+
             editForm.ShowDialog(this);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
+            this.BackColor = Color.Red;
+
+
             if (e.Button == MouseButtons.Left)
             {
                 
@@ -74,10 +80,13 @@ namespace DP_ETL_TOOL.Controls
                 this.offset = new Point();
                 this.offset.X = this.Location.X - startPosition.X;
                 this.offset.Y = this.Location.Y - startPosition.Y;
+
+
             }
             else
             {
                 this.isDragged = false;
+
             }
         }
 
@@ -93,15 +102,12 @@ namespace DP_ETL_TOOL.Controls
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
+            this.BackColor = Color.DarkBlue;
+
             this.isDragged = false;
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
 
-            //e.Graphics.Clear(Color.White);
-        }
 
         public TableEntity getTableEntity()
         {
@@ -122,7 +128,15 @@ namespace DP_ETL_TOOL.Controls
             senderControl.Parent.Parent.Dispose();
         }
 
-        
+        private void DialogKeyEvent(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
+            {
+                Control s = (Control)sender;
+                s.Parent.Parent.Dispose(); // this is not very nice, but works
+            }
+        }
+
 
     }
 }
