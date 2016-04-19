@@ -16,6 +16,10 @@ namespace DP_ETL_TOOL.Controls
         private TableEntity tableEntity = new TableEntity();
 
 
+        public TableControl()
+        {
+        }
+
         protected override void OnCreateControl()
         {            
             this.Text = tableEntity.getName(); //+ "\n ( \t xxx, \n \t xxx )";
@@ -29,11 +33,6 @@ namespace DP_ETL_TOOL.Controls
             this.ForeColor = Color.White;
             this.BackColor = Color.DarkBlue;
             this.TextAlign = ContentAlignment.MiddleLeft;            
-        }
-
-        protected override void OnDoubleClick(EventArgs e)
-        {
-            CreateTableEditGUI(tableEntity);            
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -99,86 +98,7 @@ namespace DP_ETL_TOOL.Controls
             senderControl.Parent.Parent.Dispose();
         }
 
-        private void DialogKeyEvent(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                Control s = (Control)sender;
-                s.Parent.Parent.Dispose(); // this is not very nice, but works
-            }
-        }
-
-        private void CreateTableEditGUI(TableEntity te)
-        {
-
-            StringBuilder sb = new StringBuilder();
-
-            EditObjectForm editForm = new EditObjectForm();
-            editForm.Text = this.Text;
-
-            populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
-            populateComboBoxColumnType((ComboBox)editForm.Controls["combColumnType"]);
-
-            editForm.Controls["tbTableName"].Text = te.getName();
-            editForm.Controls["tbSchemaName"].Text = te.getSchema();
-
-            editForm.Controls["btnAdd"].Click += (sender, args) => {
-                ComboBox cb = (ComboBox)editForm.Controls["combColumnType"];
-
-                if (editForm.Controls["tbColumnName"].Text.ToString().Length > 0 && cb.SelectedItem != null && editForm.Controls["tbColumnLength"].Text.ToString().Length > 0)
-                {
-                    int length = 0;
-                    int.TryParse(editForm.Controls["tbColumnLength"].Text, out length);
-
-                    te.addColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedText, length);
-
-                    populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
-                }
-            };
-
-
-            editForm.Controls["btnRemove"].Click += (sender, args) =>
-            {
-                ComboBox cb = (ComboBox)editForm.Controls["combColumn"];
-
-                if (cb.SelectedItem != null)
-                {
-
-                    te.removeColumn(cb.SelectedItem.ToString());
-
-                    populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
-                }
-
-                Console.WriteLine("IT WORKS");
-            };
-
-            editForm.KeyDown += new KeyEventHandler(DialogKeyEvent);
-
-            editForm.ShowDialog(this);
-        }
-
-        private void populateComboBoxColumnType(ComboBox cb)
-        {
-            cb.Items.Add("VARCHAR2");
-            cb.Items.Add("NUMBER");
-        }
-
-        private void populateComboBoxColumn(ComboBox cb, TableEntity te)
-        {
-            cb.Items.Clear();
-
-            List<Column> columns = te.getColumns();
-
-            if( columns != null)
-            {
-                foreach (Column c in columns)
-                {
-                    cb.Items.Add(c.getName());
-                }
-            }
-
-
-        }
+        
 
     }
 }

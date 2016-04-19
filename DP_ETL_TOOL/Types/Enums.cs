@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DP_ETL_TOOL.Controls
+namespace DP_ETL_TOOL.Types
 {
     class Enums
     {
@@ -14,6 +14,13 @@ namespace DP_ETL_TOOL.Controls
             Right,
             Inner,
             Full
+        };
+
+        public enum ModeType
+        {
+            Table,
+            View,
+            Extraction_Procedure
         };
 
     }

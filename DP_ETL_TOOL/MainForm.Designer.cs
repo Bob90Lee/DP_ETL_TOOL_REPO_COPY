@@ -30,35 +30,40 @@
         {
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oracleSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snippetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designerTab = new System.Windows.Forms.TabPage();
-            this.designerList = new System.Windows.Forms.ListBox();
+            this.lbDesignerList = new System.Windows.Forms.ListBox();
             this.leftTabs = new System.Windows.Forms.TabControl();
             this.rightTabs = new System.Windows.Forms.TabControl();
             this.visualTab = new System.Windows.Forms.TabPage();
             this.visualPanel = new System.Windows.Forms.Panel();
             this.codeTab = new System.Windows.Forms.TabPage();
-            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.codeControl = new System.Windows.Forms.RichTextBox();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.oracleSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbDesignerMode = new System.Windows.Forms.ListBox();
+            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
+            this.grpDesigneUp = new System.Windows.Forms.GroupBox();
+            this.grpDesigneDown = new System.Windows.Forms.GroupBox();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
             this.leftTabs.SuspendLayout();
             this.rightTabs.SuspendLayout();
             this.visualTab.SuspendLayout();
             this.codeTab.SuspendLayout();
+            this.grpDesigneUp.SuspendLayout();
+            this.grpDesigneDown.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
@@ -86,10 +91,34 @@
             this.applicationToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
             this.applicationToolStripMenuItem.Text = "Application";
             // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.newToolStripMenuItem.Text = "New";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // settingsToolStripMenuItem
@@ -99,6 +128,20 @@
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // modulesToolStripMenuItem
+            // 
+            this.modulesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.oracleSQLToolStripMenuItem});
+            this.modulesToolStripMenuItem.Name = "modulesToolStripMenuItem";
+            this.modulesToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.modulesToolStripMenuItem.Text = "Modules";
+            // 
+            // oracleSQLToolStripMenuItem
+            // 
+            this.oracleSQLToolStripMenuItem.Name = "oracleSQLToolStripMenuItem";
+            this.oracleSQLToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.oracleSQLToolStripMenuItem.Text = "Oracle SQL";
             // 
             // toolsToolStripMenuItem
             // 
@@ -115,6 +158,18 @@
             this.snippetsToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.snippetsToolStripMenuItem.Text = "Snippets";
             // 
+            // tableToolStripMenuItem
+            // 
+            this.tableToolStripMenuItem.Name = "tableToolStripMenuItem";
+            this.tableToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.tableToolStripMenuItem.Text = "Table";
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -123,10 +178,17 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
             // designerTab
             // 
             this.designerTab.BackColor = System.Drawing.Color.White;
-            this.designerTab.Controls.Add(this.designerList);
+            this.designerTab.Controls.Add(this.grpDesigneDown);
+            this.designerTab.Controls.Add(this.grpDesigneUp);
             this.designerTab.Location = new System.Drawing.Point(4, 22);
             this.designerTab.Name = "designerTab";
             this.designerTab.Padding = new System.Windows.Forms.Padding(3);
@@ -134,14 +196,14 @@
             this.designerTab.TabIndex = 0;
             this.designerTab.Text = "Designer";
             // 
-            // designerList
+            // lbDesignerList
             // 
-            this.designerList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.designerList.FormattingEnabled = true;
-            this.designerList.Location = new System.Drawing.Point(3, 3);
-            this.designerList.Name = "designerList";
-            this.designerList.Size = new System.Drawing.Size(131, 443);
-            this.designerList.TabIndex = 0;
+            this.lbDesignerList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbDesignerList.FormattingEnabled = true;
+            this.lbDesignerList.Location = new System.Drawing.Point(3, 16);
+            this.lbDesignerList.Name = "lbDesignerList";
+            this.lbDesignerList.Size = new System.Drawing.Size(125, 215);
+            this.lbDesignerList.TabIndex = 0;
             // 
             // leftTabs
             // 
@@ -197,16 +259,6 @@
             this.codeTab.Text = "Code";
             this.codeTab.UseVisualStyleBackColor = true;
             // 
-            // codeEdit
-            // 
-            this.codeEdit.AcceptsTab = true;
-            this.codeEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.codeEdit.Location = new System.Drawing.Point(40, 0);
-            this.codeEdit.Name = "codeEdit";
-            this.codeEdit.Size = new System.Drawing.Size(687, 449);
-            this.codeEdit.TabIndex = 0;
-            this.codeEdit.Text = "";
-            // 
             // codeControl
             // 
             this.codeControl.Dock = System.Windows.Forms.DockStyle.Left;
@@ -218,61 +270,48 @@
             this.codeControl.TabIndex = 0;
             this.codeControl.Text = "";
             // 
-            // newToolStripMenuItem
+            // lbDesignerMode
             // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newToolStripMenuItem.Text = "New";
+            this.lbDesignerMode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbDesignerMode.FormattingEnabled = true;
+            this.lbDesignerMode.Location = new System.Drawing.Point(3, 16);
+            this.lbDesignerMode.Name = "lbDesignerMode";
+            this.lbDesignerMode.Size = new System.Drawing.Size(125, 184);
+            this.lbDesignerMode.TabIndex = 1;
             // 
-            // openToolStripMenuItem
+            // codeEdit
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.codeEdit.AcceptsTab = true;
+            this.codeEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.codeEdit.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.codeEdit.ForeColor = System.Drawing.Color.Black;
+            this.codeEdit.Location = new System.Drawing.Point(40, 0);
+            this.codeEdit.Name = "codeEdit";
+            this.codeEdit.Size = new System.Drawing.Size(687, 449);
+            this.codeEdit.TabIndex = 0;
+            this.codeEdit.Text = "";
             // 
-            // saveToolStripMenuItem
+            // grpDesigneUp
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.grpDesigneUp.Controls.Add(this.lbDesignerMode);
+            this.grpDesigneUp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpDesigneUp.Location = new System.Drawing.Point(3, 3);
+            this.grpDesigneUp.Name = "grpDesigneUp";
+            this.grpDesigneUp.Size = new System.Drawing.Size(131, 203);
+            this.grpDesigneUp.TabIndex = 0;
+            this.grpDesigneUp.TabStop = false;
+            this.grpDesigneUp.Text = "Designer Mode";
             // 
-            // exportToolStripMenuItem
+            // grpDesigneDown
             // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exportToolStripMenuItem.Text = "Export";
-            // 
-            // modulesToolStripMenuItem
-            // 
-            this.modulesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.oracleSQLToolStripMenuItem});
-            this.modulesToolStripMenuItem.Name = "modulesToolStripMenuItem";
-            this.modulesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.modulesToolStripMenuItem.Text = "Modules";
-            // 
-            // oracleSQLToolStripMenuItem
-            // 
-            this.oracleSQLToolStripMenuItem.Name = "oracleSQLToolStripMenuItem";
-            this.oracleSQLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.oracleSQLToolStripMenuItem.Text = "Oracle SQL";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // tableToolStripMenuItem
-            // 
-            this.tableToolStripMenuItem.Name = "tableToolStripMenuItem";
-            this.tableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.tableToolStripMenuItem.Text = "Table";
-            // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.viewToolStripMenuItem.Text = "View";
+            this.grpDesigneDown.Controls.Add(this.lbDesignerList);
+            this.grpDesigneDown.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.grpDesigneDown.Location = new System.Drawing.Point(3, 212);
+            this.grpDesigneDown.Name = "grpDesigneDown";
+            this.grpDesigneDown.Size = new System.Drawing.Size(131, 234);
+            this.grpDesigneDown.TabIndex = 1;
+            this.grpDesigneDown.TabStop = false;
+            this.grpDesigneDown.Text = "Designer Tools";
             // 
             // MainForm
             // 
@@ -293,6 +332,8 @@
             this.rightTabs.ResumeLayout(false);
             this.visualTab.ResumeLayout(false);
             this.codeTab.ResumeLayout(false);
+            this.grpDesigneUp.ResumeLayout(false);
+            this.grpDesigneDown.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -312,10 +353,9 @@
         private System.Windows.Forms.ToolStripMenuItem applicationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.TabPage codeTab;
-        private System.Windows.Forms.RichTextBox codeEdit;
         private System.Windows.Forms.RichTextBox codeControl;
         private System.Windows.Forms.Panel visualPanel;
-        private System.Windows.Forms.ListBox designerList;
+        private System.Windows.Forms.ListBox lbDesignerList;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
@@ -325,6 +365,10 @@
         private System.Windows.Forms.ToolStripMenuItem tableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ListBox lbDesignerMode;
+        private Controls.SyntaxTextBoxControl codeEdit;
+        private System.Windows.Forms.GroupBox grpDesigneDown;
+        private System.Windows.Forms.GroupBox grpDesigneUp;
     }
 }
 

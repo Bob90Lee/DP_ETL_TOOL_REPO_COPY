@@ -178,5 +178,10 @@ namespace DP_ETL_TOOL.Controls
             return output;
         }
 
+        public void RefreshSyntax()
+        {
+            SyntaxHighlight(this, true, words);
+        }
+
     }
 }

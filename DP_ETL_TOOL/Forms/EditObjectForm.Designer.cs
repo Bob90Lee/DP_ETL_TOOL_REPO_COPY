@@ -41,9 +41,19 @@
             this.combColumnType = new System.Windows.Forms.ComboBox();
             this.chckIsUnique = new System.Windows.Forms.CheckBox();
             this.btnOk = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.tbColumnLength = new System.Windows.Forms.TextBox();
             this.lblJoins = new System.Windows.Forms.Label();
+            this.combParent = new System.Windows.Forms.ComboBox();
+            this.combJoins = new System.Windows.Forms.ComboBox();
+            this.btnJoinRemove = new System.Windows.Forms.Button();
+            this.lbConnections = new System.Windows.Forms.ListBox();
+            this.combChild = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddConnection = new System.Windows.Forms.Button();
+            this.lblParentColumn = new System.Windows.Forms.Label();
+            this.lblChildColumn = new System.Windows.Forms.Label();
+            this.btnDeleteTable = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTableName
@@ -152,19 +162,10 @@
             // 
             this.btnOk.Location = new System.Drawing.Point(15, 439);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(119, 23);
+            this.btnOk.Size = new System.Drawing.Size(106, 23);
             this.btnOk.TabIndex = 13;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(153, 439);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(119, 23);
-            this.btnCancel.TabIndex = 14;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // tbColumnLength
             // 
@@ -182,14 +183,119 @@
             this.lblJoins.TabIndex = 16;
             this.lblJoins.Text = "Joins";
             // 
+            // combParent
+            // 
+            this.combParent.FormattingEnabled = true;
+            this.combParent.Location = new System.Drawing.Point(18, 355);
+            this.combParent.Name = "combParent";
+            this.combParent.Size = new System.Drawing.Size(116, 21);
+            this.combParent.TabIndex = 17;
+            // 
+            // combJoins
+            // 
+            this.combJoins.FormattingEnabled = true;
+            this.combJoins.Location = new System.Drawing.Point(114, 213);
+            this.combJoins.Name = "combJoins";
+            this.combJoins.Size = new System.Drawing.Size(128, 21);
+            this.combJoins.TabIndex = 19;
+            // 
+            // btnJoinRemove
+            // 
+            this.btnJoinRemove.Location = new System.Drawing.Point(248, 211);
+            this.btnJoinRemove.Name = "btnJoinRemove";
+            this.btnJoinRemove.Size = new System.Drawing.Size(24, 23);
+            this.btnJoinRemove.TabIndex = 20;
+            this.btnJoinRemove.Text = "X";
+            this.btnJoinRemove.UseVisualStyleBackColor = true;
+            // 
+            // lbConnections
+            // 
+            this.lbConnections.FormattingEnabled = true;
+            this.lbConnections.Location = new System.Drawing.Point(18, 240);
+            this.lbConnections.Name = "lbConnections";
+            this.lbConnections.Size = new System.Drawing.Size(253, 82);
+            this.lbConnections.TabIndex = 21;
+            // 
+            // combChild
+            // 
+            this.combChild.FormattingEnabled = true;
+            this.combChild.Location = new System.Drawing.Point(153, 355);
+            this.combChild.Name = "combChild";
+            this.combChild.Size = new System.Drawing.Size(118, 21);
+            this.combChild.TabIndex = 22;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(152, 382);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(119, 23);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Remove Selected";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnAddConnection
+            // 
+            this.btnAddConnection.Location = new System.Drawing.Point(15, 382);
+            this.btnAddConnection.Name = "btnAddConnection";
+            this.btnAddConnection.Size = new System.Drawing.Size(119, 23);
+            this.btnAddConnection.TabIndex = 23;
+            this.btnAddConnection.Text = "Add Conection";
+            this.btnAddConnection.UseVisualStyleBackColor = true;
+            // 
+            // lblParentColumn
+            // 
+            this.lblParentColumn.AutoSize = true;
+            this.lblParentColumn.Location = new System.Drawing.Point(15, 331);
+            this.lblParentColumn.Name = "lblParentColumn";
+            this.lblParentColumn.Size = new System.Drawing.Size(106, 13);
+            this.lblParentColumn.TabIndex = 25;
+            this.lblParentColumn.Text = "Parent Table Column";
+            // 
+            // lblChildColumn
+            // 
+            this.lblChildColumn.AutoSize = true;
+            this.lblChildColumn.Location = new System.Drawing.Point(154, 331);
+            this.lblChildColumn.Name = "lblChildColumn";
+            this.lblChildColumn.Size = new System.Drawing.Size(98, 13);
+            this.lblChildColumn.TabIndex = 26;
+            this.lblChildColumn.Text = "Child Table Column";
+            // 
+            // btnDeleteTable
+            // 
+            this.btnDeleteTable.Location = new System.Drawing.Point(247, 439);
+            this.btnDeleteTable.Name = "btnDeleteTable";
+            this.btnDeleteTable.Size = new System.Drawing.Size(24, 23);
+            this.btnDeleteTable.TabIndex = 28;
+            this.btnDeleteTable.Text = "X";
+            this.btnDeleteTable.UseVisualStyleBackColor = true;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(132, 439);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(106, 23);
+            this.btnCancel.TabIndex = 29;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
             // EditObjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(289, 474);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnDeleteTable);
+            this.Controls.Add(this.lblChildColumn);
+            this.Controls.Add(this.lblParentColumn);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAddConnection);
+            this.Controls.Add(this.combChild);
+            this.Controls.Add(this.lbConnections);
+            this.Controls.Add(this.btnJoinRemove);
+            this.Controls.Add(this.combJoins);
+            this.Controls.Add(this.combParent);
             this.Controls.Add(this.lblJoins);
             this.Controls.Add(this.tbColumnLength);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.chckIsUnique);
             this.Controls.Add(this.combColumnType);
@@ -227,8 +333,18 @@
         private System.Windows.Forms.ComboBox combColumnType;
         private System.Windows.Forms.CheckBox chckIsUnique;
         private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox tbColumnLength;
         private System.Windows.Forms.Label lblJoins;
+        private System.Windows.Forms.ComboBox combJoins;
+        private System.Windows.Forms.ComboBox combParent;
+        private System.Windows.Forms.Button btnJoinRemove;
+        private System.Windows.Forms.ListBox lbConnections;
+        private System.Windows.Forms.ComboBox combChild;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddConnection;
+        private System.Windows.Forms.Label lblParentColumn;
+        private System.Windows.Forms.Label lblChildColumn;
+        private System.Windows.Forms.Button btnDeleteTable;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DP_ETL_TOOL.Types;
+using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -114,12 +116,26 @@ namespace DP_ETL_TOOL.Controls
                 {
                     case Enums.JoinType.Left :
                         {
-                            pen = new Pen(Color.Red, 2);
+                            pen = new Pen(Color.LightBlue, 2);
+                            pen.DashStyle = DashStyle.Dash;
+                            break;
+                        }
+                    case Enums.JoinType.Right:
+                        {
+                            pen = new Pen(Color.LightGreen, 2);
+                            pen.DashStyle = DashStyle.Dash;
                             break;
                         }
                     case Enums.JoinType.Inner:
                         {
-                            pen = new Pen(Color.Green, 2);
+                            pen = new Pen(Color.Red, 2);
+                            pen.DashStyle = DashStyle.Dot;
+                            break;
+                        }
+                    case Enums.JoinType.Full:
+                        {
+                            pen = new Pen(Color.Black, 2);
+                            pen.DashStyle = DashStyle.Solid;
                             break;
                         }
                     default:
