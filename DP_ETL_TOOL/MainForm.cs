@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DP_ETL_TOOL.Controls;
+using System.Drawing;
 
 namespace DP_ETL_TOOL
 {
@@ -25,6 +26,8 @@ namespace DP_ETL_TOOL
 
             visualPanel.AllowDrop = true;
             visualPanel.MouseClick += new MouseEventHandler(VisualPanelClickEvent);
+
+            visualPanel.BackgroundImage = Image.FromFile(@"C:\Users\BORIS\Documents\Visual Studio 2015\Projects\DP_ETL_TOOL\DP_ETL_TOOL\Graphics\background.png");           
 
             codeEdit.SelectionTabs = new int[] { 30, 60, 90, 120 };
 

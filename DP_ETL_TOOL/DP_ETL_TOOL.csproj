@@ -46,9 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\SyntaxTextBoxControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SyntaxTextBoxControl.Designer.cs">
+      <DependentUpon>SyntaxTextBoxControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Types\Enums.cs" />
     <Compile Include="Controls\JoinControl.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\TableEntity.cs" />
     <Compile Include="Controls\TableControl.cs">
@@ -101,7 +107,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Graphics\" />
+    <Content Include="Graphics\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\Dictionaries\dic_orcl.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

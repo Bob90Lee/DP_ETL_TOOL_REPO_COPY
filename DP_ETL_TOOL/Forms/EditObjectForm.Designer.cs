@@ -43,6 +43,7 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.tbColumnLength = new System.Windows.Forms.TextBox();
+            this.lblJoins = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblTableName
@@ -149,7 +150,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(15, 286);
+            this.btnOk.Location = new System.Drawing.Point(15, 439);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(119, 23);
             this.btnOk.TabIndex = 13;
@@ -158,7 +159,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(153, 286);
+            this.btnCancel.Location = new System.Drawing.Point(153, 439);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(119, 23);
             this.btnCancel.TabIndex = 14;
@@ -172,11 +173,21 @@
             this.tbColumnLength.Size = new System.Drawing.Size(50, 20);
             this.tbColumnLength.TabIndex = 15;
             // 
+            // lblJoins
+            // 
+            this.lblJoins.AutoSize = true;
+            this.lblJoins.Location = new System.Drawing.Point(15, 216);
+            this.lblJoins.Name = "lblJoins";
+            this.lblJoins.Size = new System.Drawing.Size(31, 13);
+            this.lblJoins.TabIndex = 16;
+            this.lblJoins.Text = "Joins";
+            // 
             // EditObjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(289, 321);
+            this.ClientSize = new System.Drawing.Size(289, 474);
+            this.Controls.Add(this.lblJoins);
             this.Controls.Add(this.tbColumnLength);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -218,5 +229,6 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox tbColumnLength;
+        private System.Windows.Forms.Label lblJoins;
     }
 }

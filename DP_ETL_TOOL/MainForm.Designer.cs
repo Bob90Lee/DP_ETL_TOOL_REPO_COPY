@@ -42,7 +42,7 @@
             this.visualTab = new System.Windows.Forms.TabPage();
             this.visualPanel = new System.Windows.Forms.Panel();
             this.codeTab = new System.Windows.Forms.TabPage();
-            this.codeEdit = new System.Windows.Forms.RichTextBox();
+            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.codeControl = new System.Windows.Forms.RichTextBox();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();

@@ -114,17 +114,17 @@ namespace DP_ETL_TOOL.Controls
                 {
                     case Enums.JoinType.Left :
                         {
-                            pen = new Pen(Color.Red, 3);
+                            pen = new Pen(Color.Red, 2);
                             break;
                         }
                     case Enums.JoinType.Inner:
                         {
-                            pen = new Pen(Color.Green, 3);
+                            pen = new Pen(Color.Green, 2);
                             break;
                         }
                     default:
                         {
-                            pen = new Pen(Color.Black, 3);
+                            pen = new Pen(Color.Black, 2);
                             break;
                         }
 
@@ -151,12 +151,6 @@ namespace DP_ETL_TOOL.Controls
         {
             this.Invalidate();
             base.OnParentBackColorChanged(e);
-        }
-
-
-        protected override void OnMouseClick(MouseEventArgs e)
-        {
-            Parent.Invalidate(this.Bounds, true);
         }
 
     }
