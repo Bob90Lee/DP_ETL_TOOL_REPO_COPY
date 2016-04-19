@@ -15,11 +15,7 @@ namespace DP_ETL_TOOL
 
         private List<TableControl> tables = new List<TableControl>();
         private List<JoinControl> joins = new List<JoinControl>();
-        private List<TableEntity> entities = new List<TableEntity>();
-
         private JoinControl currentJoin;
-
-        Control dummy = new Control();
 
         private bool activatedJoin = false;
 
@@ -27,22 +23,19 @@ namespace DP_ETL_TOOL
         {
             InitializeComponent();
 
-            exitToolStripMenuItem.Click += new EventHandler(ExitApplication);
-
             visualPanel.AllowDrop = true;
             visualPanel.MouseClick += new MouseEventHandler(VisualPanelClickEvent);
-
             visualPanel.BackgroundImage = Image.FromFile(@"C:\Users\BORIS\Documents\Visual Studio 2015\Projects\DP_ETL_TOOL\DP_ETL_TOOL\Graphics\background.png");
 
             codeEdit.SelectionTabs = new int[] { 30, 60, 90, 120 };
 
             PopulateObjectList(lbDesignerList);
             PopulateModesList(lbDesignerMode);
+
+            exitToolStripMenuItem.Click += new EventHandler(ExitApplication);
             lbDesignerList.SelectedValueChanged += new EventHandler(DesignerListValueChanged);
             lbDesignerMode.SelectedValueChanged += new EventHandler(DesignerModeValueChanged);
-
             rightTabs.SelectedIndexChanged += new EventHandler(RightTabsSelectedChanged);
-
             codeEdit.GotFocus += new EventHandler(CodeEditRefresh);
         }
 
@@ -58,22 +51,17 @@ namespace DP_ETL_TOOL
             {
                 if (e.Button == MouseButtons.Right && lbDesignerList.SelectedItem == lbDesignerList.Items[0]) // table
                 {
-
-                    TableControl tc = new TableControl();
-                    tc.MouseClick += new MouseEventHandler(TableClick);
-                    tc.DoubleClick += new EventHandler(OnTableDoubleClick);
-
-                    tables.Add(tc);
-                    entities.Add(tc.getTableEntity());
-
-                    tc.Location = visualTab.PointToClient(Control.MousePosition);
-                    visualPanel.Controls.Add(tc);
+                    TableControl tableControl = new TableControl();
+                    tableControl.MouseClick += new MouseEventHandler(OnTableClick);
+                    tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
+                    tables.Add(tableControl);
+                    tableControl.Location = visualTab.PointToClient(Control.MousePosition);
+                    visualPanel.Controls.Add(tableControl);
                 }
             }
-
         }
 
-        private void TableClick(object sender, MouseEventArgs e)
+        private void OnTableClick(object sender, MouseEventArgs e)
         {
             if (lbDesignerList.Items.Count > 0)
             {
@@ -211,7 +199,18 @@ namespace DP_ETL_TOOL
             editForm.Controls["tbTableName"].Text = te.getName();
             editForm.Controls["tbSchemaName"].Text = te.getSchema();
 
-            editForm.Controls["btnAdd"].Click += (sender, args) => {
+            editForm.Controls["chckIsKey"].Click += (sender, args) =>
+            {
+
+            };
+
+            editForm.Controls["chckIsUnique"].Click += (sender, args) =>
+            {
+
+            };
+
+            editForm.Controls["btnAdd"].Click += (sender, args) =>
+            {
                 ComboBox cb = (ComboBox)editForm.Controls["combColumnType"];
 
                 if (editForm.Controls["tbColumnName"].Text.ToString().Length > 0 && cb.SelectedItem != null && editForm.Controls["tbColumnLength"].Text.ToString().Length > 0)
@@ -219,7 +218,7 @@ namespace DP_ETL_TOOL
                     int length = 0;
                     int.TryParse(editForm.Controls["tbColumnLength"].Text, out length);
 
-                    te.addColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedText, length);
+                    te.addColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedText, length, editForm.Controls["chckIsKey"].Is);
 
                     populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
                 }
@@ -270,8 +269,6 @@ namespace DP_ETL_TOOL
 
             };
 
-            editForm.KeyDown += new KeyEventHandler(DialogKeyEvent);
-
             editForm.ShowDialog(this);
         }
 
@@ -296,19 +293,11 @@ namespace DP_ETL_TOOL
             }
         }
 
-        private void DialogKeyEvent(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                Control s = (Control)sender;
-                s.Parent.Parent.Dispose(); // this is not very nice, but works
-            }
-        }
-
         private void OnTableDoubleClick(object sender, EventArgs e)
         {
             TableControl tc = (TableControl)sender;
             CreateTableEditGUI(tc);
         }
+
     }
 }

@@ -19,8 +19,8 @@ namespace DP_ETL_TOOL.Controls
         XDocument doc = new XDocument();
         string words = "";
 
-        Font basicFont = new Font("Times", 12, FontStyle.Regular);
-        Font specialFont = new Font("Times", 12, FontStyle.Bold);
+        Font basicFont = new Font("Times", 8, FontStyle.Regular);
+        Font specialFont = new Font("Times", 8, FontStyle.Bold);
 
         Color basicColor = Color.Black;
         Color specialColor = Color.DarkBlue;

@@ -35,13 +35,13 @@ namespace DP_ETL_TOOL.Controls
             this.tableSchema = schemaName.ToUpper();
         }
 
-        public bool addColumn(String name, String type, int length)
+        public bool addColumn(String name, String type, int length, bool isKey, bool isUnique)
         {
             Column exists = null;
 
             foreach (Column column in columns)
             {
-                if (column.getName().Contains(name.ToUpper()))
+                if (column.GetName().Contains(name.ToUpper()))
                 {
                     exists = column;
                 }
@@ -49,7 +49,7 @@ namespace DP_ETL_TOOL.Controls
 
             if (exists == null)
             {
-                Column c = new Column(name.ToUpper(), type.ToUpper(), length);
+                Column c = new Column(name.ToUpper(), type.ToUpper(), length, isKey, isUnique);
                 columns.Add(c);
                 return true; // column was added
             }
@@ -87,11 +87,11 @@ namespace DP_ETL_TOOL.Controls
 
         public void removeColumn(String name)
         {
-            if ( columns != null)
+            if (columns != null)
             {
                 foreach (Column column in columns)
                 {
-                    if (column.getName().Contains(name.ToUpper()))
+                    if (column.GetName().Contains(name.ToUpper()))
                     {
                         columns.Remove(column);
                     }
@@ -136,21 +136,46 @@ namespace DP_ETL_TOOL.Controls
         private String name;
         private String type;
         private int length;
+        private bool isKey = false;
+        private bool isUnique = false;
 
-        public Column(String name, String type, int length)
+        public Column(String name, String type, int length, bool isKey, bool isUnique)
         {
             this.name = name.ToUpper();
             this.type = type.ToUpper();
             this.length = length;
+            this.isKey = isKey;
+            this.isUnique = isUnique;
         }
 
-        public String getName()
+        public String GetName()
         {
             return this.name;
         }
+
+        public String GetColumnType()
+        {
+            return this.type;
+        }
+
+        public int GetColumnLength()
+        {
+            return this.length;
+        }
+
+        public bool GetColumnIsKey()
+        {
+            return this.isKey;
+        }
+
+        public bool GetColumnIsUnique()
+        {
+            return this.isUnique;
+        }
+
     }
 
-    class Index
+    class Index // TODO
     {
         private String name;
         private String type;
