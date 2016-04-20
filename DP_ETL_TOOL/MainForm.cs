@@ -195,6 +195,7 @@ namespace DP_ETL_TOOL
 
             populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
             populateComboBoxColumnType((ComboBox)editForm.Controls["combColumnType"]);
+            populateComboBoxJoins((ComboBox)editForm.Controls["combJoins"], joins, te.getName());
 
             editForm.Controls["tbTableName"].Text = te.getName();
             editForm.Controls["tbSchemaName"].Text = te.getSchema();
@@ -218,7 +219,7 @@ namespace DP_ETL_TOOL
                     int length = 0;
                     int.TryParse(editForm.Controls["tbColumnLength"].Text, out length);
 
-                    te.addColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedText, length, editForm.Controls["chckIsKey"].Is);
+                    //te.addColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedText, length, editForm.Controls["chckIsKey"].Is);
 
                     populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
                 }
@@ -288,7 +289,33 @@ namespace DP_ETL_TOOL
             {
                 foreach (Column c in columns)
                 {
-                    cb.Items.Add(c.getName());
+                    cb.Items.Add(c.GetName());
+                }
+            }
+        }
+
+        private void populateComboBoxJoins(ComboBox cb, List<JoinControl> jc, string tableName)
+        {
+            cb.Items.Clear();
+
+            List<JoinControl> joins = jc;
+
+            if (joins != null)
+            {
+                foreach (JoinControl j in joins)
+                {
+                    
+
+                    if (j.getMainTable() != null)
+                    {
+                        String s = j.getMainTable().getTableEntity().getName();
+                        if (s == tableName )
+                        {
+                            cb.Items.Add(s);
+
+                        }
+                    
+                    }
                 }
             }
         }
