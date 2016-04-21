@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DP_ETL_TOOL.Controls;
+using DP_ETL_TOOL.Entities;
 using System.Drawing;
 using DP_ETL_TOOL.Types;
 using DP_ETL_TOOL.Modules;
@@ -75,7 +76,7 @@ namespace DP_ETL_TOOL
 
                         if (activatedJoin)
                         {
-                            currentJoin.setChildEntity(tc);
+                            currentJoin.SetChildTable(tc);
                             activatedJoin = false;
                         }
                         else
@@ -100,13 +101,13 @@ namespace DP_ETL_TOOL
                             }
 
                             currentJoin = new JoinControl(visualPanel, jt);
-                            currentJoin.setMainTable(tc);
+                            currentJoin.SetMainTable(tc);
                             activatedJoin = true;
                         }
 
                     }
 
-                    if (currentJoin.getMainTable() != null && currentJoin.getChildTable() != null)
+                    if (currentJoin.GetMainTable() != null && currentJoin.GetChildTable() != null)
                     {
                         joins.Add(currentJoin);
                         visualPanel.Controls.Add(currentJoin);
@@ -195,10 +196,10 @@ namespace DP_ETL_TOOL
 
             populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
             populateComboBoxColumnType((ComboBox)editForm.Controls["combColumnType"]);
-            populateComboBoxJoins((ComboBox)editForm.Controls["combJoins"], joins, te.getName());
+            populateComboBoxJoins((ComboBox)editForm.Controls["combJoins"], joins, te.GetName());
 
-            editForm.Controls["tbTableName"].Text = te.getName();
-            editForm.Controls["tbSchemaName"].Text = te.getSchema();
+            editForm.Controls["tbTableName"].Text = te.GetName();
+            editForm.Controls["tbSchemaName"].Text = te.GetSchema();
 
             editForm.Controls["chckIsKey"].Click += (sender, args) =>
             {
@@ -233,7 +234,7 @@ namespace DP_ETL_TOOL
                 if (cb.SelectedItem != null)
                 {
 
-                    te.removeColumn(cb.SelectedItem.ToString());
+                    //te.removeColumn(cb.SelectedItem.ToString());
 
                     populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
                 }
@@ -242,10 +243,10 @@ namespace DP_ETL_TOOL
 
             editForm.Controls["btnOk"].Click += (sender, args) =>
             { // save form
-                te.setName(editForm.Controls["tbTableName"].Text);
-                te.setSchema(editForm.Controls["tbSchemaName"].Text);
+                te.SetTableName(editForm.Controls["tbTableName"].Text);
+                te.SetSchemaName(editForm.Controls["tbSchemaName"].Text);
 
-                tc.Text = te.getName();
+                tc.Text = te.GetName();
 
                 editForm.Dispose();
 
@@ -258,10 +259,7 @@ namespace DP_ETL_TOOL
 
             editForm.Controls["btnDeleteTable"].Click += (sender, args) =>
             { // delete table and everything including her entity
-                te.getColumns().Clear();
-                te.getIndexes().Clear();
 
-                // + delete z parent entit joiny+tables
 
 
 
@@ -283,13 +281,13 @@ namespace DP_ETL_TOOL
         {
             cb.Items.Clear();
 
-            List<Column> columns = te.getColumns();
+            List<ColumnEntity> columns = te.GetColumns();
 
             if (columns != null)
             {
-                foreach (Column c in columns)
+                foreach (ColumnEntity c in columns)
                 {
-                    cb.Items.Add(c.GetName());
+                    cb.Items.Add(c.GetColumnName());
                 }
             }
         }
@@ -304,17 +302,17 @@ namespace DP_ETL_TOOL
             {
                 foreach (JoinControl j in joins)
                 {
-                    
 
-                    if (j.getMainTable() != null)
+
+                    if (j.GetMainTable() != null)
                     {
-                        String s = j.getMainTable().getTableEntity().getName();
-                        if (s == tableName )
+                        String s = j.GetMainTable().getTableEntity().GetName();
+                        if (s == tableName)
                         {
                             cb.Items.Add(s);
 
                         }
-                    
+
                     }
                 }
             }

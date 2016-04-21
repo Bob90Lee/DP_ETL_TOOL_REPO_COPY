@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using DP_ETL_TOOL.Forms;
-using System.Text;
-using System.Collections.Generic;
+using DP_ETL_TOOL.Entities;
 
 namespace DP_ETL_TOOL.Controls
 {
@@ -22,7 +20,7 @@ namespace DP_ETL_TOOL.Controls
 
         protected override void OnCreateControl()
         {            
-            this.Text = tableEntity.getName(); //+ "\n ( \t xxx, \n \t xxx )";
+            this.Text = tableEntity.GetName(); //+ "\n ( \t xxx, \n \t xxx )";
 
             this.AutoSize = true;
 
@@ -87,8 +85,8 @@ namespace DP_ETL_TOOL.Controls
         private void changeTableName(object sender, EventArgs e)
         {
             Control senderControl = (Control) sender;
-            tableEntity.setName(senderControl.Text);
-            this.Text = tableEntity.getName();
+            tableEntity.SetTableName(senderControl.Text);
+            this.Text = tableEntity.GetName();
             
         }
 

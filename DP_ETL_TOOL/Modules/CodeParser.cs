@@ -1,10 +1,8 @@
 ﻿using DP_ETL_TOOL.Controls;
+using DP_ETL_TOOL.Entities;
 using DP_ETL_TOOL.Types;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DP_ETL_TOOL.Modules
 {
@@ -42,17 +40,17 @@ namespace DP_ETL_TOOL.Modules
                 i++;
 
                 TableEntity te = t.getTableEntity();
-                sb.Append(te.getSchema());
+                sb.Append(te.GetSchema());
                 sb.Append(".");
                 
                 if (i < tables.Count)
                 {
-                    sb.AppendLine(te.getName());
+                    sb.AppendLine(te.GetName());
                     sb.Append("JOIN ");
                 }
                 else
                 {
-                    sb.Append(te.getName());
+                    sb.Append(te.GetName());
                 }
             }
 

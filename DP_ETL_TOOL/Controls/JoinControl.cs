@@ -2,7 +2,6 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace DP_ETL_TOOL.Controls
@@ -45,7 +44,7 @@ namespace DP_ETL_TOOL.Controls
             this.joinType = jt;
         }
 
-        public void setMainTable(TableControl te)
+        public void SetMainTable(TableControl te)
         {
             mainTable = te;
 
@@ -53,7 +52,7 @@ namespace DP_ETL_TOOL.Controls
             lastMainY = te.Bounds.Y + te.Height/2;
         }
 
-        public void setChildEntity(TableControl te)
+        public void SetChildTable(TableControl te)
         {
             childTable = te;
 
@@ -61,17 +60,17 @@ namespace DP_ETL_TOOL.Controls
             lastChildY = te.Bounds.Y + te.Height / 2;
         }
 
-        public TableControl getMainTable()
+        public TableControl GetMainTable()
         {
             return mainTable;
         }
 
-        public TableControl getChildTable()
+        public TableControl GetChildTable()
         {
             return childTable;
         }
 
-        private bool isTableObjectMove(TableControl mainTable, TableControl childTable)
+        private bool IsObjectMoved(TableControl mainTable, TableControl childTable)
         {
             if (lastMainX != mainTable.Bounds.X || lastMainY != mainTable.Bounds.Y || lastChildX != childTable.Bounds.X || lastChildY != childTable.Bounds.Y)
             {
@@ -102,7 +101,7 @@ namespace DP_ETL_TOOL.Controls
             Graphics g = e.Graphics;
             Rectangle bounds = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
 
-            if (mainTable != null && childTable != null && isTableObjectMove(mainTable, childTable))
+            if (mainTable != null && childTable != null && IsObjectMoved(mainTable, childTable))
             {
                 thisParent.Invalidate(this.Bounds, true);
 

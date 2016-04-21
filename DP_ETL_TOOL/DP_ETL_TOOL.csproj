@@ -46,17 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\ColumnEntity.cs" />
+    <Compile Include="Entities\ColumnPairEntity.cs" />
+    <Compile Include="Entities\IndexEntity.cs" />
     <Compile Include="Controls\SyntaxTextBoxControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\SyntaxTextBoxControl.Designer.cs">
       <DependentUpon>SyntaxTextBoxControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\JoinEntity.cs" />
+    <Compile Include="Entities\ProcedureEntity.cs" />
+    <Compile Include="Entities\WhereConditionEntity.cs" />
     <Compile Include="Types\Enums.cs" />
     <Compile Include="Controls\JoinControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\TableEntity.cs" />
+    <Compile Include="Entities\TableEntity.cs" />
     <Compile Include="Controls\TableControl.cs">
       <SubType>Component</SubType>
     </Compile>
