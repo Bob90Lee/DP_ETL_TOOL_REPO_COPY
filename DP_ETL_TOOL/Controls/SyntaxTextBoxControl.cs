@@ -33,7 +33,7 @@ namespace DP_ETL_TOOL.Controls
             words = ParseDictionaryToString(doc);
         }
 
-        
+
         protected override void OnKeyUp(KeyEventArgs e)
         {
             base.OnKeyUp(e);
@@ -89,7 +89,7 @@ namespace DP_ETL_TOOL.Controls
             }
 
         }
-        
+
         public void SyntaxHighlight(SyntaxTextBoxControl control, bool full, string words)
         {
             string dictionaryWords = words; // "(SELECT|AS|FROM|WHERE|GROUP|BY|ORDER|ASC|DESC|LEFT|RIGHT|INNER|JOIN)";

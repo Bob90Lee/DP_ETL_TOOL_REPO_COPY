@@ -16,7 +16,8 @@ namespace DP_ETL_TOOL.Controls
         private int lastChildX;
         private int lastChildY;
 
-        Control thisParent = null;
+        private int thresholdX = 20;
+        private int thresholdY = 5;
 
         Enums.JoinType joinType = Enums.JoinType.Left;
 
@@ -32,15 +33,12 @@ namespace DP_ETL_TOOL.Controls
 
         public JoinControl(Control parent, Enums.JoinType jt)
         {
-            Size = new Size(1000, 1000);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             SetStyle(ControlStyles.Opaque, true);
 
+            this.Size = new Size(1000, 1000);
             this.BackColor = Color.Transparent;
             this.Enabled = false;
-
-            thisParent = parent;
-
             this.joinType = jt;
         }
 
@@ -70,23 +68,23 @@ namespace DP_ETL_TOOL.Controls
             return childTable;
         }
 
-        private bool IsObjectMoved(TableControl mainTable, TableControl childTable)
+        private bool IsObjectMoved(TableControl mainTable, TableControl childTable, int thresholdX, int thresholdY)
         {
             if (lastMainX != mainTable.Bounds.X || lastMainY != mainTable.Bounds.Y || lastChildX != childTable.Bounds.X || lastChildY != childTable.Bounds.Y)
             {
                 int delta = 0;
 
                 delta = lastMainX - mainTable.Bounds.X;
-                if (Math.Abs(delta) > 20) { lastMainX = mainTable.Bounds.X;  return true; };
+                if (Math.Abs(delta) > thresholdX) { lastMainX = mainTable.Bounds.X;  return true; };
 
                 delta = lastMainY - mainTable.Bounds.Y;
-                if (Math.Abs(delta) > 5) { lastMainY = mainTable.Bounds.Y;  return true; };
+                if (Math.Abs(delta) > thresholdY) { lastMainY = mainTable.Bounds.Y;  return true; };
 
                 delta = lastChildX - childTable.Bounds.X;
-                if (Math.Abs(delta) > 20) { lastChildX = childTable.Bounds.X;  return true; };
+                if (Math.Abs(delta) > thresholdX) { lastChildX = childTable.Bounds.X;  return true; };
 
                 delta = lastChildY - childTable.Bounds.Y;
-                if (Math.Abs(delta) > 5) { lastChildY = childTable.Bounds.Y;  return true; };
+                if (Math.Abs(delta) > thresholdY) { lastChildY = childTable.Bounds.Y;  return true; };
 
                 return false;
             }
@@ -101,10 +99,9 @@ namespace DP_ETL_TOOL.Controls
             Graphics g = e.Graphics;
             Rectangle bounds = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
 
-            if (mainTable != null && childTable != null && IsObjectMoved(mainTable, childTable))
+            if (mainTable != null && childTable != null && IsObjectMoved(mainTable, childTable, thresholdX, thresholdY))
             {
-                thisParent.Invalidate(this.Bounds, true);
-
+                Parent.Invalidate(this.Bounds, true);
                 g.FillRectangle(new SolidBrush(Color.FromArgb(255, this.BackColor)), bounds);
             }
             else {
@@ -149,8 +146,8 @@ namespace DP_ETL_TOOL.Controls
             }
 
 
-            g.Dispose();
-            base.OnPaint(e);
+            //g.Dispose();
+            //base.OnPaint(e);
         }
 
         protected override void OnBackColorChanged(EventArgs e)
@@ -159,13 +156,13 @@ namespace DP_ETL_TOOL.Controls
             {
                 Parent.Invalidate(this.Bounds, true);
             }
-            base.OnBackColorChanged(e);
+            //base.OnBackColorChanged(e);
         }
 
         protected override void OnParentBackColorChanged(EventArgs e)
         {
             this.Invalidate();
-            base.OnParentBackColorChanged(e);
+            //base.OnParentBackColorChanged(e);
         }
 
     }

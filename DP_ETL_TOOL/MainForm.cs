@@ -220,7 +220,9 @@ namespace DP_ETL_TOOL
                     int length = 0;
                     int.TryParse(editForm.Controls["tbColumnLength"].Text, out length);
 
-                    //te.addColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedText, length, editForm.Controls["chckIsKey"].Is);
+                    CheckBox check = (CheckBox)editForm.Controls["chckIsKey"];
+
+                    te.AddColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedText, length, check.Checked);
 
                     populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
                 }

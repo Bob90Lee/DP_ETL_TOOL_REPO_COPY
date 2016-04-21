@@ -35,6 +35,9 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oracleSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,31 +48,33 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.designerTab = new System.Windows.Forms.TabPage();
+            this.grpDesigneDown = new System.Windows.Forms.GroupBox();
             this.lbDesignerList = new System.Windows.Forms.ListBox();
+            this.grpDesigneUp = new System.Windows.Forms.GroupBox();
+            this.lbDesignerMode = new System.Windows.Forms.ListBox();
             this.leftTabs = new System.Windows.Forms.TabControl();
             this.rightTabs = new System.Windows.Forms.TabControl();
             this.visualTab = new System.Windows.Forms.TabPage();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.visualPanel = new System.Windows.Forms.Panel();
             this.codeTab = new System.Windows.Forms.TabPage();
-            this.codeControl = new System.Windows.Forms.RichTextBox();
-            this.lbDesignerMode = new System.Windows.Forms.ListBox();
             this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
-            this.grpDesigneUp = new System.Windows.Forms.GroupBox();
-            this.grpDesigneDown = new System.Windows.Forms.GroupBox();
+            this.codeControl = new System.Windows.Forms.RichTextBox();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
+            this.grpDesigneDown.SuspendLayout();
+            this.grpDesigneUp.SuspendLayout();
             this.leftTabs.SuspendLayout();
             this.rightTabs.SuspendLayout();
             this.visualTab.SuspendLayout();
             this.codeTab.SuspendLayout();
-            this.grpDesigneUp.SuspendLayout();
-            this.grpDesigneDown.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.applicationToolStripMenuItem,
+            this.editToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.snippetsToolStripMenuItem,
@@ -120,6 +125,27 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoToolStripMenuItem,
+            this.redoToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // undoToolStripMenuItem
+            // 
+            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.undoToolStripMenuItem.Text = "Undo";
+            // 
+            // redoToolStripMenuItem
+            // 
+            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.redoToolStripMenuItem.Text = "Redo";
             // 
             // settingsToolStripMenuItem
             // 
@@ -196,6 +222,17 @@
             this.designerTab.TabIndex = 0;
             this.designerTab.Text = "Designer";
             // 
+            // grpDesigneDown
+            // 
+            this.grpDesigneDown.Controls.Add(this.lbDesignerList);
+            this.grpDesigneDown.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.grpDesigneDown.Location = new System.Drawing.Point(3, 212);
+            this.grpDesigneDown.Name = "grpDesigneDown";
+            this.grpDesigneDown.Size = new System.Drawing.Size(131, 234);
+            this.grpDesigneDown.TabIndex = 1;
+            this.grpDesigneDown.TabStop = false;
+            this.grpDesigneDown.Text = "Designer Tools";
+            // 
             // lbDesignerList
             // 
             this.lbDesignerList.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -204,6 +241,26 @@
             this.lbDesignerList.Name = "lbDesignerList";
             this.lbDesignerList.Size = new System.Drawing.Size(125, 215);
             this.lbDesignerList.TabIndex = 0;
+            // 
+            // grpDesigneUp
+            // 
+            this.grpDesigneUp.Controls.Add(this.lbDesignerMode);
+            this.grpDesigneUp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpDesigneUp.Location = new System.Drawing.Point(3, 3);
+            this.grpDesigneUp.Name = "grpDesigneUp";
+            this.grpDesigneUp.Size = new System.Drawing.Size(131, 203);
+            this.grpDesigneUp.TabIndex = 0;
+            this.grpDesigneUp.TabStop = false;
+            this.grpDesigneUp.Text = "Designer Mode";
+            // 
+            // lbDesignerMode
+            // 
+            this.lbDesignerMode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbDesignerMode.FormattingEnabled = true;
+            this.lbDesignerMode.Location = new System.Drawing.Point(3, 16);
+            this.lbDesignerMode.Name = "lbDesignerMode";
+            this.lbDesignerMode.Size = new System.Drawing.Size(125, 184);
+            this.lbDesignerMode.TabIndex = 1;
             // 
             // leftTabs
             // 
@@ -232,6 +289,7 @@
             // 
             this.visualTab.AutoScroll = true;
             this.visualTab.BackColor = System.Drawing.Color.White;
+            this.visualTab.Controls.Add(this.toolStrip1);
             this.visualTab.Controls.Add(this.visualPanel);
             this.visualTab.Location = new System.Drawing.Point(4, 22);
             this.visualTab.Name = "visualTab";
@@ -239,6 +297,14 @@
             this.visualTab.Size = new System.Drawing.Size(727, 449);
             this.visualTab.TabIndex = 0;
             this.visualTab.Text = "Visual";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(721, 25);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
             // 
             // visualPanel
             // 
@@ -259,26 +325,6 @@
             this.codeTab.Text = "Code";
             this.codeTab.UseVisualStyleBackColor = true;
             // 
-            // codeControl
-            // 
-            this.codeControl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.codeControl.Location = new System.Drawing.Point(0, 0);
-            this.codeControl.Name = "codeControl";
-            this.codeControl.ReadOnly = true;
-            this.codeControl.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.codeControl.Size = new System.Drawing.Size(40, 449);
-            this.codeControl.TabIndex = 0;
-            this.codeControl.Text = "";
-            // 
-            // lbDesignerMode
-            // 
-            this.lbDesignerMode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbDesignerMode.FormattingEnabled = true;
-            this.lbDesignerMode.Location = new System.Drawing.Point(3, 16);
-            this.lbDesignerMode.Name = "lbDesignerMode";
-            this.lbDesignerMode.Size = new System.Drawing.Size(125, 184);
-            this.lbDesignerMode.TabIndex = 1;
-            // 
             // codeEdit
             // 
             this.codeEdit.AcceptsTab = true;
@@ -291,27 +337,16 @@
             this.codeEdit.TabIndex = 0;
             this.codeEdit.Text = "";
             // 
-            // grpDesigneUp
+            // codeControl
             // 
-            this.grpDesigneUp.Controls.Add(this.lbDesignerMode);
-            this.grpDesigneUp.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpDesigneUp.Location = new System.Drawing.Point(3, 3);
-            this.grpDesigneUp.Name = "grpDesigneUp";
-            this.grpDesigneUp.Size = new System.Drawing.Size(131, 203);
-            this.grpDesigneUp.TabIndex = 0;
-            this.grpDesigneUp.TabStop = false;
-            this.grpDesigneUp.Text = "Designer Mode";
-            // 
-            // grpDesigneDown
-            // 
-            this.grpDesigneDown.Controls.Add(this.lbDesignerList);
-            this.grpDesigneDown.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.grpDesigneDown.Location = new System.Drawing.Point(3, 212);
-            this.grpDesigneDown.Name = "grpDesigneDown";
-            this.grpDesigneDown.Size = new System.Drawing.Size(131, 234);
-            this.grpDesigneDown.TabIndex = 1;
-            this.grpDesigneDown.TabStop = false;
-            this.grpDesigneDown.Text = "Designer Tools";
+            this.codeControl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.codeControl.Location = new System.Drawing.Point(0, 0);
+            this.codeControl.Name = "codeControl";
+            this.codeControl.ReadOnly = true;
+            this.codeControl.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.codeControl.Size = new System.Drawing.Size(40, 449);
+            this.codeControl.TabIndex = 0;
+            this.codeControl.Text = "";
             // 
             // MainForm
             // 
@@ -328,12 +363,13 @@
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();
             this.designerTab.ResumeLayout(false);
+            this.grpDesigneDown.ResumeLayout(false);
+            this.grpDesigneUp.ResumeLayout(false);
             this.leftTabs.ResumeLayout(false);
             this.rightTabs.ResumeLayout(false);
             this.visualTab.ResumeLayout(false);
+            this.visualTab.PerformLayout();
             this.codeTab.ResumeLayout(false);
-            this.grpDesigneUp.ResumeLayout(false);
-            this.grpDesigneDown.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -369,6 +405,10 @@
         private Controls.SyntaxTextBoxControl codeEdit;
         private System.Windows.Forms.GroupBox grpDesigneDown;
         private System.Windows.Forms.GroupBox grpDesigneUp;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
     }
 }
 
