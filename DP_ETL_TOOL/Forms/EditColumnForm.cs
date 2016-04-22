@@ -2,12 +2,11 @@
 
 namespace DP_ETL_TOOL.Forms
 {
-    public partial class EditObjectForm : Form
+    public partial class EditColumnForm : Form
     {
-        public EditObjectForm()
+        public EditColumnForm()
         {
             InitializeComponent();
-
         }
     }
 }

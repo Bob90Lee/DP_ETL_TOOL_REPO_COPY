@@ -55,11 +55,12 @@
             this.leftTabs = new System.Windows.Forms.TabControl();
             this.rightTabs = new System.Windows.Forms.TabControl();
             this.visualTab = new System.Windows.Forms.TabPage();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.visualPanel = new System.Windows.Forms.Panel();
             this.codeTab = new System.Windows.Forms.TabPage();
             this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.codeControl = new System.Windows.Forms.RichTextBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
             this.grpDesigneDown.SuspendLayout();
@@ -68,6 +69,7 @@
             this.rightTabs.SuspendLayout();
             this.visualTab.SuspendLayout();
             this.codeTab.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
@@ -298,20 +300,12 @@
             this.visualTab.TabIndex = 0;
             this.visualTab.Text = "Visual";
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(721, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
             // visualPanel
             // 
-            this.visualPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.visualPanel.Location = new System.Drawing.Point(3, 3);
+            this.visualPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.visualPanel.Location = new System.Drawing.Point(3, 25);
             this.visualPanel.Name = "visualPanel";
-            this.visualPanel.Size = new System.Drawing.Size(721, 443);
+            this.visualPanel.Size = new System.Drawing.Size(704, 443);
             this.visualPanel.TabIndex = 0;
             // 
             // codeTab
@@ -348,6 +342,21 @@
             this.codeControl.TabIndex = 0;
             this.codeControl.Text = "";
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1});
+            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(704, 25);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -370,6 +379,8 @@
             this.visualTab.ResumeLayout(false);
             this.visualTab.PerformLayout();
             this.codeTab.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -405,10 +416,11 @@
         private Controls.SyntaxTextBoxControl codeEdit;
         private System.Windows.Forms.GroupBox grpDesigneDown;
         private System.Windows.Forms.GroupBox grpDesigneUp;
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

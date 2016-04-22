@@ -122,6 +122,22 @@ namespace DP_ETL_TOOL.Entities
             return tableColumns;
         }
 
+        public ColumnEntity GetColumnByName(string columnName)
+        {
+            if (tableColumns != null)
+            {
+                foreach (ColumnEntity column in tableColumns)
+                {
+                    if (column.GetColumnName() == columnName.ToUpper().Trim())
+                    {
+                        return column;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public List<IndexEntity> GetIndexes()
         {
             return tableIndexes;

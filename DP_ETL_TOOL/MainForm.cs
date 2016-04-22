@@ -30,8 +30,8 @@ namespace DP_ETL_TOOL
 
             codeEdit.SelectionTabs = new int[] { 30, 60, 90, 120 };
 
-            PopulateObjectList(lbDesignerList);
             PopulateModesList(lbDesignerMode);
+            PopulateObjectList(lbDesignerList, lbDesignerMode);
 
             exitToolStripMenuItem.Click += new EventHandler(ExitApplication);
             lbDesignerList.SelectedValueChanged += new EventHandler(DesignerListValueChanged);
@@ -66,7 +66,7 @@ namespace DP_ETL_TOOL
         {
             if (lbDesignerList.Items.Count > 0)
             {
-                if (e.Button == MouseButtons.Right && lbDesignerList.SelectedItem != lbDesignerList.Items[0]) // join
+                if (e.Button == MouseButtons.Right /* && lbDesignerList.SelectedItem != lbDesignerList.Items[0] */) // join
                 {
                     Control senderControl = (Control)sender;
 
@@ -81,24 +81,7 @@ namespace DP_ETL_TOOL
                         }
                         else
                         {
-                            Enums.JoinType jt;
-
-                            if (lbDesignerList.SelectedItem == lbDesignerList.Items[1])
-                            {
-                                jt = Enums.JoinType.Left;
-                            }
-                            else if (lbDesignerList.SelectedItem == lbDesignerList.Items[2])
-                            {
-                                jt = Enums.JoinType.Inner;
-                            }
-                            else if (lbDesignerList.SelectedItem == lbDesignerList.Items[3])
-                            {
-                                jt = Enums.JoinType.Right;
-                            }
-                            else
-                            {
-                                jt = Enums.JoinType.Full;
-                            }
+                            Enums.JoinType jt = Enums.JoinType.Inner; // default join type
 
                             currentJoin = new JoinControl(visualPanel, jt);
                             currentJoin.SetMainTable(tc);
@@ -117,23 +100,24 @@ namespace DP_ETL_TOOL
             }
         }
 
-        private void PopulateObjectList(ListBox b)
+        private void PopulateObjectList(ListBox box, ListBox mode)
         {
-            b.Items.Add("Table");
-            b.Items.Add("Left join");
-            b.Items.Add("Inner join");
-            b.Items.Add("Right join");
-            b.Items.Add("Full join");
+            box.Items.Clear();
 
-            b.SelectedItem = b.Items[0];
+            if (mode.SelectedItem.ToString() == "Transformation Layer")
+            {
+                box.Items.Add("View");
+                box.SelectedItem = box.Items[0];
+            }
         }
 
         private void PopulateModesList(ListBox b)
         {
-            b.Items.Add("Create Table");
-            b.Items.Add("Create View");
-            b.Items.Add("Create Extraction Procedure");
-            b.SelectedItem = b.Items[1];
+            b.Items.Add("Extraction Layer");
+            b.Items.Add("Transformation Layer");
+            b.Items.Add("Load Layer");
+
+            b.SelectedItem = b.Items[0];
         }
 
         private void DesignerListValueChanged(object sender, EventArgs e)
@@ -157,7 +141,7 @@ namespace DP_ETL_TOOL
 
             if (lb.SelectedItem == lb.Items[1])
             {
-                PopulateObjectList(lbDesignerList);
+                PopulateObjectList(lbDesignerList, lb);
             }
 
         }
@@ -191,7 +175,7 @@ namespace DP_ETL_TOOL
 
             StringBuilder sb = new StringBuilder();
 
-            EditObjectForm editForm = new EditObjectForm();
+            EditTableForm editForm = new EditTableForm();
             editForm.Text = this.Text;
 
             populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
@@ -200,11 +184,6 @@ namespace DP_ETL_TOOL
 
             editForm.Controls["tbTableName"].Text = te.GetName();
             editForm.Controls["tbSchemaName"].Text = te.GetSchema();
-
-            editForm.Controls["chckIsKey"].Click += (sender, args) =>
-            {
-
-            };
 
             editForm.Controls["chckIsUnique"].Click += (sender, args) =>
             {
@@ -220,7 +199,7 @@ namespace DP_ETL_TOOL
                     int length = 0;
                     int.TryParse(editForm.Controls["tbColumnLength"].Text, out length);
 
-                    CheckBox check = (CheckBox)editForm.Controls["chckIsKey"];
+                    CheckBox check = (CheckBox)editForm.Controls["chckIsUnique"];
 
                     te.AddColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedText, length, check.Checked);
 
@@ -229,16 +208,44 @@ namespace DP_ETL_TOOL
             };
 
 
-            editForm.Controls["btnRemove"].Click += (sender, args) =>
+            editForm.Controls["btnEditColumn"].Click += (sender, args) =>
             {
+                EditColumnForm editColumnForm = new EditColumnForm();
+
                 ComboBox cb = (ComboBox)editForm.Controls["combColumn"];
 
                 if (cb.SelectedItem != null)
                 {
+                    ColumnEntity column = te.GetColumnByName(cb.SelectedItem.ToString());
 
-                    //te.removeColumn(cb.SelectedItem.ToString());
+                    editForm.Controls["tbColumnName"].Text = column.GetColumnName();
+                    editForm.Controls["combColumnType"].Text = column.GetColumnType();
+                    editForm.Controls["tbColumnLength"].Text = column.GetColumnLength().ToString();
+                    CheckBox check = (CheckBox)editForm.Controls["chckIsUnique"];
 
-                    populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
+                    check.Checked = column.GetColumnIsUnique();
+
+                    populateComboBoxColumnType((ComboBox)editColumnForm.Controls["combColumnType"]);
+
+                    editColumnForm.Controls["btnOk"].Click += (innerSender, innerArgs) =>
+                    {
+                        int length = 0;
+                        int.TryParse(editForm.Controls["tbColumnLength"].Text, out length);
+
+                        column.SetColumnName(editColumnForm.Controls["tbColumnName"].Text);
+                        column.SetColumnLength(length);
+                        column.SetColumnType(editColumnForm.Controls["combColumnType"].Text);
+                        column.SetIsUnique(check.Checked);
+
+                        editColumnForm.Dispose();
+                    };
+
+                    editColumnForm.Controls["btnCancel"].Click += (innerSender, innerArgs) =>
+                    {
+                        editColumnForm.Dispose();
+                    };
+
+                    editColumnForm.ShowDialog(this);
                 }
 
             };
@@ -257,17 +264,6 @@ namespace DP_ETL_TOOL
             editForm.Controls["btnCancel"].Click += (sender, args) =>
             { // close form
                 editForm.Dispose();
-            };
-
-            editForm.Controls["btnDeleteTable"].Click += (sender, args) =>
-            { // delete table and everything including her entity
-
-
-
-
-                editForm.Dispose();
-
-
             };
 
             editForm.ShowDialog(this);
