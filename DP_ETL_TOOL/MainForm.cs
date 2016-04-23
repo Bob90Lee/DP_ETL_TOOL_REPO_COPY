@@ -8,14 +8,19 @@ using DP_ETL_TOOL.Types;
 using DP_ETL_TOOL.Modules;
 using System.Text;
 using DP_ETL_TOOL.Forms;
+using System.Runtime.Serialization;
+using System.Xml;
 
 namespace DP_ETL_TOOL
 {
     public partial class MainForm : Form
     {
 
-        private List<TableControl> tables = new List<TableControl>();
-        private List<JoinControl> joins = new List<JoinControl>();
+        //private List<TableControl> tables = new List<TableControl>();
+        //private List<JoinControl> joins = new List<JoinControl>();
+
+        private ProjectEntity project;
+
         private JoinControl currentJoin;
 
         private bool activatedJoin = false;
@@ -23,6 +28,8 @@ namespace DP_ETL_TOOL
         public MainForm()
         {
             InitializeComponent();
+
+            project = new ProjectEntity();
 
             visualPanel.AllowDrop = true;
             visualPanel.MouseClick += new MouseEventHandler(VisualPanelClickEvent);
@@ -55,7 +62,7 @@ namespace DP_ETL_TOOL
                     TableControl tableControl = new TableControl();
                     tableControl.MouseClick += new MouseEventHandler(OnTableClick);
                     tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
-                    tables.Add(tableControl);
+                    project.AddTable(tableControl);
                     tableControl.Location = visualTab.PointToClient(Control.MousePosition);
                     visualPanel.Controls.Add(tableControl);
                 }
@@ -90,7 +97,8 @@ namespace DP_ETL_TOOL
                         ColumnEntity column = null;
                         populateComboBoxColumn(comboColumn, te);
 
-                        selectColumnForm.Controls["btnOk"].Click += (s, a) => {
+                        selectColumnForm.Controls["btnOk"].Click += (s, a) =>
+                        {
                             if (comboColumn.SelectedItem != null)
                             {
                                 string[] columnName = comboColumn.SelectedItem.ToString().Split(null);
@@ -108,7 +116,6 @@ namespace DP_ETL_TOOL
                             if (activatedJoin)
                             {
                                 currentJoin.SetChildTable(tc);
-                                currentJoin.GetJoinEntity().GetJoinPairs()[0].SetChildTable(te);
                                 currentJoin.GetJoinEntity().GetJoinPairs()[0].SetChildColumn(column);
                                 activatedJoin = false;
                             }
@@ -118,7 +125,7 @@ namespace DP_ETL_TOOL
 
                                 currentJoin = new JoinControl(visualPanel, jt);
                                 currentJoin.SetMainTable(tc);
-                                currentJoin.GetJoinEntity().AddJoinPair(new ColumnPairEntity(te, null, column, null));
+                                currentJoin.GetJoinEntity().AddJoinPair(new ColumnPairEntity(column, null));
                                 activatedJoin = true;
                             }
 
@@ -134,7 +141,7 @@ namespace DP_ETL_TOOL
                                     ColumnPairEntity currentJoinPair = currentJoin.GetJoinEntity().GetJoinPairs()[0];
                                     if (!je.FindExistingJoinPair(currentJoinPair.GetParentColumn().GetColumnName(), currentJoinPair.GetChildColumn().GetColumnName()))
                                     {
-                                        joins.Add(currentJoin);
+                                        project.AddJoin(currentJoin);
                                         te.AddJoinEntity(currentJoin.GetJoinEntity());
                                         visualPanel.Controls.Add(currentJoin);
                                     }
@@ -145,9 +152,10 @@ namespace DP_ETL_TOOL
                             }
                             else
                             {
-                                joins.Add(currentJoin);
+                                project.AddJoin(currentJoin);
                                 te.AddJoinEntity(currentJoin.GetJoinEntity());
                                 visualPanel.Controls.Add(currentJoin);
+                                currentJoin.GetJoinEntity().RefreshNames();
                             }
 
                             activatedJoin = false;
@@ -215,7 +223,7 @@ namespace DP_ETL_TOOL
             {
                 codeEdit.Clear();
 
-                CodeParser parser = new CodeParser(Enums.ModeType.View, tables, joins);
+                CodeParser parser = new CodeParser(Enums.ModeType.View, project.GetTables(), project.GetJoins());
                 codeEdit.AppendText(parser.GetCode());
 
                 codeEdit.Focus();
@@ -241,7 +249,7 @@ namespace DP_ETL_TOOL
 
             populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
             populateComboBoxColumnType((ComboBox)editForm.Controls["combColumnType"]);
-            populateComboBoxJoins((ComboBox)editForm.Controls["combJoins"], joins, te.GetName());
+            populateComboBoxJoins((ComboBox)editForm.Controls["combJoins"], project.GetJoins(), te.GetName());
 
             editForm.Controls["tbTableName"].Text = te.GetName();
             editForm.Controls["tbSchemaName"].Text = te.GetSchema();
@@ -324,20 +332,19 @@ namespace DP_ETL_TOOL
                     {
                         string[] content = s.Split(null);
 
-                        foreach (JoinControl jc in joins)
+                        foreach (JoinControl jc in project.GetJoins())
                         {
                             JoinEntity join = jc.GetJoinEntity();
-                            if (join.IsMainJoin(content[0].ToString()) != null)
-                            {
-                                string i = join.GetChildTable().GetName().ToString().ToUpper();
-                                string j = content[content.Length - 1].ToUpper();
 
-                                if (i.Equals(j))
-                                {
-                                    currentJoin = join;
-                                    break;
-                                }
+                            string i = join.GetChildTable().GetName().ToString().ToUpper();
+                            string j = content[content.Length - 1].ToUpper();
+
+                            if (i.Equals(j))
+                            {
+                                currentJoin = join;
+                                break;
                             }
+
                         }
 
                         EditJoinForm editJoinForm = new EditJoinForm();
@@ -407,12 +414,12 @@ namespace DP_ETL_TOOL
                 foreach (JoinControl j in joins)
                 {
                     JoinEntity joinEntity = j.GetJoinEntity();
-                    ColumnPairEntity columnPair = joinEntity.IsMainJoin(tableName);
-                    if (columnPair != null)
-                    {
-                        String s = columnPair.GetParentTable().GetName() + " ( " + joinEntity.GetJoinType().ToString() + " ) " + columnPair.GetChildTable().GetName();
-                        cb.Items.Add(s);
-                    }
+
+                    foreach (ColumnPairEntity columnPair in joinEntity.GetJoinPairs()) { 
+                    String s = columnPair.GetParentColumn().GetColumnName() + " ( " + joinEntity.GetJoinType().ToString() + " ) " + columnPair.GetChildColumn().GetColumnName();
+                    cb.Items.Add(s);
+                }
+                    
                 }
             }
         }
@@ -423,8 +430,9 @@ namespace DP_ETL_TOOL
             CreateTableEditGUI(tc);
         }
 
-        private bool NewFileAvailable() {
-            if (tables.Count > 0 || joins.Count > 0)
+        private bool NewFileAvailable()
+        {
+            if (project.GetTables().Count > 0 || project.GetJoins().Count > 0)
             {
                 return false;
             }
@@ -436,11 +444,8 @@ namespace DP_ETL_TOOL
         {
             if (NewFileAvailable())
             {
-                this.tables = null;
-                this.tables = new List<TableControl>();
-
-                this.joins = null;
-                this.joins = new List<JoinControl>();
+                this.project = null;
+                this.project = new ProjectEntity();
 
                 currentJoin = null;
                 activatedJoin = false;
@@ -449,6 +454,27 @@ namespace DP_ETL_TOOL
 
         private bool SaveToFile()
         {
+            DataContractSerializer writer = new DataContractSerializer(typeof(ProjectEntity));
+
+            //ColumnEntity ce = project.GetTables()[0].GetTableEntity().GetColumns()[0];
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "ETL Tool File|*.etf";
+            saveFileDialog.Title = "Save project";
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog.OpenFile();
+
+                XmlWriter xmlWriter = XmlWriter.Create(fs, new XmlWriterSettings { Indent = true });
+
+                writer.WriteObject(xmlWriter, project);
+
+                xmlWriter.Close();
+                fs.Close();
+            }
+
             return true; // success
         }
 
@@ -457,5 +483,10 @@ namespace DP_ETL_TOOL
             return true; // success
         }
 
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            project.PrepareForSerializationToXML();
+            SaveToFile();
+        }
     }
 }

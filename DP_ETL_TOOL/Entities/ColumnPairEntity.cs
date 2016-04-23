@@ -1,28 +1,26 @@
-﻿namespace DP_ETL_TOOL.Entities
+﻿using System.Runtime.Serialization;
+
+namespace DP_ETL_TOOL.Entities
 {
+    [DataContract]
     class ColumnPairEntity
     {
-        private TableEntity parentTable;
-        private TableEntity childTable;
+        [DataMember]
         private ColumnEntity parentColumn;
+        [DataMember]
         private ColumnEntity childColumn;
 
-        public ColumnPairEntity(TableEntity parentTable, TableEntity childTable, ColumnEntity parentColumn, ColumnEntity childColumn)
+        public ColumnPairEntity()
         {
-            this.parentTable = parentTable;
-            this.childTable = childTable;
+
+        }
+
+        public ColumnPairEntity(ColumnEntity parentColumn, ColumnEntity childColumn)
+        {
             this.parentColumn = parentColumn;
             this.childColumn = childColumn;
-        }
-
-        public void SetParentTable(TableEntity parentTable)
-        {
-            this.parentTable = parentTable;
-        }
-
-        public void SetChildTable(TableEntity childTable)
-        {
-            this.childTable = childTable;
+            //this.parentTableName = parentTable.GetName();
+            //this.childTableName = childTable.GetName();
         }
 
         public void SetParentColumn(ColumnEntity parentColumn)
@@ -33,16 +31,6 @@
         public void SetChildColumn(ColumnEntity childColumn)
         {
             this.childColumn = childColumn;
-        }
-
-        public TableEntity GetParentTable()
-        {
-            return this.parentTable;
-        }
-
-        public TableEntity GetChildTable()
-        {
-            return this.childTable;
         }
 
         public ColumnEntity GetParentColumn()

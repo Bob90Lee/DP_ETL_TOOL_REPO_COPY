@@ -1,16 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace DP_ETL_TOOL.Entities
 {
+    [DataContract]
     class ProcedureEntity
     {
+        [DataMember]
         private TableEntity sourceTable;
+        [DataMember]
         private TableEntity destinationTable;
+        [DataMember]
         private List<WhereConditionEntity> whereConditions;
+
+        public ProcedureEntity()
+        {
+
+        }
 
         public ProcedureEntity(TableEntity sourceTable, TableEntity destinationTable, List<WhereConditionEntity> whereConditions)
         {

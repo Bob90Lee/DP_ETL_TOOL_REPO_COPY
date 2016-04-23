@@ -1,13 +1,24 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace DP_ETL_TOOL.Entities
 {
-    class ColumnEntity
+    [DataContract]
+    public class ColumnEntity
     {
+        [DataMember]
         private String columnName;
+        [DataMember]
         private String columnType;
+        [DataMember]
         private int columnLength;
-        private bool columnIsUnique = false;
+        [DataMember]
+        private bool columnIsUnique;
+
+        public ColumnEntity()
+        {
+
+        }
 
         public ColumnEntity(String name, String type, int length, bool isUnique)
         {

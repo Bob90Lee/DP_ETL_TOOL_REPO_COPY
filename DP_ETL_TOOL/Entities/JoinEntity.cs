@@ -1,14 +1,29 @@
 ﻿using DP_ETL_TOOL.Types;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace DP_ETL_TOOL.Entities
 {
+    [DataContract]
     class JoinEntity
     {
+        [DataMember]
         private Enums.JoinType joinType;
+        [DataMember]
         private List<ColumnPairEntity> joinPairs;
+        [IgnoreDataMember]
         private TableEntity mainTable;
+        [IgnoreDataMember]
         private TableEntity childTable;
+        [DataMember]
+        private string mainTableName;
+        [DataMember]
+        private string childTableName;
+
+        public JoinEntity()
+        {
+
+        }
 
         public JoinEntity(Enums.JoinType joinType, TableEntity mainTable, TableEntity childTable)
         {
@@ -33,19 +48,6 @@ namespace DP_ETL_TOOL.Entities
         public List<ColumnPairEntity> GetJoinPairs()
         {
             return this.joinPairs;
-        }
-
-        public ColumnPairEntity IsMainJoin(string tableName)
-        {
-            foreach (ColumnPairEntity columnPair in joinPairs)
-            {
-                if (columnPair.GetParentTable().GetName().Trim().ToUpper() == tableName.Trim().ToUpper())
-                {
-                    return columnPair;
-                }
-            }
-
-            return null;
         }
 
         public Enums.JoinType GetJoinType()
@@ -101,6 +103,12 @@ namespace DP_ETL_TOOL.Entities
             }
 
             return false;
+        }
+
+        public void RefreshNames()
+        {
+            this.mainTableName = mainTable.GetName();
+            this.childTableName = childTable.GetName();
         }
     }
 }

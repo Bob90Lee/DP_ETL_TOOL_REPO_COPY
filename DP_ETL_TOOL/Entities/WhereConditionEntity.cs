@@ -1,9 +1,19 @@
-﻿namespace DP_ETL_TOOL.Entities
+﻿using System.Runtime.Serialization;
+
+namespace DP_ETL_TOOL.Entities
 {
+    [DataContract]
     class WhereConditionEntity
     {
+        [DataMember]
         private string leftSide;
+        [DataMember]
         private string rightSide;
+
+        public WhereConditionEntity()
+        {
+
+        }
 
         public WhereConditionEntity(string leftSide, string rightSide)
         {

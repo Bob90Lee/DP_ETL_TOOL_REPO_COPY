@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace DP_ETL_TOOL.Entities
 {
+    [DataContract]
     class TableEntity
     {
+        [DataMember]
         private String tableName;
+        [DataMember]
         private String tableSchema;
+        [DataMember]
         private List<ColumnEntity> tableColumns = new List<ColumnEntity>();
+        [DataMember]
         private List<IndexEntity> tableIndexes = new List<IndexEntity>();
+        [DataMember]
         private List<JoinEntity> tableJoins = new List<JoinEntity>();
 
         public TableEntity()

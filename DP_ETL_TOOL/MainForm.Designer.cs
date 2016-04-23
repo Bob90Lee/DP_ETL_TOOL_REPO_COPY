@@ -59,8 +59,9 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.visualPanel = new System.Windows.Forms.Panel();
             this.codeTab = new System.Windows.Forms.TabPage();
-            this.codeControl = new System.Windows.Forms.RichTextBox();
             this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
+            this.codeControl = new System.Windows.Forms.RichTextBox();
+            this.asXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
             this.grpDesigneDown.SuspendLayout();
@@ -101,31 +102,34 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Text = "New Project";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Text = "Open Project";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Text = "Save Project";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
+            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.asXMLToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -333,17 +337,6 @@
             this.codeTab.Text = "Code";
             this.codeTab.UseVisualStyleBackColor = true;
             // 
-            // codeControl
-            // 
-            this.codeControl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.codeControl.Location = new System.Drawing.Point(0, 0);
-            this.codeControl.Name = "codeControl";
-            this.codeControl.ReadOnly = true;
-            this.codeControl.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.codeControl.Size = new System.Drawing.Size(40, 449);
-            this.codeControl.TabIndex = 0;
-            this.codeControl.Text = "";
-            // 
             // codeEdit
             // 
             this.codeEdit.AcceptsTab = true;
@@ -355,6 +348,23 @@
             this.codeEdit.Size = new System.Drawing.Size(687, 449);
             this.codeEdit.TabIndex = 0;
             this.codeEdit.Text = "";
+            // 
+            // codeControl
+            // 
+            this.codeControl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.codeControl.Location = new System.Drawing.Point(0, 0);
+            this.codeControl.Name = "codeControl";
+            this.codeControl.ReadOnly = true;
+            this.codeControl.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.codeControl.Size = new System.Drawing.Size(40, 449);
+            this.codeControl.TabIndex = 0;
+            this.codeControl.Text = "";
+            // 
+            // asXMLToolStripMenuItem
+            // 
+            this.asXMLToolStripMenuItem.Name = "asXMLToolStripMenuItem";
+            this.asXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.asXMLToolStripMenuItem.Text = "As XML";
             // 
             // MainForm
             // 
@@ -420,6 +430,7 @@
         private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem asXMLToolStripMenuItem;
     }
 }
 
