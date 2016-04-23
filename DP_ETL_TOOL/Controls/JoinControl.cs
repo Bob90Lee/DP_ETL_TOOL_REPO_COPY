@@ -1,4 +1,5 @@
 ﻿using DP_ETL_TOOL.Types;
+using DP_ETL_TOOL.Entities;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -8,6 +9,7 @@ namespace DP_ETL_TOOL.Controls
 {
     class JoinControl : UserControl
     {
+        private JoinEntity join;
         private TableControl mainTable;
         private TableControl childTable;
 
@@ -40,11 +42,15 @@ namespace DP_ETL_TOOL.Controls
             this.BackColor = Color.Transparent;
             this.Enabled = false;
             this.joinType = jt;
+
+            this.join = new JoinEntity(jt, null, null);
         }
 
         public void SetMainTable(TableControl te)
         {
             mainTable = te;
+            join.SetMainTable(te.GetTableEntity());
+            join.AddJoinPair(new ColumnPairEntity(te.GetTableEntity(), null, null, null));
 
             lastMainX = te.Bounds.X + te.Width/2;
             lastMainY = te.Bounds.Y + te.Height/2;
@@ -53,6 +59,9 @@ namespace DP_ETL_TOOL.Controls
         public void SetChildTable(TableControl te)
         {
             childTable = te;
+            join.SetChildTable(te.GetTableEntity());
+            ColumnPairEntity columnPair = join.IsMainJoin(mainTable.GetTableEntity().GetName());
+            columnPair.SetChildTable(te.GetTableEntity());
 
             lastChildX = te.Bounds.X + te.Width / 2;
             lastChildY = te.Bounds.Y + te.Height / 2;
@@ -110,7 +119,7 @@ namespace DP_ETL_TOOL.Controls
 
                 switch (joinType)
                 {
-                    case Enums.JoinType.Left :
+                    case Enums.JoinType.Left:
                         {
                             pen = new Pen(Color.LightBlue, 2);
                             pen.DashStyle = DashStyle.Dash;
@@ -142,12 +151,29 @@ namespace DP_ETL_TOOL.Controls
 
                 }
 
-                g.DrawLine(pen, mainTable.Bounds.X + mainTable.Width / 2, mainTable.Bounds.Y + mainTable.Height / 2, childTable.Bounds.X + childTable.Width / 2, childTable.Bounds.Y + childTable.Height / 2);
+                AdjustableArrowCap bigArrow = new AdjustableArrowCap(7, 7);
+                pen.CustomEndCap = bigArrow;
+
+                int startX, startY, finalX, finalY, halfX, halfY;
+
+                startX = mainTable.Bounds.X + mainTable.Width / 2;
+                startY = mainTable.Bounds.Y + mainTable.Height / 2;
+                finalX = childTable.Bounds.X + childTable.Width / 2;
+                finalY = childTable.Bounds.Y + childTable.Height / 2;
+                halfX = (finalX + startX) / 2;
+                halfY = (finalY + startY) / 2;
+
+                g.DrawLine(pen, startX, startY, halfX, halfY);
+                bigArrow = new AdjustableArrowCap(1, 1);
+                pen.CustomEndCap = bigArrow;
+                g.DrawLine(pen, halfX, halfY, finalX, finalY);
+
+                pen.Dispose();
             }
 
 
-            //g.Dispose();
-            //base.OnPaint(e);
+            g.Dispose();
+            base.OnPaint(e);
         }
 
         protected override void OnBackColorChanged(EventArgs e)
@@ -163,6 +189,11 @@ namespace DP_ETL_TOOL.Controls
         {
             this.Invalidate();
             //base.OnParentBackColorChanged(e);
+        }
+
+        public JoinEntity GetJoinEntity()
+        {
+            return this.join;
         }
 
     }

@@ -35,7 +35,7 @@ namespace DP_ETL_TOOL.Controls
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            this.BackColor = Color.Red;
+            this.BackColor = Color.LightBlue;
 
 
             if (e.Button == MouseButtons.Left)
@@ -75,14 +75,22 @@ namespace DP_ETL_TOOL.Controls
             this.isDragged = false;
         }
 
+        protected override void OnMouseHover(EventArgs e)
+        {
+            this.BackColor = Color.LightBlue;
+        }
 
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            this.BackColor = Color.DarkBlue;
+        }
 
-        public TableEntity getTableEntity()
+        public TableEntity GetTableEntity()
         {
             return tableEntity;
         }
 
-        private void changeTableName(object sender, EventArgs e)
+        private void ChangeTableName(object sender, EventArgs e)
         {
             Control senderControl = (Control) sender;
             tableEntity.SetTableName(senderControl.Text);
@@ -90,7 +98,7 @@ namespace DP_ETL_TOOL.Controls
             
         }
 
-        private void deleteTable(object sender, EventArgs e) {
+        private void DeleteTable(object sender, EventArgs e) {
             this.Dispose();
             Control senderControl = (Control)sender;
             senderControl.Parent.Parent.Dispose();

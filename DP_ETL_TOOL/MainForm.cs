@@ -171,7 +171,7 @@ namespace DP_ETL_TOOL
 
         private void CreateTableEditGUI(TableControl tc)
         {
-            TableEntity te = tc.getTableEntity();
+            TableEntity te = tc.GetTableEntity();
 
             StringBuilder sb = new StringBuilder();
 
@@ -201,7 +201,7 @@ namespace DP_ETL_TOOL
 
                     CheckBox check = (CheckBox)editForm.Controls["chckIsUnique"];
 
-                    te.AddColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedText, length, check.Checked);
+                    te.AddColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedItem.ToString(), length, check.Checked);
 
                     populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
                 }
@@ -218,10 +218,10 @@ namespace DP_ETL_TOOL
                 {
                     ColumnEntity column = te.GetColumnByName(cb.SelectedItem.ToString());
 
-                    editForm.Controls["tbColumnName"].Text = column.GetColumnName();
-                    editForm.Controls["combColumnType"].Text = column.GetColumnType();
-                    editForm.Controls["tbColumnLength"].Text = column.GetColumnLength().ToString();
-                    CheckBox check = (CheckBox)editForm.Controls["chckIsUnique"];
+                    editColumnForm.Controls["tbColumnName"].Text = column.GetColumnName();
+                    editColumnForm.Controls["combColumnType"].Text = column.GetColumnType();
+                    editColumnForm.Controls["tbColumnLength"].Text = column.GetColumnLength().ToString();
+                    CheckBox check = (CheckBox)editColumnForm.Controls["chckIsUnique"];
 
                     check.Checked = column.GetColumnIsUnique();
 
@@ -250,7 +250,52 @@ namespace DP_ETL_TOOL
 
             };
 
-            editForm.Controls["btnOk"].Click += (sender, args) =>
+            editForm.Controls["btnEditJoin"].Click += (sender, args) =>
+            {
+                ComboBox combJoins = (ComboBox)editForm.Controls["combJoins"];
+
+                if (combJoins.SelectedItem != null)
+                {
+                    string s = combJoins.SelectedItem.ToString();
+                    JoinEntity currentJoin = null;
+
+                    if (s != null)
+                    {
+                        string[] content = s.Split(null);
+
+                        foreach (JoinControl jc in joins)
+                        {
+                            JoinEntity join = jc.GetJoinEntity();
+                            if (join.IsMainJoin(content[0].ToString()) != null)
+                            {
+                                string i = join.GetChildTable().GetName().ToString().ToUpper();
+                                string j = content[content.Length - 1].ToUpper();
+
+                                if (i.Equals(j))
+                                {
+                                    currentJoin = join;
+                                    break;
+                                }
+                            }
+                        }
+
+                        EditJoinForm editJoinForm = new EditJoinForm();
+
+                        ListBox columnPairsList = (ListBox)editJoinForm.Controls["lbColumnPairs"];
+                        columnPairsList.Items.Clear();
+
+                        foreach (ColumnPairEntity columnPair in currentJoin.GetJoinPairs())
+                        {
+                            columnPairsList.Items.Add(columnPair.GetParentColumn() + " on " + columnPair.GetChildColumn());
+                        }
+
+                        editJoinForm.ShowDialog(this);
+
+                    }
+                }
+            };
+
+                editForm.Controls["btnOk"].Click += (sender, args) =>
             { // save form
                 te.SetTableName(editForm.Controls["tbTableName"].Text);
                 te.SetSchemaName(editForm.Controls["tbSchemaName"].Text);
@@ -300,17 +345,12 @@ namespace DP_ETL_TOOL
             {
                 foreach (JoinControl j in joins)
                 {
-
-
-                    if (j.GetMainTable() != null)
+                    JoinEntity joinEntity = j.GetJoinEntity();
+                    ColumnPairEntity columnPair = joinEntity.IsMainJoin(tableName);
+                    if (columnPair != null)
                     {
-                        String s = j.GetMainTable().getTableEntity().GetName();
-                        if (s == tableName)
-                        {
-                            cb.Items.Add(s);
-
-                        }
-
+                        String s = columnPair.GetParentTable().GetName() + " ( " + joinEntity.GetJoinType().ToString() + " ) " + columnPair.GetChildTable().GetName();
+                        cb.Items.Add(s);
                     }
                 }
             }

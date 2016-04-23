@@ -24,6 +24,8 @@ namespace DP_ETL_TOOL.Modules
 
         private string GenerateViewCode(List<TableControl> tables, List<JoinControl> joins)
         {
+
+
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("CREATE OR REPLACE VIEW");
@@ -39,7 +41,7 @@ namespace DP_ETL_TOOL.Modules
             {
                 i++;
 
-                TableEntity te = t.getTableEntity();
+                TableEntity te = t.GetTableEntity();
                 sb.Append(te.GetSchema());
                 sb.Append(".");
                 

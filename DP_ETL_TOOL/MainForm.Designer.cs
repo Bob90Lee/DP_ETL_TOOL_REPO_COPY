@@ -55,12 +55,12 @@
             this.leftTabs = new System.Windows.Forms.TabControl();
             this.rightTabs = new System.Windows.Forms.TabControl();
             this.visualTab = new System.Windows.Forms.TabPage();
-            this.visualPanel = new System.Windows.Forms.Panel();
-            this.codeTab = new System.Windows.Forms.TabPage();
-            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
-            this.codeControl = new System.Windows.Forms.RichTextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.visualPanel = new System.Windows.Forms.Panel();
+            this.codeTab = new System.Windows.Forms.TabPage();
+            this.codeControl = new System.Windows.Forms.RichTextBox();
+            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
             this.grpDesigneDown.SuspendLayout();
@@ -68,8 +68,8 @@
             this.leftTabs.SuspendLayout();
             this.rightTabs.SuspendLayout();
             this.visualTab.SuspendLayout();
-            this.codeTab.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.codeTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
@@ -227,7 +227,6 @@
             // grpDesigneDown
             // 
             this.grpDesigneDown.Controls.Add(this.lbDesignerList);
-            this.grpDesigneDown.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.grpDesigneDown.Location = new System.Drawing.Point(3, 212);
             this.grpDesigneDown.Name = "grpDesigneDown";
             this.grpDesigneDown.Size = new System.Drawing.Size(131, 234);
@@ -247,7 +246,6 @@
             // grpDesigneUp
             // 
             this.grpDesigneUp.Controls.Add(this.lbDesignerMode);
-            this.grpDesigneUp.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpDesigneUp.Location = new System.Drawing.Point(3, 3);
             this.grpDesigneUp.Name = "grpDesigneUp";
             this.grpDesigneUp.Size = new System.Drawing.Size(131, 203);
@@ -300,12 +298,28 @@
             this.visualTab.TabIndex = 0;
             this.visualTab.Text = "Visual";
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1});
+            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(721, 25);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // visualPanel
             // 
-            this.visualPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.visualPanel.Location = new System.Drawing.Point(3, 25);
+            this.visualPanel.AutoScroll = true;
+            this.visualPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.visualPanel.Location = new System.Drawing.Point(3, 3);
             this.visualPanel.Name = "visualPanel";
-            this.visualPanel.Size = new System.Drawing.Size(704, 443);
+            this.visualPanel.Size = new System.Drawing.Size(721, 443);
             this.visualPanel.TabIndex = 0;
             // 
             // codeTab
@@ -319,18 +333,6 @@
             this.codeTab.Text = "Code";
             this.codeTab.UseVisualStyleBackColor = true;
             // 
-            // codeEdit
-            // 
-            this.codeEdit.AcceptsTab = true;
-            this.codeEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.codeEdit.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.codeEdit.ForeColor = System.Drawing.Color.Black;
-            this.codeEdit.Location = new System.Drawing.Point(40, 0);
-            this.codeEdit.Name = "codeEdit";
-            this.codeEdit.Size = new System.Drawing.Size(687, 449);
-            this.codeEdit.TabIndex = 0;
-            this.codeEdit.Text = "";
-            // 
             // codeControl
             // 
             this.codeControl.Dock = System.Windows.Forms.DockStyle.Left;
@@ -342,20 +344,17 @@
             this.codeControl.TabIndex = 0;
             this.codeControl.Text = "";
             // 
-            // toolStrip1
+            // codeEdit
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(704, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.codeEdit.AcceptsTab = true;
+            this.codeEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.codeEdit.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.codeEdit.ForeColor = System.Drawing.Color.Black;
+            this.codeEdit.Location = new System.Drawing.Point(40, 0);
+            this.codeEdit.Name = "codeEdit";
+            this.codeEdit.Size = new System.Drawing.Size(687, 449);
+            this.codeEdit.TabIndex = 0;
+            this.codeEdit.Text = "";
             // 
             // MainForm
             // 
@@ -378,9 +377,9 @@
             this.rightTabs.ResumeLayout(false);
             this.visualTab.ResumeLayout(false);
             this.visualTab.PerformLayout();
-            this.codeTab.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.codeTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

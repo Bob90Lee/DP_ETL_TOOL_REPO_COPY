@@ -61,7 +61,7 @@
             this.lblTableName.Location = new System.Drawing.Point(12, 9);
             this.lblTableName.Name = "lblTableName";
             this.lblTableName.Size = new System.Drawing.Size(65, 13);
-            this.lblTableName.TabIndex = 0;
+            this.lblTableName.TabIndex = 99;
             this.lblTableName.Text = "Table Name";
             // 
             // tbTableName
@@ -77,7 +77,7 @@
             this.lblSchemaName.Location = new System.Drawing.Point(12, 39);
             this.lblSchemaName.Name = "lblSchemaName";
             this.lblSchemaName.Size = new System.Drawing.Size(77, 13);
-            this.lblSchemaName.TabIndex = 2;
+            this.lblSchemaName.TabIndex = 99;
             this.lblSchemaName.Text = "Schema Name";
             // 
             // tbSchemaName
@@ -85,7 +85,7 @@
             this.tbSchemaName.Location = new System.Drawing.Point(113, 32);
             this.tbSchemaName.Name = "tbSchemaName";
             this.tbSchemaName.Size = new System.Drawing.Size(158, 20);
-            this.tbSchemaName.TabIndex = 3;
+            this.tbSchemaName.TabIndex = 2;
             // 
             // lblColumns
             // 
@@ -93,7 +93,7 @@
             this.lblColumns.Location = new System.Drawing.Point(12, 65);
             this.lblColumns.Name = "lblColumns";
             this.lblColumns.Size = new System.Drawing.Size(47, 13);
-            this.lblColumns.TabIndex = 4;
+            this.lblColumns.TabIndex = 99;
             this.lblColumns.Text = "Columns";
             // 
             // btnEditColumn
@@ -101,7 +101,7 @@
             this.btnEditColumn.Location = new System.Drawing.Point(210, 219);
             this.btnEditColumn.Name = "btnEditColumn";
             this.btnEditColumn.Size = new System.Drawing.Size(62, 23);
-            this.btnEditColumn.TabIndex = 6;
+            this.btnEditColumn.TabIndex = 8;
             this.btnEditColumn.Text = "Edit";
             this.btnEditColumn.UseVisualStyleBackColor = true;
             // 
@@ -119,7 +119,7 @@
             this.tbColumnName.Location = new System.Drawing.Point(113, 84);
             this.tbColumnName.Name = "tbColumnName";
             this.tbColumnName.Size = new System.Drawing.Size(158, 20);
-            this.tbColumnName.TabIndex = 8;
+            this.tbColumnName.TabIndex = 3;
             // 
             // combColumn
             // 
@@ -127,7 +127,7 @@
             this.combColumn.Location = new System.Drawing.Point(114, 192);
             this.combColumn.Name = "combColumn";
             this.combColumn.Size = new System.Drawing.Size(158, 21);
-            this.combColumn.TabIndex = 9;
+            this.combColumn.TabIndex = 8;
             // 
             // combColumnType
             // 
@@ -135,7 +135,7 @@
             this.combColumnType.Location = new System.Drawing.Point(113, 110);
             this.combColumnType.Name = "combColumnType";
             this.combColumnType.Size = new System.Drawing.Size(158, 21);
-            this.combColumnType.TabIndex = 11;
+            this.combColumnType.TabIndex = 4;
             // 
             // chckIsUnique
             // 
@@ -143,7 +143,7 @@
             this.chckIsUnique.Location = new System.Drawing.Point(113, 169);
             this.chckIsUnique.Name = "chckIsUnique";
             this.chckIsUnique.Size = new System.Drawing.Size(71, 17);
-            this.chckIsUnique.TabIndex = 12;
+            this.chckIsUnique.TabIndex = 6;
             this.chckIsUnique.Text = "Is Unique";
             this.chckIsUnique.UseVisualStyleBackColor = true;
             // 
@@ -152,7 +152,7 @@
             this.tbColumnLength.Location = new System.Drawing.Point(113, 137);
             this.tbColumnLength.Name = "tbColumnLength";
             this.tbColumnLength.Size = new System.Drawing.Size(158, 20);
-            this.tbColumnLength.TabIndex = 15;
+            this.tbColumnLength.TabIndex = 5;
             // 
             // lblJoins
             // 
@@ -160,7 +160,7 @@
             this.lblJoins.Location = new System.Drawing.Point(12, 251);
             this.lblJoins.Name = "lblJoins";
             this.lblJoins.Size = new System.Drawing.Size(31, 13);
-            this.lblJoins.TabIndex = 16;
+            this.lblJoins.TabIndex = 99;
             this.lblJoins.Text = "Joins";
             // 
             // combJoins
@@ -169,7 +169,7 @@
             this.combJoins.Location = new System.Drawing.Point(113, 270);
             this.combJoins.Name = "combJoins";
             this.combJoins.Size = new System.Drawing.Size(159, 21);
-            this.combJoins.TabIndex = 19;
+            this.combJoins.TabIndex = 10;
             // 
             // lblColumnName
             // 
@@ -177,7 +177,7 @@
             this.lblColumnName.Location = new System.Drawing.Point(12, 91);
             this.lblColumnName.Name = "lblColumnName";
             this.lblColumnName.Size = new System.Drawing.Size(73, 13);
-            this.lblColumnName.TabIndex = 30;
+            this.lblColumnName.TabIndex = 99;
             this.lblColumnName.Text = "Column Name";
             // 
             // lblColumnType
@@ -186,7 +186,7 @@
             this.lblColumnType.Location = new System.Drawing.Point(12, 118);
             this.lblColumnType.Name = "lblColumnType";
             this.lblColumnType.Size = new System.Drawing.Size(69, 13);
-            this.lblColumnType.TabIndex = 31;
+            this.lblColumnType.TabIndex = 99;
             this.lblColumnType.Text = "Column Type";
             // 
             // lblColumnLength
@@ -195,7 +195,7 @@
             this.lblColumnLength.Location = new System.Drawing.Point(12, 144);
             this.lblColumnLength.Name = "lblColumnLength";
             this.lblColumnLength.Size = new System.Drawing.Size(78, 13);
-            this.lblColumnLength.TabIndex = 32;
+            this.lblColumnLength.TabIndex = 99;
             this.lblColumnLength.Text = "Column Length";
             // 
             // lblSelectedColumn
@@ -204,7 +204,7 @@
             this.lblSelectedColumn.Location = new System.Drawing.Point(12, 200);
             this.lblSelectedColumn.Name = "lblSelectedColumn";
             this.lblSelectedColumn.Size = new System.Drawing.Size(87, 13);
-            this.lblSelectedColumn.TabIndex = 33;
+            this.lblSelectedColumn.TabIndex = 99;
             this.lblSelectedColumn.Text = "Selected Column";
             // 
             // lblSelectedJoin
@@ -213,7 +213,7 @@
             this.lblSelectedJoin.Location = new System.Drawing.Point(12, 278);
             this.lblSelectedJoin.Name = "lblSelectedJoin";
             this.lblSelectedJoin.Size = new System.Drawing.Size(71, 13);
-            this.lblSelectedJoin.TabIndex = 34;
+            this.lblSelectedJoin.TabIndex = 99;
             this.lblSelectedJoin.Text = "Selected Join";
             // 
             // btnEditJoin
@@ -221,7 +221,7 @@
             this.btnEditJoin.Location = new System.Drawing.Point(211, 295);
             this.btnEditJoin.Name = "btnEditJoin";
             this.btnEditJoin.Size = new System.Drawing.Size(61, 23);
-            this.btnEditJoin.TabIndex = 35;
+            this.btnEditJoin.TabIndex = 11;
             this.btnEditJoin.Text = "Edit";
             this.btnEditJoin.UseVisualStyleBackColor = true;
             // 
@@ -240,7 +240,7 @@
             this.lblIndexes.Location = new System.Drawing.Point(12, 349);
             this.lblIndexes.Name = "lblIndexes";
             this.lblIndexes.Size = new System.Drawing.Size(44, 13);
-            this.lblIndexes.TabIndex = 36;
+            this.lblIndexes.TabIndex = 99;
             this.lblIndexes.Text = "Indexes";
             // 
             // btnEditIndexes
@@ -248,7 +248,7 @@
             this.btnEditIndexes.Location = new System.Drawing.Point(209, 339);
             this.btnEditIndexes.Name = "btnEditIndexes";
             this.btnEditIndexes.Size = new System.Drawing.Size(62, 23);
-            this.btnEditIndexes.TabIndex = 37;
+            this.btnEditIndexes.TabIndex = 12;
             this.btnEditIndexes.Text = "Edit";
             this.btnEditIndexes.UseVisualStyleBackColor = true;
             // 
@@ -257,7 +257,7 @@
             this.btnCancel.Location = new System.Drawing.Point(151, 395);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(120, 23);
-            this.btnCancel.TabIndex = 38;
+            this.btnCancel.TabIndex = 14;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -268,7 +268,7 @@
             this.lblDeleteTable.Location = new System.Drawing.Point(203, 436);
             this.lblDeleteTable.Name = "lblDeleteTable";
             this.lblDeleteTable.Size = new System.Drawing.Size(68, 13);
-            this.lblDeleteTable.TabIndex = 39;
+            this.lblDeleteTable.TabIndex = 99;
             this.lblDeleteTable.Text = "Delete Table";
             this.lblDeleteTable.Click += new System.EventHandler(this.lblDeleteTable_Click);
             // 
