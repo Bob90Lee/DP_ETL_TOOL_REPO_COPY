@@ -101,6 +101,23 @@ namespace DP_ETL_TOOL.Entities
             }
 
         }
+
+        public void DeserializeFromXML()
+        {
+            this.tables = new List<TableControl>();
+            this.joins = new List<JoinControl>();
+
+            foreach (TableEntity te in tableEntities)
+            {
+
+                tables.Add(new TableControl(te));
+            }
+
+            foreach (JoinEntity je in joinEntities)
+            {
+                joins.Add(new JoinControl(je));
+            }
+        }
     }
 
 

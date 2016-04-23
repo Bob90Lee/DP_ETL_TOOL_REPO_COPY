@@ -12,8 +12,8 @@ namespace DP_ETL_TOOL.Controls
         XDocument doc = new XDocument();
         string words = "";
 
-        Font basicFont = new Font("Times", 8, FontStyle.Regular);
-        Font specialFont = new Font("Times", 8, FontStyle.Bold);
+        //Font basicFont = new Font("Times", 8, FontStyle.Regular);
+        //Font specialFont = new Font("Times", 8, FontStyle.Bold);
 
         Color basicColor = Color.Black;
         Color specialColor = Color.DarkBlue;
@@ -24,7 +24,7 @@ namespace DP_ETL_TOOL.Controls
         {
             InitializeComponent();
 
-            this.Font = basicFont;
+            //this.Font = basicFont;
             this.ForeColor = Color.Black;
 
             this.ShortcutsEnabled = true;
@@ -109,7 +109,7 @@ namespace DP_ETL_TOOL.Controls
                 {
                     control.Select(startIndex, StopIndex);
                     control.SelectionColor = specialColor;
-                    control.SelectionFont = specialFont;
+                    //control.SelectionFont = specialFont;
                     control.SelectionStart = StartCursorPosition;
                     control.SelectionColor = basicColor;
                 }
@@ -123,20 +123,20 @@ namespace DP_ETL_TOOL.Controls
 
                         control.Select(startIndex, StopIndex);
                         control.SelectionColor = specialColor;
-                        control.SelectionFont = specialFont;
+                        //control.SelectionFont = specialFont;
                         control.SelectionStart = StartCursorPosition;
                         control.SelectionColor = basicColor;
-                        control.SelectionFont = basicFont;
+                        //control.SelectionFont = basicFont;
 
                     }
 
                     control.SelectionColor = basicColor;
-                    control.SelectionFont = basicFont;
+                    //control.SelectionFont = basicFont;
 
                 }
 
                 control.SelectionColor = basicColor;
-                control.SelectionFont = basicFont;
+                //control.SelectionFont = basicFont;
                 control.Select(control.SelectionStart, 0);
             }
         }

@@ -59,7 +59,7 @@ namespace DP_ETL_TOOL
             {
                 if (e.Button == MouseButtons.Right && lbDesignerList.SelectedItem == lbDesignerList.Items[0]) // table
                 {
-                    TableControl tableControl = new TableControl();
+                    TableControl tableControl = new TableControl(null);
                     tableControl.MouseClick += new MouseEventHandler(OnTableClick);
                     tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
                     project.AddTable(tableControl);
@@ -123,7 +123,7 @@ namespace DP_ETL_TOOL
                             {
                                 Enums.JoinType jt = Enums.JoinType.Inner; // default join type
 
-                                currentJoin = new JoinControl(visualPanel, jt);
+                                currentJoin = new JoinControl(null);
                                 currentJoin.SetMainTable(tc);
                                 currentJoin.GetJoinEntity().AddJoinPair(new ColumnPairEntity(column, null));
                                 activatedJoin = true;
@@ -135,8 +135,10 @@ namespace DP_ETL_TOOL
                         {
                             if (te.GetJoins() != null && te.GetJoins().Count > 0)
                             {
-
-                                foreach (JoinEntity je in te.GetJoins())
+                                JoinEntity[] copy = new JoinEntity[te.GetJoins().Count];
+                                te.GetJoins().CopyTo(copy);
+                                
+                                foreach (JoinEntity je in copy)
                                 {
                                     ColumnPairEntity currentJoinPair = currentJoin.GetJoinEntity().GetJoinPairs()[0];
                                     if (!je.FindExistingJoinPair(currentJoinPair.GetParentColumn().GetColumnName(), currentJoinPair.GetChildColumn().GetColumnName()))
@@ -149,6 +151,8 @@ namespace DP_ETL_TOOL
                                         MessageBox.Show("Can not create join! Join already exists on " + tc.GetTableEntity().GetName() + "! Add join columns instead!", "ETL Tool", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                                     }
                                 }
+
+
                             }
                             else
                             {
@@ -159,6 +163,7 @@ namespace DP_ETL_TOOL
                             }
 
                             activatedJoin = false;
+                            currentJoin = new JoinControl(null);
                         }
                     }
                     else
@@ -415,11 +420,12 @@ namespace DP_ETL_TOOL
                 {
                     JoinEntity joinEntity = j.GetJoinEntity();
 
-                    foreach (ColumnPairEntity columnPair in joinEntity.GetJoinPairs()) { 
-                    String s = columnPair.GetParentColumn().GetColumnName() + " ( " + joinEntity.GetJoinType().ToString() + " ) " + columnPair.GetChildColumn().GetColumnName();
-                    cb.Items.Add(s);
-                }
-                    
+                    foreach (ColumnPairEntity columnPair in joinEntity.GetJoinPairs())
+                    {
+                        String s = columnPair.GetParentColumn().GetColumnName() + " ( " + joinEntity.GetJoinType().ToString() + " ) " + columnPair.GetChildColumn().GetColumnName();
+                        cb.Items.Add(s);
+                    }
+
                 }
             }
         }
@@ -480,6 +486,25 @@ namespace DP_ETL_TOOL
 
         private bool LoadFromFile()
         {
+            DataContractSerializer deserializer = new DataContractSerializer(typeof(ProjectEntity));
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "ETL Tool File|*.etf";
+            openFileDialog.Title = "Open project";
+
+            openFileDialog.ShowDialog();
+
+            if (openFileDialog.FileName != "")
+            {
+                System.IO.FileStream fs = (System.IO.FileStream)openFileDialog.OpenFile();
+
+                XmlReader xmlReader = XmlReader.Create(fs);
+
+                project = (ProjectEntity)deserializer.ReadObject(xmlReader);
+
+                //Parent.Invalidate();
+            }
+
             return true; // success
         }
 
@@ -487,6 +512,26 @@ namespace DP_ETL_TOOL
         {
             project.PrepareForSerializationToXML();
             SaveToFile();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFromFile();
+            project.DeserializeFromXML();
+
+            foreach (TableControl tc in project.GetTables())
+            {
+                tc.MouseClick += new MouseEventHandler(OnTableClick);
+                tc.DoubleClick += new EventHandler(OnTableDoubleClick);
+                visualPanel.Controls.Add(tc);
+            }
+
+            foreach (JoinControl jc in project.GetJoins())
+            {
+                //visualPanel.Controls.Add(jc);
+            }
+
+            this.Invalidate();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace DP_ETL_TOOL.Controls
         private int thresholdX = 20;
         private int thresholdY = 5;
 
-        Enums.JoinType joinType = Enums.JoinType.Left;
+        Enums.JoinType joinType;
 
         protected override CreateParams CreateParams
         {
@@ -33,25 +33,34 @@ namespace DP_ETL_TOOL.Controls
             }
         }
 
-        public JoinControl(Control parent, Enums.JoinType jt)
+        public JoinControl(JoinEntity joinEntity)
         {
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             SetStyle(ControlStyles.Opaque, true);
 
-            this.Size = new Size(1000, 1000);
-            this.BackColor = Color.Transparent;
+            this.Size = new Size(1024, 1024);
+            //this.BackColor = Color.Transparent;
             this.Enabled = false;
-            this.joinType = jt;
+            this.joinType = Enums.JoinType.Left;
 
-            this.join = new JoinEntity(jt, null, null);
+            if (joinEntity != null)
+            {
+                this.join = joinEntity;
+            }
+            else {
+                this.join = new JoinEntity(joinType, null, null);
+            }
+
+            
+            
         }
 
         public void SetMainTable(TableControl te)
         {
             mainTable = te;
             join.SetMainTable(te.GetTableEntity());
-            lastMainX = te.Bounds.X + te.Width/2;
-            lastMainY = te.Bounds.Y + te.Height/2;
+            lastMainX = te.Bounds.X + te.Width / 2;
+            lastMainY = te.Bounds.Y + te.Height / 2;
         }
 
         public void SetChildTable(TableControl te)
@@ -79,16 +88,16 @@ namespace DP_ETL_TOOL.Controls
                 int delta = 0;
 
                 delta = lastMainX - mainTable.Bounds.X;
-                if (Math.Abs(delta) > thresholdX) { lastMainX = mainTable.Bounds.X;  return true; };
+                if (Math.Abs(delta) > thresholdX) { lastMainX = mainTable.Bounds.X; return true; };
 
                 delta = lastMainY - mainTable.Bounds.Y;
-                if (Math.Abs(delta) > thresholdY) { lastMainY = mainTable.Bounds.Y;  return true; };
+                if (Math.Abs(delta) > thresholdY) { lastMainY = mainTable.Bounds.Y; return true; };
 
                 delta = lastChildX - childTable.Bounds.X;
-                if (Math.Abs(delta) > thresholdX) { lastChildX = childTable.Bounds.X;  return true; };
+                if (Math.Abs(delta) > thresholdX) { lastChildX = childTable.Bounds.X; return true; };
 
                 delta = lastChildY - childTable.Bounds.Y;
-                if (Math.Abs(delta) > thresholdY) { lastChildY = childTable.Bounds.Y;  return true; };
+                if (Math.Abs(delta) > thresholdY) { lastChildY = childTable.Bounds.Y; return true; };
 
                 return false;
             }
@@ -150,6 +159,12 @@ namespace DP_ETL_TOOL.Controls
                 pen.CustomEndCap = bigArrow;
 
                 int startX, startY, finalX, finalY, halfX, halfY;
+
+                if (mainTable.Bounds == null || childTable.Bounds == null)
+                {
+                    mainTable.Bounds = bounds;
+                    childTable.Bounds = bounds;
+                }
 
                 startX = mainTable.Bounds.X + mainTable.Width / 2;
                 startY = mainTable.Bounds.Y + mainTable.Height / 2;

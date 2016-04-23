@@ -34,6 +34,7 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,6 @@
             this.codeTab = new System.Windows.Forms.TabPage();
             this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.codeControl = new System.Windows.Forms.RichTextBox();
-            this.asXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
             this.grpDesigneDown.SuspendLayout();
@@ -110,6 +110,7 @@
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open Project";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -125,6 +126,12 @@
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportToolStripMenuItem.Text = "Export";
+            // 
+            // asXMLToolStripMenuItem
+            // 
+            this.asXMLToolStripMenuItem.Name = "asXMLToolStripMenuItem";
+            this.asXMLToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.asXMLToolStripMenuItem.Text = "As XML";
             // 
             // exitToolStripMenuItem
             // 
@@ -359,12 +366,6 @@
             this.codeControl.Size = new System.Drawing.Size(40, 449);
             this.codeControl.TabIndex = 0;
             this.codeControl.Text = "";
-            // 
-            // asXMLToolStripMenuItem
-            // 
-            this.asXMLToolStripMenuItem.Name = "asXMLToolStripMenuItem";
-            this.asXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.asXMLToolStripMenuItem.Text = "As XML";
             // 
             // MainForm
             // 

@@ -11,11 +11,18 @@ namespace DP_ETL_TOOL.Controls
         private bool isDragged = false;
         private Point offset;
 
-        private TableEntity tableEntity = new TableEntity();
+        private TableEntity tableEntity;
 
 
-        public TableControl()
+        public TableControl(TableEntity tableEntity)
         {
+            if (tableEntity != null)
+            {
+                this.tableEntity = tableEntity;
+            }
+            else{
+                this.tableEntity = new TableEntity();
+            }
         }
 
         protected override void OnCreateControl()
