@@ -60,8 +60,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.visualPanel = new System.Windows.Forms.Panel();
             this.codeTab = new System.Windows.Forms.TabPage();
-            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.codeControl = new System.Windows.Forms.RichTextBox();
+            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
             this.grpDesigneDown.SuspendLayout();
@@ -96,8 +96,8 @@
             this.exportToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
-            this.applicationToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
-            this.applicationToolStripMenuItem.Text = "Application";
+            this.applicationToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.applicationToolStripMenuItem.Text = "File";
             // 
             // newToolStripMenuItem
             // 
@@ -125,12 +125,12 @@
             this.asXMLToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exportToolStripMenuItem.Text = "Export";
+            this.exportToolStripMenuItem.Text = "Export As";
             // 
             // asXMLToolStripMenuItem
             // 
             this.asXMLToolStripMenuItem.Name = "asXMLToolStripMenuItem";
-            this.asXMLToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.asXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.asXMLToolStripMenuItem.Text = "As XML";
             // 
             // exitToolStripMenuItem
@@ -151,13 +151,13 @@
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             // 
             // settingsToolStripMenuItem
@@ -173,13 +173,13 @@
             this.modulesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.oracleSQLToolStripMenuItem});
             this.modulesToolStripMenuItem.Name = "modulesToolStripMenuItem";
-            this.modulesToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.modulesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.modulesToolStripMenuItem.Text = "Modules";
             // 
             // oracleSQLToolStripMenuItem
             // 
             this.oracleSQLToolStripMenuItem.Name = "oracleSQLToolStripMenuItem";
-            this.oracleSQLToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.oracleSQLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.oracleSQLToolStripMenuItem.Text = "Oracle SQL";
             // 
             // toolsToolStripMenuItem
@@ -200,13 +200,13 @@
             // tableToolStripMenuItem
             // 
             this.tableToolStripMenuItem.Name = "tableToolStripMenuItem";
-            this.tableToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.tableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tableToolStripMenuItem.Text = "Table";
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // helpToolStripMenuItem
@@ -220,7 +220,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // designerTab
@@ -344,6 +344,17 @@
             this.codeTab.Text = "Code";
             this.codeTab.UseVisualStyleBackColor = true;
             // 
+            // codeControl
+            // 
+            this.codeControl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.codeControl.Location = new System.Drawing.Point(0, 0);
+            this.codeControl.Name = "codeControl";
+            this.codeControl.ReadOnly = true;
+            this.codeControl.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.codeControl.Size = new System.Drawing.Size(40, 449);
+            this.codeControl.TabIndex = 0;
+            this.codeControl.Text = "";
+            // 
             // codeEdit
             // 
             this.codeEdit.AcceptsTab = true;
@@ -355,17 +366,6 @@
             this.codeEdit.Size = new System.Drawing.Size(687, 449);
             this.codeEdit.TabIndex = 0;
             this.codeEdit.Text = "";
-            // 
-            // codeControl
-            // 
-            this.codeControl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.codeControl.Location = new System.Drawing.Point(0, 0);
-            this.codeControl.Name = "codeControl";
-            this.codeControl.ReadOnly = true;
-            this.codeControl.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.codeControl.Size = new System.Drawing.Size(40, 449);
-            this.codeControl.TabIndex = 0;
-            this.codeControl.Text = "";
             // 
             // MainForm
             // 
