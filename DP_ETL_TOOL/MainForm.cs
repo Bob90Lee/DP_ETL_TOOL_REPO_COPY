@@ -68,33 +68,94 @@ namespace DP_ETL_TOOL
             {
                 if (e.Button == MouseButtons.Right /* && lbDesignerList.SelectedItem != lbDesignerList.Items[0] */) // join
                 {
+                    int numCols = 0;
+
                     Control senderControl = (Control)sender;
+                    TableControl tc = null;
+                    TableEntity te = null;
 
-                    if (senderControl != null && senderControl.GetType() == typeof(TableControl))
+                    if (senderControl != null)
                     {
-                        TableControl tc = (TableControl)senderControl;
+                        tc = (TableControl)senderControl;
+                        te = tc.GetTableEntity();
 
-                        if (activatedJoin)
-                        {
-                            currentJoin.SetChildTable(tc);
-                            activatedJoin = false;
-                        }
-                        else
-                        {
-                            Enums.JoinType jt = Enums.JoinType.Inner; // default join type
-
-                            currentJoin = new JoinControl(visualPanel, jt);
-                            currentJoin.SetMainTable(tc);
-                            activatedJoin = true;
-                        }
-
+                        List<ColumnEntity> ce = te.GetColumns();
+                        numCols = ce.Count;
                     }
 
-                    if (currentJoin.GetMainTable() != null && currentJoin.GetChildTable() != null)
+                    if (numCols > 0)
                     {
-                        joins.Add(currentJoin);
-                        visualPanel.Controls.Add(currentJoin);
-                        activatedJoin = false;
+                        SelectColumnForm selectColumnForm = new SelectColumnForm();
+                        ComboBox comboColumn = (ComboBox)selectColumnForm.Controls["combColumnName"];
+                        ColumnEntity column = null;
+                        populateComboBoxColumn(comboColumn, te);
+
+                        selectColumnForm.Controls["btnOk"].Click += (s, a) => {
+                            if (comboColumn.SelectedItem != null)
+                            {
+                                string[] columnName = comboColumn.SelectedItem.ToString().Split(null);
+                                column = te.GetColumnByName(columnName[0]);
+
+                                selectColumnForm.Dispose();
+                            }
+                        };
+
+                        selectColumnForm.ShowDialog(this);
+
+                        if (senderControl.GetType() == typeof(TableControl) && column != null)
+                        {
+
+                            if (activatedJoin)
+                            {
+                                currentJoin.SetChildTable(tc);
+                                currentJoin.GetJoinEntity().GetJoinPairs()[0].SetChildTable(te);
+                                currentJoin.GetJoinEntity().GetJoinPairs()[0].SetChildColumn(column);
+                                activatedJoin = false;
+                            }
+                            else
+                            {
+                                Enums.JoinType jt = Enums.JoinType.Inner; // default join type
+
+                                currentJoin = new JoinControl(visualPanel, jt);
+                                currentJoin.SetMainTable(tc);
+                                currentJoin.GetJoinEntity().AddJoinPair(new ColumnPairEntity(te, null, column, null));
+                                activatedJoin = true;
+                            }
+
+                        }
+
+                        if (currentJoin.GetMainTable() != null && currentJoin.GetChildTable() != null)
+                        {
+                            if (te.GetJoins() != null && te.GetJoins().Count > 0)
+                            {
+
+                                foreach (JoinEntity je in te.GetJoins())
+                                {
+                                    ColumnPairEntity currentJoinPair = currentJoin.GetJoinEntity().GetJoinPairs()[0];
+                                    if (!je.FindExistingJoinPair(currentJoinPair.GetParentColumn().GetColumnName(), currentJoinPair.GetChildColumn().GetColumnName()))
+                                    {
+                                        joins.Add(currentJoin);
+                                        te.AddJoinEntity(currentJoin.GetJoinEntity());
+                                        visualPanel.Controls.Add(currentJoin);
+                                    }
+                                    else {
+                                        MessageBox.Show("Can not create join! Join already exists on " + tc.GetTableEntity().GetName() + "! Add join columns instead!", "ETL Tool", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                joins.Add(currentJoin);
+                                te.AddJoinEntity(currentJoin.GetJoinEntity());
+                                visualPanel.Controls.Add(currentJoin);
+                            }
+
+                            activatedJoin = false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Can not create join! First, add columns to the table " + tc.GetTableEntity().GetName() + "!", "ETL Tool", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -286,7 +347,7 @@ namespace DP_ETL_TOOL
 
                         foreach (ColumnPairEntity columnPair in currentJoin.GetJoinPairs())
                         {
-                            columnPairsList.Items.Add(columnPair.GetParentColumn() + " on " + columnPair.GetChildColumn());
+                            columnPairsList.Items.Add(columnPair.GetParentColumn().GetColumnName() + " on " + columnPair.GetChildColumn().GetColumnName());
                         }
 
                         editJoinForm.ShowDialog(this);
@@ -295,16 +356,16 @@ namespace DP_ETL_TOOL
                 }
             };
 
-                editForm.Controls["btnOk"].Click += (sender, args) =>
-            { // save form
-                te.SetTableName(editForm.Controls["tbTableName"].Text);
-                te.SetSchemaName(editForm.Controls["tbSchemaName"].Text);
+            editForm.Controls["btnOk"].Click += (sender, args) =>
+        { // save form
+            te.SetTableName(editForm.Controls["tbTableName"].Text);
+            te.SetSchemaName(editForm.Controls["tbSchemaName"].Text);
 
-                tc.Text = te.GetName();
+            tc.Text = te.GetName();
 
-                editForm.Dispose();
+            editForm.Dispose();
 
-            };
+        };
 
             editForm.Controls["btnCancel"].Click += (sender, args) =>
             { // close form
@@ -360,6 +421,40 @@ namespace DP_ETL_TOOL
         {
             TableControl tc = (TableControl)sender;
             CreateTableEditGUI(tc);
+        }
+
+        private bool NewFileAvailable() {
+            if (tables.Count > 0 || joins.Count > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void NewFile(object sender, EventArgs e)
+        {
+            if (NewFileAvailable())
+            {
+                this.tables = null;
+                this.tables = new List<TableControl>();
+
+                this.joins = null;
+                this.joins = new List<JoinControl>();
+
+                currentJoin = null;
+                activatedJoin = false;
+            }
+        }
+
+        private bool SaveToFile()
+        {
+            return true; // success
+        }
+
+        private bool LoadFromFile()
+        {
+            return true; // success
         }
 
     }

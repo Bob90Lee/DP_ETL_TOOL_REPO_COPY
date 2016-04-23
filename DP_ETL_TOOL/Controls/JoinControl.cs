@@ -50,8 +50,6 @@ namespace DP_ETL_TOOL.Controls
         {
             mainTable = te;
             join.SetMainTable(te.GetTableEntity());
-            join.AddJoinPair(new ColumnPairEntity(te.GetTableEntity(), null, null, null));
-
             lastMainX = te.Bounds.X + te.Width/2;
             lastMainY = te.Bounds.Y + te.Height/2;
         }
@@ -60,9 +58,6 @@ namespace DP_ETL_TOOL.Controls
         {
             childTable = te;
             join.SetChildTable(te.GetTableEntity());
-            ColumnPairEntity columnPair = join.IsMainJoin(mainTable.GetTableEntity().GetName());
-            columnPair.SetChildTable(te.GetTableEntity());
-
             lastChildX = te.Bounds.X + te.Width / 2;
             lastChildY = te.Bounds.Y + te.Height / 2;
         }

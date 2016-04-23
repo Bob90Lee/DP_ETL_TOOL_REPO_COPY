@@ -72,5 +72,35 @@ namespace DP_ETL_TOOL.Entities
         {
             this.childTable = childTable;
         }
+
+        public bool IsJoinPairsEmpty()
+        {
+            if (joinPairs.Count > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool FindExistingJoinPair(string mainTableColumnName, string childTableColumnName)
+        {
+            if (IsJoinPairsEmpty())
+            {
+                return false;
+            }
+            else
+            {
+                foreach (ColumnPairEntity ce in joinPairs)
+                {
+                    if (ce.GetParentColumn().GetColumnName() == mainTableColumnName.Trim().ToUpper() && ce.GetChildColumn().GetColumnName() == childTableColumnName.Trim().ToUpper())
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }

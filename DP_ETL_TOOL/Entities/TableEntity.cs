@@ -9,6 +9,7 @@ namespace DP_ETL_TOOL.Entities
         private String tableSchema;
         private List<ColumnEntity> tableColumns = new List<ColumnEntity>();
         private List<IndexEntity> tableIndexes = new List<IndexEntity>();
+        private List<JoinEntity> tableJoins = new List<JoinEntity>();
 
         public TableEntity()
         {
@@ -20,6 +21,7 @@ namespace DP_ETL_TOOL.Entities
             this.tableName = tableName;
             this.tableColumns = new List<ColumnEntity>();
             this.tableIndexes = new List<IndexEntity>();
+            this.tableJoins = new List<JoinEntity>();
         }
 
         public void SetTableName(String tableName)
@@ -141,6 +143,16 @@ namespace DP_ETL_TOOL.Entities
         public List<IndexEntity> GetIndexes()
         {
             return tableIndexes;
+        }
+
+        public List<JoinEntity> GetJoins()
+        {
+            return tableJoins;
+        }
+
+        public void AddJoinEntity(JoinEntity join)
+        {
+            tableJoins.Add(join);
         }
     }
 }

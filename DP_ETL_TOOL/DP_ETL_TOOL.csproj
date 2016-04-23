@@ -70,6 +70,12 @@
     <Compile Include="Forms\EditJoinForm.Designer.cs">
       <DependentUpon>EditJoinForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SelectColumnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SelectColumnForm.Designer.cs">
+      <DependentUpon>SelectColumnForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Types\Enums.cs" />
     <Compile Include="Controls\JoinControl.cs">
       <SubType>UserControl</SubType>
@@ -104,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditTableForm.resx">
       <DependentUpon>EditTableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SelectColumnForm.resx">
+      <DependentUpon>SelectColumnForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
