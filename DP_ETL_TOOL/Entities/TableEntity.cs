@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using DP_ETL_TOOL.Types;
 
 namespace DP_ETL_TOOL.Entities
 {
@@ -19,17 +20,21 @@ namespace DP_ETL_TOOL.Entities
         private List<JoinEntity> tableJoins = new List<JoinEntity>();
         [DataMember]
         private GUICoordsEntity coords;
+        [DataMember]
+        private Enums.TableType tableType;
 
-        public TableEntity()
+        public TableEntity(Enums.TableType tableType)
         {
             this.tableName = "TableNEW" + new Random().Next(10, 99);
             this.coords = new GUICoordsEntity();
+            this.tableType = tableType;
         }
 
-        public TableEntity(String tableName)
+        public TableEntity(String tableName, Enums.TableType tableType)
         {
             this.tableName = tableName;
             this.coords = new GUICoordsEntity();
+            this.tableType = tableType;
         }
 
         public void SetTableName(String tableName)
@@ -166,6 +171,11 @@ namespace DP_ETL_TOOL.Entities
         public GUICoordsEntity GetCoords()
         {
             return this.coords;
+        }
+
+        public Enums.TableType GetTableType()
+        {
+            return this.tableType;
         }
     }
 }

@@ -17,5 +17,13 @@
             Extraction_Procedure
         };
 
+        public enum TableType
+        {
+            Source_Table,
+            Extraction_Table,
+            Load_Table,
+            Destination_Table
+        }
+
     }
 }

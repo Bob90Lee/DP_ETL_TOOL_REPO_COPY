@@ -40,9 +40,6 @@ namespace DP_ETL_TOOL
             lbDesignerList.SelectedValueChanged += new EventHandler(DesignerListValueChanged);
             lbDesignerMode.SelectedValueChanged += new EventHandler(DesignerModeValueChanged);
 
-            //rightTabs. += new EventHandler(RightTabsSelectedChanged);
-
-            codeEdit.GotFocus += new EventHandler(CodeEditRefresh);
         }
 
         private void ExitApplication(object sender, EventArgs e)
@@ -55,9 +52,9 @@ namespace DP_ETL_TOOL
         {
             if (lbDesignerList.Items.Count > 0)
             {
-                if (e.Button == MouseButtons.Right && lbDesignerList.SelectedItem == lbDesignerList.Items[0]) // table
+                if (e.Button == MouseButtons.Right && lbDesignerList.SelectedItem.ToString().ToUpper().Contains("TABLE")) // table
                 {
-                    TableControl tableControl = new TableControl(null);
+                    TableControl tableControl = new TableControl(null, SelectTableType(lbDesignerList));
                     tableControl.MouseClick += new MouseEventHandler(OnTableClick);
                     tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
                     project.AddTable(tableControl);
@@ -67,11 +64,35 @@ namespace DP_ETL_TOOL
             }
         }
 
+        private Enums.TableType SelectTableType(ListBox listBoxDesignerList)
+        {
+            Enums.TableType tableType = Enums.TableType.Source_Table;
+
+            if (listBoxDesignerList.SelectedItem.ToString() == "Source Table")
+            {
+                tableType = Enums.TableType.Source_Table;
+            }
+            else if (listBoxDesignerList.SelectedItem.ToString() == "Extraction Table")
+            {
+                tableType = Enums.TableType.Extraction_Table;
+            }
+            else if (listBoxDesignerList.SelectedItem.ToString() == "Load Table")
+            {
+                tableType = Enums.TableType.Load_Table;
+            }
+            else if (listBoxDesignerList.SelectedItem.ToString() == "Destination Table")
+            {
+                tableType = Enums.TableType.Destination_Table;
+            }
+
+            return tableType;
+        }
+
         private void OnTableClick(object sender, MouseEventArgs e)
         {
             if (lbDesignerList.Items.Count > 0)
             {
-                if (e.Button == MouseButtons.Right /* && lbDesignerList.SelectedItem != lbDesignerList.Items[0] */) // join
+                if (e.Button == MouseButtons.Right && lbDesignerList.SelectedItem.ToString().ToUpper().Contains("JOIN")) // join
                 {
                     int numCols = 0;
 
@@ -176,18 +197,50 @@ namespace DP_ETL_TOOL
         {
             box.Items.Clear();
 
-            if (mode.SelectedItem.ToString() == "Transformation Layer")
+            if (mode.SelectedItem.ToString() == "Table")
             {
-                box.Items.Add("View");
-                box.SelectedItem = box.Items[0];
+                box.Items.Add("Source Table");
+                box.Items.Add("Extraction Table");
+                box.Items.Add("Load Table");
+                box.Items.Add("Destination Table");
             }
+
+            else if (mode.SelectedItem.ToString() == "Extraction Procedure")
+            {
+                box.Items.Add("Source Table");
+                box.Items.Add("Extraction Table");
+            }
+
+            else if (mode.SelectedItem.ToString() == "Transformation View")
+            {
+                box.Items.Add("Extraction Table");
+                box.Items.Add("Join");
+            }
+
+            else if (mode.SelectedItem.ToString() == "Transformation Procedure")
+            {
+                box.Items.Add("Load Table");
+                box.Items.Add("Destination Table");
+                box.Items.Add("Transformation View");
+            }
+
+            else if (mode.SelectedItem.ToString() == "Destination View")
+            {
+                box.Items.Add("Destination Table");
+                box.Items.Add("Join");
+            }
+
+            box.SelectedItem = box.Items[0];
+
         }
 
         private void PopulateModesList(ListBox b)
         {
-            b.Items.Add("Extraction Layer");
-            b.Items.Add("Transformation Layer");
-            b.Items.Add("Load Layer");
+            b.Items.Add("Table");
+            b.Items.Add("Extraction Procedure");
+            b.Items.Add("Transformation View");
+            b.Items.Add("Transformation Procedure");
+            b.Items.Add("Destination View");
 
             b.SelectedItem = b.Items[0];
         }
@@ -209,34 +262,37 @@ namespace DP_ETL_TOOL
         {
             ListBox lb = (ListBox)sender;
 
-            lbDesignerList.Items.Clear();
-
-            if (lb.SelectedItem == lb.Items[1])
+            if (visualPanel.Controls.Count > 0)
+            {
+                var confirmResult = MessageBox.Show("Are you sure you want to change designer mode? Changing so results will result in clearing of current workspace ( Your object will not be lost. ).",
+                         "Confirm mode change!",
+                         MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    lbDesignerList.Items.Clear();
+                    visualPanel.Controls.Clear();
+                    PopulateObjectList(lbDesignerList, lb);
+                }
+                else
+                {
+                    // NO
+                }
+            }
+            else
             {
                 PopulateObjectList(lbDesignerList, lb);
             }
-
         }
 
-        private void RightTabsSelectedChanged(object sender, EventArgs e)
+        private void ParseObjectsToCode(object sender, EventArgs e)
         {
-            TabControl tc = (TabControl)sender;
 
-            if (tc.SelectedIndex == 1)
-            {
-                codeEdit.Clear();
+            codeEdit.Clear();
 
-                CodeParser parser = new CodeParser(Enums.ModeType.View, project.GetTables(), project.GetJoins());
-                codeEdit.AppendText(parser.GetCode());
+            CodeParser parser = new CodeParser(Enums.ModeType.View, project.GetTables(), project.GetJoins());
+            codeEdit.AppendText(parser.GetCode());
 
-                codeEdit.Focus();
-            }
-        }
-
-        private void CodeEditRefresh(object sender, EventArgs e)
-        {
-            SyntaxTextBoxControl te = (SyntaxTextBoxControl)sender;
-            te.RefreshSyntax();
+            codeEdit.Focus();
         }
 
         ///
@@ -568,6 +624,12 @@ namespace DP_ETL_TOOL
             GC.Collect();
             this.project = new ProjectEntity();
             visualPanel.Controls.Clear();
+        }
+
+        private void tsButtonGenerateCode_Click(object sender, EventArgs e)
+        {
+            ParseObjectsToCode(sender, e);
+            codeEdit.RefreshSyntax();
         }
     }
 }

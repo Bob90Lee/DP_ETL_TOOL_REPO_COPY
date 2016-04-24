@@ -57,10 +57,10 @@
             this.talbeLay4 = new System.Windows.Forms.TableLayoutPanel();
             this.visualPanel = new System.Windows.Forms.Panel();
             this.tsObjectProperties = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.tsLabelObjectName = new System.Windows.Forms.ToolStripLabel();
+            this.tsTextBoxObjectName = new System.Windows.Forms.ToolStripTextBox();
+            this.tsButtonSave = new System.Windows.Forms.ToolStripButton();
+            this.tsButtonNew = new System.Windows.Forms.ToolStripButton();
             this.objectsTab = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -78,6 +78,11 @@
             this.allTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allProceduresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableView = new System.Windows.Forms.DataGridView();
+            this.destinationTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.destinationViewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsCodeTools = new System.Windows.Forms.ToolStrip();
+            this.tsButtonGenerateCode = new System.Windows.Forms.ToolStripButton();
+            this.tsButtonExport = new System.Windows.Forms.ToolStripButton();
             this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
@@ -95,6 +100,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableView)).BeginInit();
+            this.tsCodeTools.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
@@ -326,12 +332,14 @@
             this.tableLay2.ColumnCount = 2;
             this.tableLay2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLay2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLay2.Controls.Add(this.codeEdit, 1, 0);
+            this.tableLay2.Controls.Add(this.codeEdit, 1, 1);
+            this.tableLay2.Controls.Add(this.tsCodeTools, 1, 0);
             this.tableLay2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLay2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.tableLay2.Location = new System.Drawing.Point(364, 4);
             this.tableLay2.Name = "tableLay2";
-            this.tableLay2.RowCount = 1;
+            this.tableLay2.RowCount = 2;
+            this.tableLay2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLay2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLay2.Size = new System.Drawing.Size(353, 435);
             this.tableLay2.TabIndex = 2;
@@ -367,10 +375,10 @@
             this.tsObjectProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsObjectProperties.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsObjectProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel1,
-            this.toolStripTextBox1,
-            this.toolStripButton1,
-            this.toolStripButton2});
+            this.tsLabelObjectName,
+            this.tsTextBoxObjectName,
+            this.tsButtonSave,
+            this.tsButtonNew});
             this.tsObjectProperties.Location = new System.Drawing.Point(0, 0);
             this.tsObjectProperties.Name = "tsObjectProperties";
             this.tsObjectProperties.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -378,35 +386,35 @@
             this.tsObjectProperties.TabIndex = 3;
             this.tsObjectProperties.Text = "toolStrip1";
             // 
-            // toolStripLabel1
+            // tsLabelObjectName
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(77, 27);
-            this.toolStripLabel1.Text = "Object Name";
+            this.tsLabelObjectName.Name = "tsLabelObjectName";
+            this.tsLabelObjectName.Size = new System.Drawing.Size(77, 27);
+            this.tsLabelObjectName.Text = "Object Name";
             // 
-            // toolStripTextBox1
+            // tsTextBoxObjectName
             // 
-            this.toolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 30);
+            this.tsTextBoxObjectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tsTextBoxObjectName.Name = "tsTextBoxObjectName";
+            this.tsTextBoxObjectName.Size = new System.Drawing.Size(100, 30);
             // 
-            // toolStripButton1
+            // tsButtonSave
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(35, 27);
-            this.toolStripButton1.Text = "Save";
+            this.tsButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("tsButtonSave.Image")));
+            this.tsButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsButtonSave.Name = "tsButtonSave";
+            this.tsButtonSave.Size = new System.Drawing.Size(35, 27);
+            this.tsButtonSave.Text = "Save";
             // 
-            // toolStripButton2
+            // tsButtonNew
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(35, 27);
-            this.toolStripButton2.Text = "New";
+            this.tsButtonNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsButtonNew.Image = ((System.Drawing.Image)(resources.GetObject("tsButtonNew.Image")));
+            this.tsButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsButtonNew.Name = "tsButtonNew";
+            this.tsButtonNew.Size = new System.Drawing.Size(35, 27);
+            this.tsButtonNew.Text = "New";
             // 
             // objectsTab
             // 
@@ -500,7 +508,9 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadTablesToolStripMenuItem});
+            this.loadTablesToolStripMenuItem,
+            this.destinationTablesToolStripMenuItem,
+            this.destinationViewsToolStripMenuItem});
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(45, 26);
             this.loadToolStripMenuItem.Text = "Load";
@@ -508,7 +518,7 @@
             // loadTablesToolStripMenuItem
             // 
             this.loadTablesToolStripMenuItem.Name = "loadTablesToolStripMenuItem";
-            this.loadTablesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.loadTablesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.loadTablesToolStripMenuItem.Text = "Load Tables";
             // 
             // allToolStripMenuItem
@@ -549,6 +559,53 @@
             this.dataTableView.Size = new System.Drawing.Size(715, 407);
             this.dataTableView.TabIndex = 1;
             // 
+            // destinationTablesToolStripMenuItem
+            // 
+            this.destinationTablesToolStripMenuItem.Name = "destinationTablesToolStripMenuItem";
+            this.destinationTablesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.destinationTablesToolStripMenuItem.Text = "Destination Tables";
+            // 
+            // destinationViewsToolStripMenuItem
+            // 
+            this.destinationViewsToolStripMenuItem.Name = "destinationViewsToolStripMenuItem";
+            this.destinationViewsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.destinationViewsToolStripMenuItem.Text = "Destination Views";
+            // 
+            // tsCodeTools
+            // 
+            this.tsCodeTools.BackColor = System.Drawing.SystemColors.Control;
+            this.tsCodeTools.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tsCodeTools.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tsCodeTools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsCodeTools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsButtonGenerateCode,
+            this.tsButtonExport});
+            this.tsCodeTools.Location = new System.Drawing.Point(32, 1);
+            this.tsCodeTools.Name = "tsCodeTools";
+            this.tsCodeTools.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.tsCodeTools.Size = new System.Drawing.Size(335, 30);
+            this.tsCodeTools.TabIndex = 4;
+            this.tsCodeTools.Text = "toolStrip1";
+            // 
+            // tsButtonGenerateCode
+            // 
+            this.tsButtonGenerateCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsButtonGenerateCode.Image = ((System.Drawing.Image)(resources.GetObject("tsButtonGenerateCode.Image")));
+            this.tsButtonGenerateCode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsButtonGenerateCode.Name = "tsButtonGenerateCode";
+            this.tsButtonGenerateCode.Size = new System.Drawing.Size(89, 27);
+            this.tsButtonGenerateCode.Text = "Generate Code";
+            this.tsButtonGenerateCode.Click += new System.EventHandler(this.tsButtonGenerateCode_Click);
+            // 
+            // tsButtonExport
+            // 
+            this.tsButtonExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsButtonExport.Image = ((System.Drawing.Image)(resources.GetObject("tsButtonExport.Image")));
+            this.tsButtonExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsButtonExport.Name = "tsButtonExport";
+            this.tsButtonExport.Size = new System.Drawing.Size(44, 27);
+            this.tsButtonExport.Text = "Export";
+            // 
             // codeEdit
             // 
             this.codeEdit.AcceptsTab = true;
@@ -556,9 +613,9 @@
             this.codeEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.codeEdit.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codeEdit.ForeColor = System.Drawing.Color.Black;
-            this.codeEdit.Location = new System.Drawing.Point(35, 4);
+            this.codeEdit.Location = new System.Drawing.Point(35, 35);
             this.codeEdit.Name = "codeEdit";
-            this.codeEdit.Size = new System.Drawing.Size(329, 427);
+            this.codeEdit.Size = new System.Drawing.Size(329, 396);
             this.codeEdit.TabIndex = 3;
             this.codeEdit.Text = "";
             // 
@@ -585,6 +642,7 @@
             this.workspaceTab.ResumeLayout(false);
             this.tableLay1.ResumeLayout(false);
             this.tableLay2.ResumeLayout(false);
+            this.tableLay2.PerformLayout();
             this.talbeLay4.ResumeLayout(false);
             this.talbeLay4.PerformLayout();
             this.tsObjectProperties.ResumeLayout(false);
@@ -595,6 +653,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableView)).EndInit();
+            this.tsCodeTools.ResumeLayout(false);
+            this.tsCodeTools.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -648,10 +708,15 @@
         private System.Windows.Forms.TableLayoutPanel talbeLay4;
         private System.Windows.Forms.Panel visualPanel;
         private System.Windows.Forms.ToolStrip tsObjectProperties;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripLabel tsLabelObjectName;
+        private System.Windows.Forms.ToolStripTextBox tsTextBoxObjectName;
+        private System.Windows.Forms.ToolStripButton tsButtonSave;
+        private System.Windows.Forms.ToolStripButton tsButtonNew;
+        private System.Windows.Forms.ToolStripMenuItem destinationTablesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem destinationViewsToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip tsCodeTools;
+        private System.Windows.Forms.ToolStripButton tsButtonGenerateCode;
+        private System.Windows.Forms.ToolStripButton tsButtonExport;
     }
 }
 

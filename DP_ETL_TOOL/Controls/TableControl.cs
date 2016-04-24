@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DP_ETL_TOOL.Entities;
+using DP_ETL_TOOL.Types;
 
 namespace DP_ETL_TOOL.Controls
 {
@@ -13,14 +14,50 @@ namespace DP_ETL_TOOL.Controls
 
         private TableEntity tableEntity;
 
-        public TableControl(TableEntity tableEntity)
+        private Color tableColor;
+        private Color textColor;
+        private Color hoverColor;
+
+        public TableControl(TableEntity tableEntity, Enums.TableType tableType)
         {
             if (tableEntity != null)
             {
                 this.tableEntity = tableEntity;
             }
             else{
-                this.tableEntity = new TableEntity();
+                this.tableEntity = new TableEntity(tableType);
+            }
+
+            switch (tableType)
+            {
+                case ( Enums.TableType.Source_Table ) : 
+                    {
+                        this.tableColor = Color.FromArgb(192, 57, 43);
+                        this.textColor = Color.White;
+                        this.hoverColor = Color.FromArgb(231, 76, 60);
+                        break;
+                    };
+                case (Enums.TableType.Extraction_Table):
+                    {
+                        this.tableColor = Color.FromArgb(44, 62, 80);
+                        this.textColor = Color.White;
+                        this.hoverColor = Color.FromArgb(52, 73, 94);
+                        break;
+                    };
+                case (Enums.TableType.Load_Table):
+                    {
+                        this.tableColor = Color.FromArgb(41, 128, 185);
+                        this.textColor = Color.White;
+                        this.hoverColor = Color.FromArgb(52, 152, 219);
+                        break;
+                    };
+                case (Enums.TableType.Destination_Table):
+                    {
+                        this.tableColor = Color.FromArgb(211, 84, 0);
+                        this.textColor = Color.White;
+                        this.hoverColor = Color.FromArgb(230, 126, 34);
+                        break;
+                    };
             }
         }
 
@@ -33,15 +70,15 @@ namespace DP_ETL_TOOL.Controls
             Padding p = new Padding();
             p.All = 5;
             this.Padding = p;
-           
-            this.ForeColor = Color.White;
-            this.BackColor = Color.DarkBlue;
+
+            this.ForeColor = textColor;
+            this.BackColor = tableColor;
             this.TextAlign = ContentAlignment.MiddleLeft;            
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            this.BackColor = Color.LightBlue;
+            this.BackColor = hoverColor;
 
 
             if (e.Button == MouseButtons.Left)
@@ -83,19 +120,19 @@ namespace DP_ETL_TOOL.Controls
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            this.BackColor = Color.DarkBlue;
+            this.BackColor = tableColor;
 
             this.isDragged = false;
         }
 
         protected override void OnMouseHover(EventArgs e)
         {
-            this.BackColor = Color.LightBlue;
+            this.BackColor = hoverColor;
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
-            this.BackColor = Color.DarkBlue;
+            this.BackColor = tableColor;
         }
 
         public TableEntity GetTableEntity()
