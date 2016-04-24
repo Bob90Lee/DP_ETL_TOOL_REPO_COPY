@@ -61,6 +61,12 @@ namespace DP_ETL_TOOL.Controls
             join.SetMainTable(te.GetTableEntity());
             lastMainX = te.Bounds.X + te.Width / 2;
             lastMainY = te.Bounds.Y + te.Height / 2;
+
+            GUICoordsEntity coords = join.GetCoords();
+            coords.SetPosX(this.Bounds.X);
+            coords.SetPosY(this.Bounds.Y);
+            coords.SetWidth(this.Width);
+            coords.SetHeight(this.Height);
         }
 
         public void SetChildTable(TableControl te)
@@ -69,6 +75,12 @@ namespace DP_ETL_TOOL.Controls
             join.SetChildTable(te.GetTableEntity());
             lastChildX = te.Bounds.X + te.Width / 2;
             lastChildY = te.Bounds.Y + te.Height / 2;
+
+            GUICoordsEntity coords = join.GetCoords();
+            coords.SetPosX(this.Bounds.X);
+            coords.SetPosY(this.Bounds.Y);
+            coords.SetWidth(this.Width);
+            coords.SetHeight(this.Height);
         }
 
         public TableControl GetMainTable()
@@ -109,6 +121,12 @@ namespace DP_ETL_TOOL.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            GUICoordsEntity coords = join.GetCoords();
+            coords.SetPosX(this.Bounds.X);
+            coords.SetPosY(this.Bounds.Y);
+            coords.SetWidth(this.Width);
+            coords.SetHeight(this.Height);
+
             Graphics g = e.Graphics;
             Rectangle bounds = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
 

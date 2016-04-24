@@ -13,7 +13,6 @@ namespace DP_ETL_TOOL.Controls
 
         private TableEntity tableEntity;
 
-
         public TableControl(TableEntity tableEntity)
         {
             if (tableEntity != null)
@@ -63,6 +62,13 @@ namespace DP_ETL_TOOL.Controls
                 this.isDragged = false;
 
             }
+
+            GUICoordsEntity coords = this.tableEntity.GetCoords();
+            coords.SetPosX(this.Bounds.X);
+            coords.SetPosY(this.Bounds.Y);
+            coords.SetWidth(this.Width);
+            coords.SetHeight(this.Height);
+
         }
 
         protected override void OnMouseMove(MouseEventArgs e)

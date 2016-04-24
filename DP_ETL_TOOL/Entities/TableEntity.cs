@@ -17,18 +17,19 @@ namespace DP_ETL_TOOL.Entities
         private List<IndexEntity> tableIndexes = new List<IndexEntity>();
         [DataMember]
         private List<JoinEntity> tableJoins = new List<JoinEntity>();
+        [DataMember]
+        private GUICoordsEntity coords;
 
         public TableEntity()
         {
             this.tableName = "TableNEW" + new Random().Next(10, 99);
+            this.coords = new GUICoordsEntity();
         }
 
         public TableEntity(String tableName)
         {
             this.tableName = tableName;
-            this.tableColumns = new List<ColumnEntity>();
-            this.tableIndexes = new List<IndexEntity>();
-            this.tableJoins = new List<JoinEntity>();
+            this.coords = new GUICoordsEntity();
         }
 
         public void SetTableName(String tableName)
@@ -160,6 +161,11 @@ namespace DP_ETL_TOOL.Entities
         public void AddJoinEntity(JoinEntity join)
         {
             tableJoins.Add(join);
+        }
+
+        public GUICoordsEntity GetCoords()
+        {
+            return this.coords;
         }
     }
 }

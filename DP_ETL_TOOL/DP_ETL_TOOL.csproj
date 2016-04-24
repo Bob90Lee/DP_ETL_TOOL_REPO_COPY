@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Entities\ColumnEntity.cs" />
     <Compile Include="Entities\ColumnPairEntity.cs" />
+    <Compile Include="Entities\GUICoordsEntity.cs" />
     <Compile Include="Entities\IndexEntity.cs" />
     <Compile Include="Controls\SyntaxTextBoxControl.cs">
       <SubType>Component</SubType>

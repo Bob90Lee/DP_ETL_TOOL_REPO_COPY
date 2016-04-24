@@ -54,31 +54,31 @@
             this.workspaceTab = new System.Windows.Forms.TabPage();
             this.tableLay1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLay2 = new System.Windows.Forms.TableLayoutPanel();
-            this.objectsTab = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.extractionLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.transformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sourceTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractionTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractionProceduresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.transformationViewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.transformationProceduresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allProceduresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataTableView = new System.Windows.Forms.DataGridView();
             this.talbeLay4 = new System.Windows.Forms.TableLayoutPanel();
             this.visualPanel = new System.Windows.Forms.Panel();
-            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.tsObjectProperties = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.objectsTab = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.extractionLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sourceTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractionTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractionProceduresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transformationViewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transformationProceduresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allProceduresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataTableView = new System.Windows.Forms.DataGridView();
+            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
             this.tableLay3.SuspendLayout();
@@ -89,12 +89,12 @@
             this.workspaceTab.SuspendLayout();
             this.tableLay1.SuspendLayout();
             this.tableLay2.SuspendLayout();
+            this.talbeLay4.SuspendLayout();
+            this.tsObjectProperties.SuspendLayout();
             this.objectsTab.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableView)).BeginInit();
-            this.talbeLay4.SuspendLayout();
-            this.tsObjectProperties.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
@@ -126,6 +126,7 @@
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.newToolStripMenuItem.Text = "New Project";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
@@ -199,7 +200,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // designerTab
@@ -305,6 +306,7 @@
             // 
             // tableLay1
             // 
+            this.tableLay1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLay1.ColumnCount = 2;
             this.tableLay1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLay1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -320,18 +322,91 @@
             // 
             // tableLay2
             // 
+            this.tableLay2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLay2.ColumnCount = 2;
             this.tableLay2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLay2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLay2.Controls.Add(this.codeEdit, 1, 0);
             this.tableLay2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLay2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tableLay2.Location = new System.Drawing.Point(363, 3);
+            this.tableLay2.Location = new System.Drawing.Point(364, 4);
             this.tableLay2.Name = "tableLay2";
             this.tableLay2.RowCount = 1;
             this.tableLay2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLay2.Size = new System.Drawing.Size(355, 437);
+            this.tableLay2.Size = new System.Drawing.Size(353, 435);
             this.tableLay2.TabIndex = 2;
+            // 
+            // talbeLay4
+            // 
+            this.talbeLay4.ColumnCount = 1;
+            this.talbeLay4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.talbeLay4.Controls.Add(this.visualPanel, 0, 1);
+            this.talbeLay4.Controls.Add(this.tsObjectProperties, 0, 0);
+            this.talbeLay4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.talbeLay4.Location = new System.Drawing.Point(4, 4);
+            this.talbeLay4.Name = "talbeLay4";
+            this.talbeLay4.RowCount = 2;
+            this.talbeLay4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.talbeLay4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.talbeLay4.Size = new System.Drawing.Size(353, 435);
+            this.talbeLay4.TabIndex = 3;
+            // 
+            // visualPanel
+            // 
+            this.visualPanel.AutoScroll = true;
+            this.visualPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.visualPanel.Location = new System.Drawing.Point(3, 33);
+            this.visualPanel.Name = "visualPanel";
+            this.visualPanel.Size = new System.Drawing.Size(347, 401);
+            this.visualPanel.TabIndex = 2;
+            // 
+            // tsObjectProperties
+            // 
+            this.tsObjectProperties.BackColor = System.Drawing.SystemColors.Control;
+            this.tsObjectProperties.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tsObjectProperties.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tsObjectProperties.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsObjectProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.toolStripTextBox1,
+            this.toolStripButton1,
+            this.toolStripButton2});
+            this.tsObjectProperties.Location = new System.Drawing.Point(0, 0);
+            this.tsObjectProperties.Name = "tsObjectProperties";
+            this.tsObjectProperties.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.tsObjectProperties.Size = new System.Drawing.Size(353, 30);
+            this.tsObjectProperties.TabIndex = 3;
+            this.tsObjectProperties.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(77, 27);
+            this.toolStripLabel1.Text = "Object Name";
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 30);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(35, 27);
+            this.toolStripButton1.Text = "Save";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(35, 27);
+            this.toolStripButton2.Text = "New";
             // 
             // objectsTab
             // 
@@ -383,33 +458,6 @@
             this.extractionLayerToolStripMenuItem.Size = new System.Drawing.Size(71, 26);
             this.extractionLayerToolStripMenuItem.Text = "Extraction";
             // 
-            // transformationToolStripMenuItem
-            // 
-            this.transformationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.transformationViewsToolStripMenuItem,
-            this.transformationProceduresToolStripMenuItem});
-            this.transformationToolStripMenuItem.Name = "transformationToolStripMenuItem";
-            this.transformationToolStripMenuItem.Size = new System.Drawing.Size(100, 26);
-            this.transformationToolStripMenuItem.Text = "Transformation";
-            // 
-            // loadToolStripMenuItem
-            // 
-            this.loadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadTablesToolStripMenuItem});
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(45, 26);
-            this.loadToolStripMenuItem.Text = "Load";
-            // 
-            // allToolStripMenuItem
-            // 
-            this.allToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allObjectsToolStripMenuItem,
-            this.allTablesToolStripMenuItem,
-            this.allProceduresToolStripMenuItem});
-            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(33, 26);
-            this.allToolStripMenuItem.Text = "All";
-            // 
             // sourceTablesToolStripMenuItem
             // 
             this.sourceTablesToolStripMenuItem.Name = "sourceTablesToolStripMenuItem";
@@ -428,6 +476,15 @@
             this.extractionProceduresToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.extractionProceduresToolStripMenuItem.Text = "Extraction Procedures";
             // 
+            // transformationToolStripMenuItem
+            // 
+            this.transformationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.transformationViewsToolStripMenuItem,
+            this.transformationProceduresToolStripMenuItem});
+            this.transformationToolStripMenuItem.Name = "transformationToolStripMenuItem";
+            this.transformationToolStripMenuItem.Size = new System.Drawing.Size(100, 26);
+            this.transformationToolStripMenuItem.Text = "Transformation";
+            // 
             // transformationViewsToolStripMenuItem
             // 
             this.transformationViewsToolStripMenuItem.Name = "transformationViewsToolStripMenuItem";
@@ -440,11 +497,29 @@
             this.transformationProceduresToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.transformationProceduresToolStripMenuItem.Text = "Transformation Procedures";
             // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadTablesToolStripMenuItem});
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(45, 26);
+            this.loadToolStripMenuItem.Text = "Load";
+            // 
             // loadTablesToolStripMenuItem
             // 
             this.loadTablesToolStripMenuItem.Name = "loadTablesToolStripMenuItem";
             this.loadTablesToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.loadTablesToolStripMenuItem.Text = "Load Tables";
+            // 
+            // allToolStripMenuItem
+            // 
+            this.allToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allObjectsToolStripMenuItem,
+            this.allTablesToolStripMenuItem,
+            this.allProceduresToolStripMenuItem});
+            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(33, 26);
+            this.allToolStripMenuItem.Text = "All";
             // 
             // allObjectsToolStripMenuItem
             // 
@@ -474,31 +549,6 @@
             this.dataTableView.Size = new System.Drawing.Size(715, 407);
             this.dataTableView.TabIndex = 1;
             // 
-            // talbeLay4
-            // 
-            this.talbeLay4.ColumnCount = 1;
-            this.talbeLay4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.talbeLay4.Controls.Add(this.visualPanel, 0, 1);
-            this.talbeLay4.Controls.Add(this.tsObjectProperties, 0, 0);
-            this.talbeLay4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.talbeLay4.Location = new System.Drawing.Point(3, 3);
-            this.talbeLay4.Name = "talbeLay4";
-            this.talbeLay4.RowCount = 2;
-            this.talbeLay4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.talbeLay4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.talbeLay4.Size = new System.Drawing.Size(354, 437);
-            this.talbeLay4.TabIndex = 3;
-            // 
-            // visualPanel
-            // 
-            this.visualPanel.AutoScroll = true;
-            this.visualPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.visualPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.visualPanel.Location = new System.Drawing.Point(3, 33);
-            this.visualPanel.Name = "visualPanel";
-            this.visualPanel.Size = new System.Drawing.Size(348, 401);
-            this.visualPanel.TabIndex = 2;
-            // 
             // codeEdit
             // 
             this.codeEdit.AcceptsTab = true;
@@ -506,56 +556,11 @@
             this.codeEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.codeEdit.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.codeEdit.ForeColor = System.Drawing.Color.Black;
-            this.codeEdit.Location = new System.Drawing.Point(33, 3);
+            this.codeEdit.Location = new System.Drawing.Point(35, 4);
             this.codeEdit.Name = "codeEdit";
-            this.codeEdit.Size = new System.Drawing.Size(329, 431);
+            this.codeEdit.Size = new System.Drawing.Size(329, 427);
             this.codeEdit.TabIndex = 3;
             this.codeEdit.Text = "";
-            // 
-            // tsObjectProperties
-            // 
-            this.tsObjectProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tsObjectProperties.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsObjectProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel1,
-            this.toolStripTextBox1,
-            this.toolStripButton1,
-            this.toolStripButton2});
-            this.tsObjectProperties.Location = new System.Drawing.Point(0, 0);
-            this.tsObjectProperties.Name = "tsObjectProperties";
-            this.tsObjectProperties.Size = new System.Drawing.Size(354, 30);
-            this.tsObjectProperties.TabIndex = 3;
-            this.tsObjectProperties.Text = "toolStrip1";
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(77, 27);
-            this.toolStripLabel1.Text = "Object Name";
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 30);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(35, 27);
-            this.toolStripButton1.Text = "Save";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(35, 27);
-            this.toolStripButton2.Text = "New";
             // 
             // MainForm
             // 
@@ -580,16 +585,16 @@
             this.workspaceTab.ResumeLayout(false);
             this.tableLay1.ResumeLayout(false);
             this.tableLay2.ResumeLayout(false);
+            this.talbeLay4.ResumeLayout(false);
+            this.talbeLay4.PerformLayout();
+            this.tsObjectProperties.ResumeLayout(false);
+            this.tsObjectProperties.PerformLayout();
             this.objectsTab.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableView)).EndInit();
-            this.talbeLay4.ResumeLayout(false);
-            this.talbeLay4.PerformLayout();
-            this.tsObjectProperties.ResumeLayout(false);
-            this.tsObjectProperties.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

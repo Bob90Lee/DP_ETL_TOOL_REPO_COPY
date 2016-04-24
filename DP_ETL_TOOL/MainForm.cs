@@ -15,10 +15,6 @@ namespace DP_ETL_TOOL
 {
     public partial class MainForm : Form
     {
-
-        //private List<TableControl> tables = new List<TableControl>();
-        //private List<JoinControl> joins = new List<JoinControl>();
-
         private ProjectEntity project;
 
         private JoinControl currentJoin;
@@ -139,7 +135,7 @@ namespace DP_ETL_TOOL
                             {
                                 JoinEntity[] copy = new JoinEntity[te.GetJoins().Count];
                                 te.GetJoins().CopyTo(copy);
-                                
+
                                 foreach (JoinEntity je in copy)
                                 {
                                     ColumnPairEntity currentJoinPair = currentJoin.GetJoinEntity().GetJoinPairs()[0];
@@ -504,7 +500,6 @@ namespace DP_ETL_TOOL
 
                 project = (ProjectEntity)deserializer.ReadObject(xmlReader);
 
-                //Parent.Invalidate();
             }
 
             return true; // success
@@ -518,6 +513,11 @@ namespace DP_ETL_TOOL
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.project = null;
+            GC.Collect();
+            this.project = new ProjectEntity();
+            visualPanel.Controls.Clear();
+
             LoadFromFile();
             project.DeserializeFromXML();
 
@@ -525,20 +525,49 @@ namespace DP_ETL_TOOL
             {
                 tc.MouseClick += new MouseEventHandler(OnTableClick);
                 tc.DoubleClick += new EventHandler(OnTableDoubleClick);
+
+                GUICoordsEntity guiCoords = tc.GetTableEntity().GetCoords();
+                tc.SetBounds(guiCoords.GetPosX(), guiCoords.GetPosY(), guiCoords.GetWidth(), guiCoords.GetHeight());
+
                 visualPanel.Controls.Add(tc);
             }
 
             foreach (JoinControl jc in project.GetJoins())
             {
-                //visualPanel.Controls.Add(jc);
+                GUICoordsEntity guiCoords = jc.GetJoinEntity().GetCoords();
+                jc.SetBounds(guiCoords.GetPosX(), guiCoords.GetPosY(), guiCoords.GetWidth(), guiCoords.GetHeight());
+
+                foreach (TableControl tc in project.GetTables())
+                {
+                    if (jc.GetJoinEntity().GetMainTableName() == tc.GetTableEntity().GetName())
+                    {
+                        jc.SetMainTable(tc);
+                    }
+                    else if (jc.GetJoinEntity().GetChildTableName() == tc.GetTableEntity().GetName())
+                    {
+                        jc.SetChildTable(tc);
+                    }
+                }
+
+                visualPanel.Controls.Add(jc);
             }
 
             this.Invalidate();
         }
 
+
+
         private void codeDecoration_Click(object sender, EventArgs e)
         {
             codeEdit.Focus();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.project = null;
+            GC.Collect();
+            this.project = new ProjectEntity();
+            visualPanel.Controls.Clear();
         }
     }
 }

@@ -19,6 +19,8 @@ namespace DP_ETL_TOOL.Entities
         private string mainTableName;
         [DataMember]
         private string childTableName;
+        [DataMember]
+        private GUICoordsEntity coords;
 
         public JoinEntity()
         {
@@ -31,6 +33,7 @@ namespace DP_ETL_TOOL.Entities
             this.joinPairs = new List<ColumnPairEntity>();
             this.mainTable = mainTable;
             this.childTable = childTable;
+            this.coords = new GUICoordsEntity();
         }
 
         public void AddJoinPair(ColumnPairEntity joinPair)
@@ -109,6 +112,21 @@ namespace DP_ETL_TOOL.Entities
         {
             this.mainTableName = mainTable.GetName();
             this.childTableName = childTable.GetName();
+        }
+
+        public GUICoordsEntity GetCoords()
+        {
+            return this.coords;
+        }
+
+        public string GetMainTableName()
+        {
+            return this.mainTableName;
+        }
+
+        public string GetChildTableName()
+        {
+            return this.childTableName;
         }
     }
 }
