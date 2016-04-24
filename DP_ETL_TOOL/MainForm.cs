@@ -43,7 +43,9 @@ namespace DP_ETL_TOOL
             exitToolStripMenuItem.Click += new EventHandler(ExitApplication);
             lbDesignerList.SelectedValueChanged += new EventHandler(DesignerListValueChanged);
             lbDesignerMode.SelectedValueChanged += new EventHandler(DesignerModeValueChanged);
-            rightTabs.SelectedIndexChanged += new EventHandler(RightTabsSelectedChanged);
+
+            //rightTabs. += new EventHandler(RightTabsSelectedChanged);
+
             codeEdit.GotFocus += new EventHandler(CodeEditRefresh);
         }
 
@@ -63,7 +65,7 @@ namespace DP_ETL_TOOL
                     tableControl.MouseClick += new MouseEventHandler(OnTableClick);
                     tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
                     project.AddTable(tableControl);
-                    tableControl.Location = visualTab.PointToClient(Control.MousePosition);
+                    tableControl.Location = workspaceTab.PointToClient(Control.MousePosition);
                     visualPanel.Controls.Add(tableControl);
                 }
             }
@@ -532,6 +534,11 @@ namespace DP_ETL_TOOL
             }
 
             this.Invalidate();
+        }
+
+        private void codeDecoration_Click(object sender, EventArgs e)
+        {
+            codeEdit.Focus();
         }
     }
 }

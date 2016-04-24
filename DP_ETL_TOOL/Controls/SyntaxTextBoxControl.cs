@@ -3,6 +3,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using System.Runtime.InteropServices;
+using System;
 
 namespace DP_ETL_TOOL.Controls
 {
@@ -11,22 +13,15 @@ namespace DP_ETL_TOOL.Controls
 
         XDocument doc = new XDocument();
         string words = "";
-
-        //Font basicFont = new Font("Times", 8, FontStyle.Regular);
-        //Font specialFont = new Font("Times", 8, FontStyle.Bold);
-
         Color basicColor = Color.Black;
         Color specialColor = Color.DarkBlue;
-
         bool controlState = false;
 
         public SyntaxTextBoxControl()
         {
             InitializeComponent();
 
-            //this.Font = basicFont;
             this.ForeColor = Color.Black;
-
             this.ShortcutsEnabled = true;
 
             doc = LoadDictionary();
@@ -89,6 +84,8 @@ namespace DP_ETL_TOOL.Controls
             }
 
         }
+
+        
 
         public void SyntaxHighlight(SyntaxTextBoxControl control, bool full, string words)
         {
@@ -175,6 +172,5 @@ namespace DP_ETL_TOOL.Controls
         {
             SyntaxHighlight(this, true, words);
         }
-
     }
 }
