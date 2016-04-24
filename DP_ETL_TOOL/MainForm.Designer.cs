@@ -59,8 +59,6 @@
             this.tsObjectProperties = new System.Windows.Forms.ToolStrip();
             this.tsLabelObjectName = new System.Windows.Forms.ToolStripLabel();
             this.tsTextBoxObjectName = new System.Windows.Forms.ToolStripTextBox();
-            this.tsButtonSave = new System.Windows.Forms.ToolStripButton();
-            this.tsButtonNew = new System.Windows.Forms.ToolStripButton();
             this.objectsTab = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -130,21 +128,21 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New Project";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open Project";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save Project";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -153,7 +151,7 @@
             this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.asXMLToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportToolStripMenuItem.Text = "Export As";
             // 
             // asXMLToolStripMenuItem
@@ -165,7 +163,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -180,13 +178,13 @@
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             // 
             // toolsToolStripMenuItem
@@ -206,7 +204,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // designerTab
@@ -376,9 +374,7 @@
             this.tsObjectProperties.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsObjectProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsLabelObjectName,
-            this.tsTextBoxObjectName,
-            this.tsButtonSave,
-            this.tsButtonNew});
+            this.tsTextBoxObjectName});
             this.tsObjectProperties.Location = new System.Drawing.Point(0, 0);
             this.tsObjectProperties.Name = "tsObjectProperties";
             this.tsObjectProperties.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -397,24 +393,6 @@
             this.tsTextBoxObjectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tsTextBoxObjectName.Name = "tsTextBoxObjectName";
             this.tsTextBoxObjectName.Size = new System.Drawing.Size(100, 30);
-            // 
-            // tsButtonSave
-            // 
-            this.tsButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("tsButtonSave.Image")));
-            this.tsButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsButtonSave.Name = "tsButtonSave";
-            this.tsButtonSave.Size = new System.Drawing.Size(35, 27);
-            this.tsButtonSave.Text = "Save";
-            // 
-            // tsButtonNew
-            // 
-            this.tsButtonNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsButtonNew.Image = ((System.Drawing.Image)(resources.GetObject("tsButtonNew.Image")));
-            this.tsButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsButtonNew.Name = "tsButtonNew";
-            this.tsButtonNew.Size = new System.Drawing.Size(35, 27);
-            this.tsButtonNew.Text = "New";
             // 
             // objectsTab
             // 
@@ -710,8 +688,6 @@
         private System.Windows.Forms.ToolStrip tsObjectProperties;
         private System.Windows.Forms.ToolStripLabel tsLabelObjectName;
         private System.Windows.Forms.ToolStripTextBox tsTextBoxObjectName;
-        private System.Windows.Forms.ToolStripButton tsButtonSave;
-        private System.Windows.Forms.ToolStripButton tsButtonNew;
         private System.Windows.Forms.ToolStripMenuItem destinationTablesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem destinationViewsToolStripMenuItem;
         private System.Windows.Forms.ToolStrip tsCodeTools;
