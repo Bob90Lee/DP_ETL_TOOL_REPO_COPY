@@ -109,7 +109,7 @@ namespace DP_ETL_TOOL.Entities
 
             foreach (TableEntity te in tableEntities)
             {
-                tables.Add(new TableControl(te, te.GetTableType()));
+                tables.Add(new TableControl(te, te.GetTableType(), 0, 0));
             }
 
             foreach (JoinEntity je in joinEntities)

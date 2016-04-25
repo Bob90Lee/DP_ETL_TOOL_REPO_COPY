@@ -16,10 +16,10 @@ namespace DP_ETL_TOOL
     public partial class MainForm : Form
     {
         private ProjectEntity project;
-
         private JoinControl currentJoin;
-
         private bool activatedJoin = false;
+        private int mouseX = 0;
+        private int mouseY = 0;
 
         public MainForm()
         {
@@ -54,12 +54,63 @@ namespace DP_ETL_TOOL
             {
                 if (e.Button == MouseButtons.Right && lbDesignerList.SelectedItem.ToString().ToUpper().Contains("TABLE")) // table
                 {
-                    TableControl tableControl = new TableControl(null, SelectTableType(lbDesignerList));
-                    tableControl.MouseClick += new MouseEventHandler(OnTableClick);
-                    tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
-                    project.AddTable(tableControl);
-                    tableControl.Location = workspaceTab.PointToClient(Control.MousePosition);
-                    visualPanel.Controls.Add(tableControl);
+                    var coordinates = visualPanel.PointToClient(Cursor.Position);
+
+                    CreateTableForm createTableForm = new CreateTableForm();
+                    CheckedListBox tableList = (CheckedListBox)createTableForm.Controls["chListBoxTableList"];
+                    List<TableControl> tcList = new List<TableControl>();
+
+                    foreach (Control c in project.GetTables())
+                    {
+                        if (c.GetType() == typeof(TableControl))
+                        {
+                            tcList.Add((TableControl)c);
+                        }
+                    }
+
+                    foreach (TableControl tc in tcList)
+                    {
+                        tableList.Items.Add((tc.GetTableEntity().GetSchema() + " " + tc.GetTableEntity().GetName() + " " + tc.GetTableEntity().GetTableType())/*.Trim()*/);
+                    }
+
+                    createTableForm.Show();
+                    createTableForm.Location = this.PointToClient(Control.MousePosition);
+
+                    createTableForm.Controls["btnNew"].Click += (s, a) =>
+                    {
+                        
+                        TableControl tableControl = new TableControl(null, SelectTableType(lbDesignerList), mouseX, mouseY);
+                        tableControl.MouseClick += new MouseEventHandler(OnTableClick);
+                        tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
+                        project.AddTable(tableControl);
+                        tableControl.Location = coordinates;//workspaceTab.PointToClient(Control.MousePosition);
+                        visualPanel.Controls.Add(tableControl);
+                    };
+
+                    createTableForm.Controls["btnAdd"].Click += (s, a) =>
+                    {
+                        visualPanel.Controls.Clear();
+                        foreach(var item in tableList.CheckedItems)
+                        {
+                            string[] tableArraySplit = ((string)item).Split();
+                            foreach(TableControl tc in project.GetTables())
+                            {
+                                TableEntity te = tc.GetTableEntity();
+                                if (te.GetName().ToUpper().Equals(tableArraySplit[1].ToUpper()))
+                                {
+                                    visualPanel.Controls.Add(tc);
+                                }
+                            }
+                        }
+
+                        createTableForm.Dispose();
+
+                    };
+
+                    createTableForm.Controls["btnNew"].Click += (s, a) =>
+                    {
+                        createTableForm.Dispose();
+                    };
                 }
             }
         }
@@ -128,6 +179,8 @@ namespace DP_ETL_TOOL
                         };
 
                         selectColumnForm.ShowDialog(this);
+                        selectColumnForm.Location = this.PointToClient(Control.MousePosition);
+
 
                         if (senderControl.GetType() == typeof(TableControl) && column != null)
                         {
@@ -284,12 +337,12 @@ namespace DP_ETL_TOOL
             }
         }
 
-        private void ParseObjectsToCode(object sender, EventArgs e)
+        private void ParseObjectsToCode(Enums.ModeType modeType)
         {
 
             codeEdit.Clear();
 
-            CodeParser parser = new CodeParser(Enums.ModeType.View, project.GetTables(), project.GetJoins());
+            CodeParser parser = new CodeParser(modeType, project.GetTables(), project.GetJoins());
             codeEdit.AppendText(parser.GetCode());
 
             codeEdit.Focus();
@@ -374,6 +427,8 @@ namespace DP_ETL_TOOL
                     };
 
                     editColumnForm.ShowDialog(this);
+                    editColumnForm.Location = this.PointToClient(Control.MousePosition);
+
                 }
 
             };
@@ -417,6 +472,7 @@ namespace DP_ETL_TOOL
                         }
 
                         editJoinForm.ShowDialog(this);
+                        editJoinForm.Location = this.PointToClient(Control.MousePosition);
 
                     }
                 }
@@ -439,6 +495,8 @@ namespace DP_ETL_TOOL
             };
 
             editForm.ShowDialog(this);
+            editForm.Location = this.PointToClient(Control.MousePosition);
+
         }
 
         private void populateComboBoxColumnType(ComboBox cb)
@@ -628,7 +686,10 @@ namespace DP_ETL_TOOL
 
         private void tsButtonGenerateCode_Click(object sender, EventArgs e)
         {
-            ParseObjectsToCode(sender, e);
+            // if else na zaklade mode selectora
+
+            ParseObjectsToCode(Enums.ModeType.Table);
+
             codeEdit.RefreshSyntax();
         }
     }

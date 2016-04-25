@@ -18,7 +18,7 @@ namespace DP_ETL_TOOL.Controls
         private Color textColor;
         private Color hoverColor;
 
-        public TableControl(TableEntity tableEntity, Enums.TableType tableType)
+        public TableControl(TableEntity tableEntity, Enums.TableType tableType, int posX, int posY)
         {
             if (tableEntity != null)
             {
@@ -59,11 +59,13 @@ namespace DP_ETL_TOOL.Controls
                         break;
                     };
             }
+
+            //this.SetBounds(posX, posY, 100, 20);
         }
 
         protected override void OnCreateControl()
         {            
-            this.Text = tableEntity.GetName(); //+ "\n ( \t xxx, \n \t xxx )";
+            this.Text = tableEntity.GetName();
 
             this.AutoSize = true;
 
@@ -83,15 +85,11 @@ namespace DP_ETL_TOOL.Controls
 
             if (e.Button == MouseButtons.Left)
             {
-                
-
                 this.isDragged = true;
                 Point startPosition = this.PointToScreen(new Point(e.X, e.Y));
-
                 this.offset = new Point();
                 this.offset.X = this.Location.X - startPosition.X;
                 this.offset.Y = this.Location.Y - startPosition.Y;
-
 
             }
             else
