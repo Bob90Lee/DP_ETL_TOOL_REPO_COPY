@@ -245,7 +245,7 @@
             // 
             // btnEditIndexes
             // 
-            this.btnEditIndexes.Location = new System.Drawing.Point(209, 339);
+            this.btnEditIndexes.Location = new System.Drawing.Point(209, 356);
             this.btnEditIndexes.Name = "btnEditIndexes";
             this.btnEditIndexes.Size = new System.Drawing.Size(62, 23);
             this.btnEditIndexes.TabIndex = 12;

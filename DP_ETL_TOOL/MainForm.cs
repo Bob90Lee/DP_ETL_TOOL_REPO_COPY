@@ -21,6 +21,10 @@ namespace DP_ETL_TOOL
         private int mouseX = 0;
         private int mouseY = 0;
 
+        private string lastSelectedMode;
+        private Enums.Layer layer = Enums.Layer.Extraction_Layer;
+        private int objectCount = 0;
+
         public MainForm()
         {
             InitializeComponent();
@@ -39,6 +43,8 @@ namespace DP_ETL_TOOL
             exitToolStripMenuItem.Click += new EventHandler(ExitApplication);
             lbDesignerList.SelectedValueChanged += new EventHandler(DesignerListValueChanged);
             lbDesignerMode.SelectedValueChanged += new EventHandler(DesignerModeValueChanged);
+
+            rightTabs.SelectedIndexChanged += new EventHandler(OnRightTabsChanged);
 
         }
 
@@ -78,22 +84,23 @@ namespace DP_ETL_TOOL
 
                     createTableForm.Controls["btnNew"].Click += (s, a) =>
                     {
-                        
+
                         TableControl tableControl = new TableControl(null, SelectTableType(lbDesignerList), mouseX, mouseY);
                         tableControl.MouseClick += new MouseEventHandler(OnTableClick);
                         tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
                         project.AddTable(tableControl);
-                        tableControl.Location = coordinates;//workspaceTab.PointToClient(Control.MousePosition);
+                        tableControl.Location = coordinates;
                         visualPanel.Controls.Add(tableControl);
+                        createTableForm.Dispose();
                     };
 
                     createTableForm.Controls["btnAdd"].Click += (s, a) =>
                     {
                         visualPanel.Controls.Clear();
-                        foreach(var item in tableList.CheckedItems)
+                        foreach (var item in tableList.CheckedItems)
                         {
                             string[] tableArraySplit = ((string)item).Split();
-                            foreach(TableControl tc in project.GetTables())
+                            foreach (TableControl tc in project.GetTables())
                             {
                                 TableEntity te = tc.GetTableEntity();
                                 if (te.GetName().ToUpper().Equals(tableArraySplit[1].ToUpper()))
@@ -107,7 +114,7 @@ namespace DP_ETL_TOOL
 
                     };
 
-                    createTableForm.Controls["btnNew"].Click += (s, a) =>
+                    createTableForm.Controls["btnCancel"].Click += (s, a) =>
                     {
                         createTableForm.Dispose();
                     };
@@ -296,6 +303,7 @@ namespace DP_ETL_TOOL
             b.Items.Add("Destination View");
 
             b.SelectedItem = b.Items[0];
+            lastSelectedMode = b.SelectedItem.ToString();
         }
 
         private void DesignerListValueChanged(object sender, EventArgs e)
@@ -315,7 +323,7 @@ namespace DP_ETL_TOOL
         {
             ListBox lb = (ListBox)sender;
 
-            if (visualPanel.Controls.Count > 0)
+            if (visualPanel.Controls.Count > 0 && lb.SelectedItem.ToString() != lastSelectedMode)
             {
                 var confirmResult = MessageBox.Show("Are you sure you want to change designer mode? Changing so results will result in clearing of current workspace ( Your object will not be lost. ).",
                          "Confirm mode change!",
@@ -328,21 +336,23 @@ namespace DP_ETL_TOOL
                 }
                 else
                 {
-                    // NO
+                    lb.SelectedItem = lastSelectedMode;
                 }
             }
             else
             {
                 PopulateObjectList(lbDesignerList, lb);
             }
+
+            lastSelectedMode = lb.SelectedItem.ToString();
         }
 
-        private void ParseObjectsToCode(Enums.ModeType modeType)
+        private void ParseObjectsToCode(Enums.ModeType modeType, List<Control> ctrls)
         {
 
             codeEdit.Clear();
 
-            CodeParser parser = new CodeParser(modeType, project.GetTables(), project.GetJoins());
+            CodeParser parser = new CodeParser(modeType, ctrls);
             codeEdit.AppendText(parser.GetCode());
 
             codeEdit.Focus();
@@ -358,6 +368,16 @@ namespace DP_ETL_TOOL
 
             EditTableForm editForm = new EditTableForm();
             editForm.Text = this.Text;
+
+            // not implemented yet
+            editForm.Controls["chckIsUnique"].Enabled = false;
+            editForm.Controls["btnEditIndexes"].Enabled = false;
+
+            if (te.GetTableType() == Enums.TableType.Source_Table)
+            {
+                editForm.Controls["combJoins"].Enabled = false;
+                editForm.Controls["btnEditJoin"].Enabled = false;
+            }
 
             populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
             populateComboBoxColumnType((ComboBox)editForm.Controls["combColumnType"]);
@@ -411,7 +431,7 @@ namespace DP_ETL_TOOL
                     editColumnForm.Controls["btnOk"].Click += (innerSender, innerArgs) =>
                     {
                         int length = 0;
-                        int.TryParse(editForm.Controls["tbColumnLength"].Text, out length);
+                        int.TryParse(editColumnForm.Controls["tbColumnLength"].Text, out length);
 
                         column.SetColumnName(editColumnForm.Controls["tbColumnName"].Text);
                         column.SetColumnLength(length);
@@ -479,15 +499,15 @@ namespace DP_ETL_TOOL
             };
 
             editForm.Controls["btnOk"].Click += (sender, args) =>
-        { // save form
-            te.SetTableName(editForm.Controls["tbTableName"].Text);
-            te.SetSchemaName(editForm.Controls["tbSchemaName"].Text);
+            { // save form
+                te.SetTableName(editForm.Controls["tbTableName"].Text);
+                te.SetSchemaName(editForm.Controls["tbSchemaName"].Text);
 
-            tc.Text = te.GetName();
+                tc.Text = te.GetName();
 
-            editForm.Dispose();
+                editForm.Dispose();
 
-        };
+            };
 
             editForm.Controls["btnCancel"].Click += (sender, args) =>
             { // close form
@@ -686,11 +706,65 @@ namespace DP_ETL_TOOL
 
         private void tsButtonGenerateCode_Click(object sender, EventArgs e)
         {
-            // if else na zaklade mode selectora
-
-            ParseObjectsToCode(Enums.ModeType.Table);
-
+            // parser mode
+            Enums.ModeType mode = GetSelectedMode(lbDesignerMode);
+            ParseObjectsToCode(mode, GetActiveDesignerObjectList());
             codeEdit.RefreshSyntax();
         }
+
+        private List<Control> GetActiveDesignerObjectList()
+        {
+            List<Control> ctrls = new List<Control>();
+
+            foreach (Control ctrl in visualPanel.Controls)
+            {
+                ctrls.Add(ctrl);
+            }
+
+            return ctrls;
+        }
+
+        private Enums.ModeType GetSelectedMode(ListBox lbDesignerMode)
+        {
+            string mode = lbDesignerMode.SelectedItem.ToString();
+
+            switch (mode.ToUpper())
+            {
+                case ("TABLE"):
+                    {
+                        return Enums.ModeType.Table;
+                    }
+                case ("EXTRACTION PROCEDURE"):
+                    {
+                        return Enums.ModeType.Extraction_Procedure;
+                    }
+                case ("TRANSFORMATION VIEW"):
+                    {
+                        return Enums.ModeType.Transformation_View;
+                    }
+                case ("TRANSFORMATION PROCEDURE"):
+                    {
+                        return Enums.ModeType.Transformation_Procedure;
+                    }
+                case ("DESTINATION VIEW"):
+                    {
+                        return Enums.ModeType.Destination_View;
+                    }
+            }
+
+            return Enums.ModeType.NULL;
+        }
+
+        private void OnRightTabsChanged(object sender, EventArgs e)
+        {
+            TabControl tabControl = (TabControl)sender;
+
+            if (tabControl.SelectedIndex == 1)
+            {
+                // call populate layer objects
+            }
+        }
+
+
     }
 }

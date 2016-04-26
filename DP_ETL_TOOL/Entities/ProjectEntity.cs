@@ -16,6 +16,16 @@ namespace DP_ETL_TOOL.Entities
         [DataMember]
         private List<JoinEntity> joinEntities;
 
+        /*
+        LAYERS
+        */
+        [IgnoreDataMember]
+        private List<object> extractionLayer;
+        [IgnoreDataMember]
+        private List<object> transformationLayer;
+        [IgnoreDataMember]
+        private List<object> loadLayer;
+
         public ProjectEntity()
         {
             this.tables = new List<TableControl>();

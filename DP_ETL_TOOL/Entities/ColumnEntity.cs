@@ -55,7 +55,7 @@ namespace DP_ETL_TOOL.Entities
 
         public void SetColumnType(string columnType)
         {
-            this.columnName = columnType;
+            this.columnType = columnType;
         }
 
         public void SetColumnLength(int columnLength)

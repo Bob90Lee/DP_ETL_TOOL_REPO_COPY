@@ -31,7 +31,7 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.chListBoxTableList = new System.Windows.Forms.CheckedListBox();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnCance = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNew
@@ -60,21 +60,21 @@
             this.btnAdd.Text = "Show Selected";
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
-            // btnCance
+            // btnCancel
             // 
-            this.btnCance.Location = new System.Drawing.Point(264, 141);
-            this.btnCance.Name = "btnCance";
-            this.btnCance.Size = new System.Drawing.Size(120, 23);
-            this.btnCance.TabIndex = 3;
-            this.btnCance.Text = "Cancel";
-            this.btnCance.UseVisualStyleBackColor = true;
+            this.btnCancel.Location = new System.Drawing.Point(264, 141);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(120, 23);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // CreateTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(392, 176);
-            this.Controls.Add(this.btnCance);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.chListBoxTableList);
             this.Controls.Add(this.btnNew);
@@ -89,6 +89,6 @@
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.CheckedListBox chListBoxTableList;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnCance;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

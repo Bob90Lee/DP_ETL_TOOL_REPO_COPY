@@ -7,6 +7,8 @@ namespace DP_ETL_TOOL.Forms
         public EditColumnForm()
         {
             InitializeComponent();
+
+            chckIsUnique.Enabled = false;
         }
     }
 }

@@ -4,6 +4,7 @@
     {
         public enum JoinType
         {
+            NULL,
             Left,
             Right,
             Inner,
@@ -12,17 +13,29 @@
 
         public enum ModeType
         {
+            NULL,
             Table,
-            View,
-            Extraction_Procedure
+            Transformation_View,
+            Destination_View,
+            Extraction_Procedure,
+            Transformation_Procedure
         };
 
         public enum TableType
         {
+            NULL,
             Source_Table,
             Extraction_Table,
             Load_Table,
             Destination_Table
+        }
+
+        public enum Layer
+        {
+            NULL,
+            Extraction_Layer,
+            Transformation_Layer,
+            Load_Layer
         }
 
     }
