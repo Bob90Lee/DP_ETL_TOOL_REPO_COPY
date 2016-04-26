@@ -360,6 +360,16 @@ namespace DP_ETL_TOOL.Entities
             return deleted;
         }
 
+        public List<LayerMemberEntity> GetAllProjectMembers()
+        {
+            List<LayerMemberEntity> allMembers = new List<LayerMemberEntity>();
+
+            allMembers.AddRange(extractionLayer);
+            allMembers.AddRange(transformationLayer);
+            allMembers.AddRange(loadLayer);
+
+            return allMembers;
+        }
 
     }
 

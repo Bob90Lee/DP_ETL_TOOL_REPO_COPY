@@ -89,5 +89,10 @@ namespace DP_ETL_TOOL.Entities
             return layerType;
         }
 
+        public Enums.ModeType GetModeType()
+        {
+            return modeType;
+        }
+
     }
 }

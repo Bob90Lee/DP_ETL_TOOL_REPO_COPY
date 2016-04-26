@@ -99,49 +99,160 @@ namespace DP_ETL_TOOL
 
                     createTableForm.Controls["btnNew"].Click += (s, a) =>
                     {
+                        bool testProcedure = false;
 
-                        TableControl tableControl = new TableControl(null, SelectTableType(lbDesignerList), mouseX, mouseY);
-                        tableControl.MouseClick += new MouseEventHandler(OnTableClick);
-                        tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
-                        project.AddTable(tableControl);
-                        tableControl.Location = coordinates;
-                        visualPanel.Controls.Add(tableControl);
+                        if (GetSelectedModeType(lbDesignerMode) == Enums.ModeType.Extraction_Procedure || GetSelectedModeType(lbDesignerMode) == Enums.ModeType.Transformation_Procedure)
+                        {
+                            objectCount = visualPanel.Controls.Count;
+                            testProcedure = true;
+                        }
+                        else
+                        {
+                            objectCount = 0;
+                        }
 
-                        LayerMemberEntity member = new LayerMemberEntity(tableControl.GetTableEntity().GetName(), Enums.Layer.All_Tables, Enums.ModeType.Table);
-                        List<Control> controls = new List<Control>();
-                        controls.Add(tableControl);
-                        member.ClassifyControlTypes(controls);
-                        project.AddLayerMember(member, Enums.Layer.All_Tables);
 
-                        createTableForm.Dispose();
+                        if (objectCount < 1)
+                        {
+
+                            TableControl tableControl = new TableControl(null, SelectTableType(lbDesignerList), mouseX, mouseY);
+                            tableControl.MouseClick += new MouseEventHandler(OnTableClick);
+                            tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
+                            project.AddTable(tableControl);
+                            tableControl.Location = coordinates;
+                            visualPanel.Controls.Add(tableControl);
+
+                            LayerMemberEntity member = new LayerMemberEntity(tableControl.GetTableEntity().GetName(), Enums.Layer.All_Tables, Enums.ModeType.Table);
+                            List<Control> controls = new List<Control>();
+                            controls.Add(tableControl);
+                            member.ClassifyControlTypes(controls);
+                            project.AddLayerMember(member, Enums.Layer.All_Tables);
+
+                            createTableForm.Dispose();
+                        }
+
+                        else if (testProcedure && objectCount == 1 && GetSelectedModeType(lbDesignerMode) == Enums.ModeType.Extraction_Procedure)
+                        {
+                            foreach (Control c in visualPanel.Controls)
+                            {
+                                TableControl table = (TableControl)c;
+
+
+                                if (table.GetTableEntity().GetTableType() != SelectTableType(lbDesignerList))
+                                {
+                                    TableControl tableControl = new TableControl(null, SelectTableType(lbDesignerList), mouseX, mouseY);
+                                    tableControl.MouseClick += new MouseEventHandler(OnTableClick);
+                                    tableControl.DoubleClick += new EventHandler(OnTableDoubleClick);
+                                    project.AddTable(tableControl);
+                                    tableControl.Location = coordinates;
+                                    visualPanel.Controls.Add(tableControl);
+
+                                    LayerMemberEntity member = new LayerMemberEntity(tableControl.GetTableEntity().GetName(), Enums.Layer.All_Tables, Enums.ModeType.Table);
+                                    List<Control> controls = new List<Control>();
+                                    controls.Add(tableControl);
+                                    member.ClassifyControlTypes(controls);
+                                    project.AddLayerMember(member, Enums.Layer.All_Tables);
+
+                                    createTableForm.Dispose();
+                                }
+
+                            }
+                        }
+
+                        else if (testProcedure && objectCount == 1 && GetSelectedModeType(lbDesignerMode) == Enums.ModeType.Transformation_Procedure)
+                        {
+                            //
+                        }
+
 
                     };
 
                     createTableForm.Controls["btnAdd"].Click += (s, a) =>
                     {
                         visualPanel.Controls.Clear();
-                        foreach (var item in tableList.CheckedItems)
+
+                        if (GetSelectedModeType(lbDesignerMode) != Enums.ModeType.Extraction_Procedure)
                         {
-                            string[] tableArraySplit = ((string)item).Split();
-                            foreach (TableControl tc in project.GetTables())
+                            foreach (var item in tableList.CheckedItems)
                             {
-                                TableEntity te = tc.GetTableEntity();
-
-                                string schema = te.GetSchema();
-
-                                if (schema == null)
+                                string[] tableArraySplit = ((string)item).Split();
+                                foreach (TableControl tc in project.GetTables())
                                 {
-                                    schema = "";
-                                }
+                                    TableEntity te = tc.GetTableEntity();
 
-                                if (te.GetName().ToUpper().Equals(tableArraySplit[1].ToUpper()) && schema.Equals(tableArraySplit[0].ToUpper()))
-                                {
-                                    visualPanel.Controls.Add(tc);
+                                    string schema = te.GetSchema();
+
+                                    if (schema == null)
+                                    {
+                                        schema = "";
+                                    }
+
+                                    if (te.GetName().ToUpper().Equals(tableArraySplit[1].ToUpper()) && schema.Equals(tableArraySplit[0].ToUpper()))
+                                    {
+                                        visualPanel.Controls.Add(tc);
+                                    }
                                 }
                             }
+
+                            createTableForm.Dispose();
+                        }
+                        else
+                        {
+                            if (tableList.CheckedItems.Count < 3)
+                            {
+                                bool isSameType = false;
+                                Enums.TableType tableType = Enums.TableType.NULL;
+                                List<Control> selected = new List<Control>();
+
+                                foreach (var item in tableList.CheckedItems)
+                                {
+                                    string[] tableArraySplit = ((string)item).Split();
+                                    foreach (TableControl tc in project.GetTables())
+                                    {
+                                        TableEntity te = tc.GetTableEntity();
+                                        string schema = te.GetSchema();
+
+                                        if (schema == null)
+                                        {
+                                            schema = "";
+                                        }
+
+                                        if (te.GetName().ToUpper().Equals(tableArraySplit[1].ToUpper()) && schema.Equals(tableArraySplit[0].ToUpper()))
+                                        {
+                                            selected.Add(tc);
+                                        }
+                                    }
+                                }
+
+                                foreach (Control c in selected)
+                                {
+                                    TableControl tc = (TableControl)c;
+                                    TableEntity te = tc.GetTableEntity();
+                                    Enums.TableType currentType = te.GetTableType();
+                                    if (currentType != tableType)
+                                    {
+                                        tableType = currentType;
+                                    }
+                                    else
+                                    {
+                                        isSameType = true;
+                                        break;
+                                    }
+                                }
+
+                                if (isSameType == false)
+                                {
+                                    foreach (Control c in selected)
+                                    {
+                                        TableControl tc = (TableControl)c;
+                                        visualPanel.Controls.Add(tc);
+                                    }
+                                    createTableForm.Dispose();
+                                }
+                            }
+
                         }
 
-                        createTableForm.Dispose();
 
                     };
 
@@ -310,9 +421,9 @@ namespace DP_ETL_TOOL
 
             else if (mode.SelectedItem.ToString() == "Transformation Procedure")
             {
-                box.Items.Add("Load Table");
                 box.Items.Add("Destination Table");
                 box.Items.Add("Transformation View");
+                box.Items.Add("Destination View");
             }
 
             else if (mode.SelectedItem.ToString() == "Destination View")
@@ -999,28 +1110,34 @@ namespace DP_ETL_TOOL
                 //VIEWS
                 case ("TRANSFORMATION VIEWS"):
                     {
+                        ObjectOverviewFillViews(Enums.ModeType.Transformation_View);
                         break;
                     }
                 case ("DESTINATION VIEWS"):
                     {
+                        ObjectOverviewFillViews(Enums.ModeType.Destination_View);
                         break;
                     }
                 //PROCEDURES
                 case ("EXTRACTION PROCEDURES"):
                     {
+                        ObjectOverviewFillProcedures(Enums.ModeType.Extraction_Procedure);
                         break;
                     }
                 case ("TRANSFORMATION PROCEDURES"):
                     {
+                        ObjectOverviewFillProcedures(Enums.ModeType.Transformation_Procedure);
                         break;
                     }
                 case ("ALL PROCEDURES"):
                     {
+                        ObjectOverviewFillProcedures(Enums.ModeType.NULL);
                         break;
                     }
                 //OTHER
-                case ("ALL OBJECT"):
+                case ("ALL OBJECTS"):
                     {
+                        ObjectOverviewFillAllObjects();
                         break;
                     }
                 default:
@@ -1088,9 +1205,104 @@ namespace DP_ETL_TOOL
 
             if (objectType == Enums.ModeType.Transformation_View)
             {
-
+                foreach (LayerMemberEntity lem in project.GetLayerMembers(Enums.Layer.Transformation_Layer))
+                {
+                    if (lem.GetModeType() == objectType)
+                    {
+                        dataTableView.Rows.Add(lem.GetMemberName(), "here goes description", "Details", "Show");
+                    }
+                }
+            }
+            else if (objectType == Enums.ModeType.Destination_View)
+            {
+                foreach (LayerMemberEntity lem in project.GetLayerMembers(Enums.Layer.Load_Layer))
+                {
+                    if (lem.GetModeType() == objectType)
+                    {
+                        dataTableView.Rows.Add(lem.GetMemberName(), "here goes description", "Details", "Show");
+                    }
+                }
             }
         }
 
+        private void ObjectOverviewFillProcedures(Enums.ModeType objectType)
+        {
+            dataTableView.Rows.Clear();
+            dataTableView.Columns.Clear();
+
+            dataTableView.Columns.Add("procedureName", "Procedure Name");
+            dataTableView.Columns.Add("procedureDescrition", "Description");
+
+            DataGridViewButtonColumn buttonColumnDetail = new DataGridViewButtonColumn();
+            buttonColumnDetail.Name = "";
+
+            DataGridViewButtonColumn buttonColumnShow = new DataGridViewButtonColumn();
+            buttonColumnDetail.Name = "";
+
+            dataTableView.Columns.Add(buttonColumnDetail);
+            dataTableView.Columns.Add(buttonColumnShow);
+
+            if (objectType == Enums.ModeType.Transformation_Procedure)
+            {
+                foreach (LayerMemberEntity lem in project.GetLayerMembers(Enums.Layer.Transformation_Layer))
+                {
+                    if (lem.GetModeType() == objectType)
+                    {
+                        dataTableView.Rows.Add(lem.GetMemberName(), "here goes description", "Details", "Show");
+                    }
+                }
+            }
+            else if (objectType == Enums.ModeType.Extraction_Procedure)
+            {
+                foreach (LayerMemberEntity lem in project.GetLayerMembers(Enums.Layer.Extraction_Layer))
+                {
+                    if (lem.GetModeType() == objectType)
+                    {
+                        dataTableView.Rows.Add(lem.GetMemberName(), "here goes description", "Details", "Show");
+                    }
+                }
+            }
+            else if (objectType == Enums.ModeType.NULL)
+            {
+                foreach (LayerMemberEntity lem in project.GetLayerMembers(Enums.Layer.Extraction_Layer))
+                {
+                    if (lem.GetModeType() == objectType)
+                    {
+                        dataTableView.Rows.Add(lem.GetMemberName(), "here goes description", "Details", "Show");
+                    }
+                }
+                foreach (LayerMemberEntity lem in project.GetLayerMembers(Enums.Layer.Transformation_Layer))
+                {
+                    if (lem.GetModeType() == objectType)
+                    {
+                        dataTableView.Rows.Add(lem.GetMemberName(), "here goes description", "Details", "Show");
+                    }
+                }
+            }
+        }
+
+        private void ObjectOverviewFillAllObjects()
+        {
+            dataTableView.Rows.Clear();
+            dataTableView.Columns.Clear();
+
+            dataTableView.Columns.Add("objectName", "Object Name");
+            dataTableView.Columns.Add("objectType", "Object Type");
+            dataTableView.Columns.Add("objectLayer", "Object Layer");
+
+            DataGridViewButtonColumn buttonColumnDetail = new DataGridViewButtonColumn();
+            buttonColumnDetail.Name = "";
+
+            DataGridViewButtonColumn buttonColumnShow = new DataGridViewButtonColumn();
+            buttonColumnDetail.Name = "";
+
+            dataTableView.Columns.Add(buttonColumnDetail);
+            dataTableView.Columns.Add(buttonColumnShow);
+
+            foreach (LayerMemberEntity lem in project.GetAllProjectMembers())
+            {
+                dataTableView.Rows.Add(lem.GetMemberName(), lem.GetModeType(), lem.GetLayerType(), "Show");
+            }
+        }
     }
 }
