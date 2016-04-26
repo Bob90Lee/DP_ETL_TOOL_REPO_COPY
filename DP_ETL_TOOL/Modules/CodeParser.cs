@@ -13,7 +13,7 @@ namespace DP_ETL_TOOL.Modules
         private List<TableControl> tables;
         private List<JoinControl> joins;
 
-        public CodeParser(Enums.ModeType mode, List<Control> ctrls)
+        public CodeParser(Enums.ModeType mode, List<Control> ctrls, LayerMemberEntity objectEntity)
         {
             tables = new List<TableControl>();
             joins = new List<JoinControl>();
@@ -28,6 +28,16 @@ namespace DP_ETL_TOOL.Modules
             else if (mode == Enums.ModeType.Table)
             {
                 this.code = GenerateTableCode(this.tables);
+            }
+
+            else if (mode == Enums.ModeType.Extraction_Procedure)
+            {
+                this.code = GenerateExtractionProcedureCode(this.tables, objectEntity);
+            }
+
+            else
+            {
+                this.code = "";
             }
 
         }
@@ -84,7 +94,7 @@ namespace DP_ETL_TOOL.Modules
 
                 TableEntity te = t.GetTableEntity();
 
-                if(te.GetSchema() == null)
+                if (te.GetSchema() == null)
                 {
                     sb.AppendLine("CREATE TABLE " + te.GetName());
                 }
@@ -99,7 +109,7 @@ namespace DP_ETL_TOOL.Modules
                     sb.Append("\t" + ce.GetColumnName() + "\t\t" + ce.GetColumnType() + "(" + ce.GetColumnLength() + ")");
                     if (i == tables.Count)
                     {
-                         sb.AppendLine();
+                        sb.AppendLine();
 
                     }
                     else {
@@ -110,6 +120,32 @@ namespace DP_ETL_TOOL.Modules
                 sb.AppendLine(");\n\n / \n\n");
 
             }
+
+            return sb.ToString();
+        }
+
+        private string GenerateExtractionProcedureCode(List<TableControl> tables, LayerMemberEntity procedure)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            int i = 0;
+
+            sb.AppendLine("CREATE OR REPLACE PROCEDURE " + procedure.GetMemberName() + "( IMPORT_ID IN NUMBER )");
+            sb.AppendLine("IS");
+            sb.AppendLine("BEGIN");
+
+            //
+            sb.AppendLine("/* here will be the control procedure start call */");
+            //
+
+            //
+            sb.AppendLine("/* here will be the control procedure finish call */");
+            //
+
+            sb.AppendLine("EXCEPTION");
+            sb.AppendLine("\t WHEN OTHERS THEN NULL; -- exception handling");
+
+            sb.AppendLine("END;");
 
             return sb.ToString();
         }

@@ -510,12 +510,12 @@ namespace DP_ETL_TOOL
             }
         }
 
-        private void ParseObjectsToCode(Enums.ModeType modeType, List<Control> ctrls)
+        private void ParseObjectsToCode(Enums.ModeType modeType, List<Control> ctrls, LayerMemberEntity objectEntity)
         {
 
             codeEdit.Clear();
 
-            CodeParser parser = new CodeParser(modeType, ctrls);
+            CodeParser parser = new CodeParser(modeType, ctrls, objectEntity);
             codeEdit.AppendText(parser.GetCode());
 
             codeEdit.Focus();
@@ -943,7 +943,7 @@ namespace DP_ETL_TOOL
         {
             // parser mode
             Enums.ModeType mode = GetSelectedModeType(lbDesignerMode);
-            ParseObjectsToCode(mode, GetActiveDesignerObjectList());
+            ParseObjectsToCode(mode, GetActiveDesignerObjectList(), new LayerMemberEntity(tsTextBoxObjectName.Text, GetSelectedLayer(lbDesignerMode), GetSelectedModeType(lbDesignerMode)));
             codeEdit.RefreshSyntax();
         }
 

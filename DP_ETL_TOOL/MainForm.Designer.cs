@@ -54,6 +54,7 @@
             this.workspaceTab = new System.Windows.Forms.TabPage();
             this.tableLay1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLay2 = new System.Windows.Forms.TableLayoutPanel();
+            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.tsCodeTools = new System.Windows.Forms.ToolStrip();
             this.tsButtonGenerateCode = new System.Windows.Forms.ToolStripButton();
             this.btnClearCode = new System.Windows.Forms.ToolStripButton();
@@ -86,7 +87,6 @@
             this.aTables = new System.Windows.Forms.ToolStripMenuItem();
             this.aProcedures = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableView = new System.Windows.Forms.DataGridView();
-            this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
             this.tableLay3.SuspendLayout();
@@ -347,6 +347,19 @@
             this.tableLay2.Size = new System.Drawing.Size(282, 435);
             this.tableLay2.TabIndex = 2;
             // 
+            // codeEdit
+            // 
+            this.codeEdit.AcceptsTab = true;
+            this.codeEdit.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.codeEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.codeEdit.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codeEdit.ForeColor = System.Drawing.Color.Black;
+            this.codeEdit.Location = new System.Drawing.Point(35, 35);
+            this.codeEdit.Name = "codeEdit";
+            this.codeEdit.Size = new System.Drawing.Size(243, 396);
+            this.codeEdit.TabIndex = 3;
+            this.codeEdit.Text = "";
+            // 
             // tsCodeTools
             // 
             this.tsCodeTools.BackColor = System.Drawing.SystemColors.Control;
@@ -443,7 +456,7 @@
             // 
             this.tsTextBoxObjectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tsTextBoxObjectName.Name = "tsTextBoxObjectName";
-            this.tsTextBoxObjectName.Size = new System.Drawing.Size(100, 30);
+            this.tsTextBoxObjectName.Size = new System.Drawing.Size(200, 30);
             // 
             // tsDropDownOperations
             // 
@@ -633,19 +646,6 @@
             this.dataTableView.Name = "dataTableView";
             this.dataTableView.Size = new System.Drawing.Size(715, 407);
             this.dataTableView.TabIndex = 1;
-            // 
-            // codeEdit
-            // 
-            this.codeEdit.AcceptsTab = true;
-            this.codeEdit.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.codeEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.codeEdit.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.codeEdit.ForeColor = System.Drawing.Color.Black;
-            this.codeEdit.Location = new System.Drawing.Point(35, 35);
-            this.codeEdit.Name = "codeEdit";
-            this.codeEdit.Size = new System.Drawing.Size(243, 396);
-            this.codeEdit.TabIndex = 3;
-            this.codeEdit.Text = "";
             // 
             // MainForm
             // 

@@ -14,6 +14,8 @@ namespace DP_ETL_TOOL.Entities
         [DataMember]
         private List<JoinEntity> joinEntities;
         [DataMember]
+        private List<ProcedureEntity> procedureEntities;
+        [DataMember]
         private Enums.Layer layerType;
         [DataMember]
         private Enums.ModeType modeType; // object type
@@ -22,8 +24,9 @@ namespace DP_ETL_TOOL.Entities
 
         public LayerMemberEntity(string memberName, Enums.Layer layerType, Enums.ModeType modeType)
         {
-            tableEntities = new List<TableEntity>();
-            joinEntities = new List<JoinEntity>();
+            this.tableEntities = new List<TableEntity>();
+            this.joinEntities = new List<JoinEntity>();
+            this.procedureEntities = new List<ProcedureEntity>();
             this.layerType = layerType;
             this.memberName = memberName;
             this.modeType = modeType;
