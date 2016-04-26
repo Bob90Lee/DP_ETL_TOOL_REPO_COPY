@@ -16,14 +16,17 @@ namespace DP_ETL_TOOL.Entities
         [DataMember]
         private Enums.Layer layerType;
         [DataMember]
+        private Enums.ModeType modeType; // object type
+        [DataMember]
         private string memberName;
 
-        public LayerMemberEntity(string memberName, Enums.Layer layerType)
+        public LayerMemberEntity(string memberName, Enums.Layer layerType, Enums.ModeType modeType)
         {
             tableEntities = new List<TableEntity>();
             joinEntities = new List<JoinEntity>();
             this.layerType = layerType;
             this.memberName = memberName;
+            this.modeType = modeType;
         }
 
         public void ClassifyControlTypes(List<Control> controls)

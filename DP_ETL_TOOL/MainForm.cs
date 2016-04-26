@@ -107,7 +107,7 @@ namespace DP_ETL_TOOL
                         tableControl.Location = coordinates;
                         visualPanel.Controls.Add(tableControl);
 
-                        LayerMemberEntity member = new LayerMemberEntity(tableControl.GetTableEntity().GetName(), Enums.Layer.All_Tables);
+                        LayerMemberEntity member = new LayerMemberEntity(tableControl.GetTableEntity().GetName(), Enums.Layer.All_Tables, Enums.ModeType.Table);
                         List<Control> controls = new List<Control>();
                         controls.Add(tableControl);
                         member.ClassifyControlTypes(controls);
@@ -957,7 +957,7 @@ namespace DP_ETL_TOOL
             string s = tsTextBoxObjectName.Text.Trim().ToUpper();
             if (s.Length > 0)
             {
-                LayerMemberEntity member = new LayerMemberEntity(s, GetSelectedLayer(lbDesignerMode));
+                LayerMemberEntity member = new LayerMemberEntity(s, GetSelectedLayer(lbDesignerMode), GetSelectedModeType(lbDesignerMode));
                 member.ClassifyControlTypes(controls);
                 project.AddLayerMember(member, GetSelectedLayer(lbDesignerMode));
             }
@@ -970,29 +970,57 @@ namespace DP_ETL_TOOL
 
             switch (clickedItem.Text.ToUpper())
             {
+                // TABLES
                 case ("SOURCE TABLES"):
                     {
-                        FillTables(Enums.TableType.Source_Table);
+                        ObjectOverviewFillTables(Enums.TableType.Source_Table);
                         break;
                     }
                 case ("EXTRACTION TABLES"):
                     {
-                        FillTables(Enums.TableType.Extraction_Table);
+                        ObjectOverviewFillTables(Enums.TableType.Extraction_Table);
                         break;
                     }
                 case ("LOAD TABLES"):
                     {
-                        FillTables(Enums.TableType.Load_Table);
+                        ObjectOverviewFillTables(Enums.TableType.Load_Table);
                         break;
                     }
                 case ("DESTINATION TABLES"):
                     {
-                        FillTables(Enums.TableType.Destination_Table);
+                        ObjectOverviewFillTables(Enums.TableType.Destination_Table);
                         break;
                     }
                 case ("ALL TABLES"):
                     {
-                        FillTables(Enums.TableType.NULL);
+                        ObjectOverviewFillTables(Enums.TableType.NULL);
+                        break;
+                    }
+                //VIEWS
+                case ("TRANSFORMATION VIEWS"):
+                    {
+                        break;
+                    }
+                case ("DESTINATION VIEWS"):
+                    {
+                        break;
+                    }
+                //PROCEDURES
+                case ("EXTRACTION PROCEDURES"):
+                    {
+                        break;
+                    }
+                case ("TRANSFORMATION PROCEDURES"):
+                    {
+                        break;
+                    }
+                case ("ALL PROCEDURES"):
+                    {
+                        break;
+                    }
+                //OTHER
+                case ("ALL OBJECT"):
+                    {
                         break;
                     }
                 default:
@@ -1005,13 +1033,23 @@ namespace DP_ETL_TOOL
 
         }
 
-        private void FillTables(Enums.TableType tableType)
+        private void ObjectOverviewFillTables(Enums.TableType tableType)
         {
             dataTableView.Rows.Clear();
             dataTableView.Columns.Clear();
 
             dataTableView.Columns.Add("schemaName", "Schema Name");
             dataTableView.Columns.Add("tableName", "Table Name");
+
+            DataGridViewButtonColumn buttonColumnEdit = new DataGridViewButtonColumn();
+            buttonColumnEdit.Name = "";
+
+            DataGridViewButtonColumn buttonColumnShow = new DataGridViewButtonColumn();
+            buttonColumnEdit.Name = "";
+
+            dataTableView.Columns.Add(buttonColumnEdit);
+            dataTableView.Columns.Add(buttonColumnShow);
+
 
             foreach (LayerMemberEntity member in project.GetLayerMembers(Enums.Layer.All_Tables))
             {
@@ -1021,13 +1059,36 @@ namespace DP_ETL_TOOL
                 {
                     if (tableType != Enums.TableType.NULL && t.GetTableType() == tableType)
                     {
-                        dataTableView.Rows.Add(t.GetSchema(), t.GetName());
+                        dataTableView.Rows.Add(t.GetSchema(), t.GetName(), "Edit", "Show");
                     }
                     else if (tableType == Enums.TableType.NULL)
                     {
-                        dataTableView.Rows.Add(t.GetSchema(), t.GetName());
+                        dataTableView.Rows.Add(t.GetSchema(), t.GetName(), "Edit", "Show");
                     }
                 }
+            }
+        }
+
+        private void ObjectOverviewFillViews(Enums.ModeType objectType)
+        {
+            dataTableView.Rows.Clear();
+            dataTableView.Columns.Clear();
+
+            dataTableView.Columns.Add("viewName", "View Name");
+            dataTableView.Columns.Add("viewDescription", "Description");
+
+            DataGridViewButtonColumn buttonColumnDetail = new DataGridViewButtonColumn();
+            buttonColumnDetail.Name = "";
+
+            DataGridViewButtonColumn buttonColumnShow = new DataGridViewButtonColumn();
+            buttonColumnDetail.Name = "";
+
+            dataTableView.Columns.Add(buttonColumnDetail);
+            dataTableView.Columns.Add(buttonColumnShow);
+
+            if (objectType == Enums.ModeType.Transformation_View)
+            {
+
             }
         }
 
