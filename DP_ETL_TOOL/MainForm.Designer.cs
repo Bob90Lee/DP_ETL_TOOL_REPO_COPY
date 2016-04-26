@@ -56,36 +56,36 @@
             this.tableLay2 = new System.Windows.Forms.TableLayoutPanel();
             this.tsCodeTools = new System.Windows.Forms.ToolStrip();
             this.tsButtonGenerateCode = new System.Windows.Forms.ToolStripButton();
+            this.btnClearCode = new System.Windows.Forms.ToolStripButton();
             this.tsButtonExport = new System.Windows.Forms.ToolStripButton();
             this.talbeLay4 = new System.Windows.Forms.TableLayoutPanel();
             this.visualPanel = new System.Windows.Forms.Panel();
             this.tsObjectProperties = new System.Windows.Forms.ToolStrip();
             this.tsLabelObjectName = new System.Windows.Forms.ToolStripLabel();
             this.tsTextBoxObjectName = new System.Windows.Forms.ToolStripTextBox();
+            this.tsDropDownOperations = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsSave = new System.Windows.Forms.ToolStripMenuItem();
             this.objectsTab = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.extractionLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sourceTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractionTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.extractionProceduresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.transformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.transformationViewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.transformationProceduresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.destinationTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.destinationViewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allProceduresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStripObjectsOverview = new System.Windows.Forms.MenuStrip();
+            this.tsExtraction = new System.Windows.Forms.ToolStripMenuItem();
+            this.eSourceTables = new System.Windows.Forms.ToolStripMenuItem();
+            this.eExtractionTables = new System.Windows.Forms.ToolStripMenuItem();
+            this.eExtractionProcedures = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsTransformation = new System.Windows.Forms.ToolStripMenuItem();
+            this.tTransformationViews = new System.Windows.Forms.ToolStripMenuItem();
+            this.tTransformationProcedures = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsLoad = new System.Windows.Forms.ToolStripMenuItem();
+            this.lLoadTables = new System.Windows.Forms.ToolStripMenuItem();
+            this.lDestinationTables = new System.Windows.Forms.ToolStripMenuItem();
+            this.lDestinationViews = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.aAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.aTables = new System.Windows.Forms.ToolStripMenuItem();
+            this.aProcedures = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableView = new System.Windows.Forms.DataGridView();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnClearCode = new System.Windows.Forms.ToolStripButton();
             this.codeEdit = new DP_ETL_TOOL.Controls.SyntaxTextBoxControl();
             this.MainMenu.SuspendLayout();
             this.designerTab.SuspendLayout();
@@ -102,7 +102,7 @@
             this.tsObjectProperties.SuspendLayout();
             this.objectsTab.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.menuStripObjectsOverview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -135,21 +135,21 @@
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.newToolStripMenuItem.Text = "New Project";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItemClick);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.openToolStripMenuItem.Text = "Open Project";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.saveToolStripMenuItem.Text = "Save Project";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
             // 
             // exportToolStripMenuItem
             // 
@@ -372,7 +372,16 @@
             this.tsButtonGenerateCode.Name = "tsButtonGenerateCode";
             this.tsButtonGenerateCode.Size = new System.Drawing.Size(89, 27);
             this.tsButtonGenerateCode.Text = "Generate Code";
-            this.tsButtonGenerateCode.Click += new System.EventHandler(this.tsButtonGenerateCode_Click);
+            this.tsButtonGenerateCode.Click += new System.EventHandler(this.TSButtonGenerateCodeClick);
+            // 
+            // btnClearCode
+            // 
+            this.btnClearCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnClearCode.Image = ((System.Drawing.Image)(resources.GetObject("btnClearCode.Image")));
+            this.btnClearCode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnClearCode.Name = "btnClearCode";
+            this.btnClearCode.Size = new System.Drawing.Size(38, 27);
+            this.btnClearCode.Text = "Clear";
             // 
             // tsButtonExport
             // 
@@ -416,7 +425,7 @@
             this.tsObjectProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsLabelObjectName,
             this.tsTextBoxObjectName,
-            this.toolStripDropDownButton1});
+            this.tsDropDownOperations});
             this.tsObjectProperties.Location = new System.Drawing.Point(0, 0);
             this.tsObjectProperties.Name = "tsObjectProperties";
             this.tsObjectProperties.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -436,6 +445,37 @@
             this.tsTextBoxObjectName.Name = "tsTextBoxObjectName";
             this.tsTextBoxObjectName.Size = new System.Drawing.Size(100, 30);
             // 
+            // tsDropDownOperations
+            // 
+            this.tsDropDownOperations.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsDropDownOperations.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsNew,
+            this.tsOpen,
+            this.tsSave});
+            this.tsDropDownOperations.Image = ((System.Drawing.Image)(resources.GetObject("tsDropDownOperations.Image")));
+            this.tsDropDownOperations.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsDropDownOperations.Name = "tsDropDownOperations";
+            this.tsDropDownOperations.Size = new System.Drawing.Size(116, 27);
+            this.tsDropDownOperations.Text = "Object Operations";
+            // 
+            // tsNew
+            // 
+            this.tsNew.Name = "tsNew";
+            this.tsNew.Size = new System.Drawing.Size(103, 22);
+            this.tsNew.Text = "New";
+            // 
+            // tsOpen
+            // 
+            this.tsOpen.Name = "tsOpen";
+            this.tsOpen.Size = new System.Drawing.Size(103, 22);
+            this.tsOpen.Text = "Open";
+            // 
+            // tsSave
+            // 
+            this.tsSave.Name = "tsSave";
+            this.tsSave.Size = new System.Drawing.Size(103, 22);
+            this.tsSave.Text = "Save";
+            // 
             // objectsTab
             // 
             this.objectsTab.Controls.Add(this.tableLayoutPanel1);
@@ -451,7 +491,7 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.menuStrip1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.menuStripObjectsOverview, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.dataTableView, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
@@ -462,174 +502,137 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(721, 443);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // menuStrip1
+            // menuStripObjectsOverview
             // 
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.extractionLayerToolStripMenuItem,
-            this.transformationToolStripMenuItem,
-            this.loadToolStripMenuItem,
-            this.allToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(721, 30);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStripObjectsOverview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.menuStripObjectsOverview.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsExtraction,
+            this.tsTransformation,
+            this.tsLoad,
+            this.tsAll});
+            this.menuStripObjectsOverview.Location = new System.Drawing.Point(0, 0);
+            this.menuStripObjectsOverview.Name = "menuStripObjectsOverview";
+            this.menuStripObjectsOverview.Size = new System.Drawing.Size(721, 30);
+            this.menuStripObjectsOverview.TabIndex = 0;
+            this.menuStripObjectsOverview.Text = "menuStrip1";
             // 
-            // extractionLayerToolStripMenuItem
+            // tsExtraction
             // 
-            this.extractionLayerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sourceTablesToolStripMenuItem,
-            this.extractionTablesToolStripMenuItem,
-            this.extractionProceduresToolStripMenuItem});
-            this.extractionLayerToolStripMenuItem.Name = "extractionLayerToolStripMenuItem";
-            this.extractionLayerToolStripMenuItem.Size = new System.Drawing.Size(71, 26);
-            this.extractionLayerToolStripMenuItem.Text = "Extraction";
+            this.tsExtraction.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eSourceTables,
+            this.eExtractionTables,
+            this.eExtractionProcedures});
+            this.tsExtraction.Name = "tsExtraction";
+            this.tsExtraction.Size = new System.Drawing.Size(71, 26);
+            this.tsExtraction.Text = "Extraction";
             // 
-            // sourceTablesToolStripMenuItem
+            // eSourceTables
             // 
-            this.sourceTablesToolStripMenuItem.Name = "sourceTablesToolStripMenuItem";
-            this.sourceTablesToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.sourceTablesToolStripMenuItem.Text = "Source Tables";
+            this.eSourceTables.Name = "eSourceTables";
+            this.eSourceTables.Size = new System.Drawing.Size(188, 22);
+            this.eSourceTables.Text = "Source Tables";
             // 
-            // extractionTablesToolStripMenuItem
+            // eExtractionTables
             // 
-            this.extractionTablesToolStripMenuItem.Name = "extractionTablesToolStripMenuItem";
-            this.extractionTablesToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.extractionTablesToolStripMenuItem.Text = "Extraction Tables";
+            this.eExtractionTables.Name = "eExtractionTables";
+            this.eExtractionTables.Size = new System.Drawing.Size(188, 22);
+            this.eExtractionTables.Text = "Extraction Tables";
             // 
-            // extractionProceduresToolStripMenuItem
+            // eExtractionProcedures
             // 
-            this.extractionProceduresToolStripMenuItem.Name = "extractionProceduresToolStripMenuItem";
-            this.extractionProceduresToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.extractionProceduresToolStripMenuItem.Text = "Extraction Procedures";
+            this.eExtractionProcedures.Name = "eExtractionProcedures";
+            this.eExtractionProcedures.Size = new System.Drawing.Size(188, 22);
+            this.eExtractionProcedures.Text = "Extraction Procedures";
             // 
-            // transformationToolStripMenuItem
+            // tsTransformation
             // 
-            this.transformationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.transformationViewsToolStripMenuItem,
-            this.transformationProceduresToolStripMenuItem});
-            this.transformationToolStripMenuItem.Name = "transformationToolStripMenuItem";
-            this.transformationToolStripMenuItem.Size = new System.Drawing.Size(100, 26);
-            this.transformationToolStripMenuItem.Text = "Transformation";
+            this.tsTransformation.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tTransformationViews,
+            this.tTransformationProcedures});
+            this.tsTransformation.Name = "tsTransformation";
+            this.tsTransformation.Size = new System.Drawing.Size(100, 26);
+            this.tsTransformation.Text = "Transformation";
             // 
-            // transformationViewsToolStripMenuItem
+            // tTransformationViews
             // 
-            this.transformationViewsToolStripMenuItem.Name = "transformationViewsToolStripMenuItem";
-            this.transformationViewsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.transformationViewsToolStripMenuItem.Text = "Transformation Views";
+            this.tTransformationViews.Name = "tTransformationViews";
+            this.tTransformationViews.Size = new System.Drawing.Size(217, 22);
+            this.tTransformationViews.Text = "Transformation Views";
             // 
-            // transformationProceduresToolStripMenuItem
+            // tTransformationProcedures
             // 
-            this.transformationProceduresToolStripMenuItem.Name = "transformationProceduresToolStripMenuItem";
-            this.transformationProceduresToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.transformationProceduresToolStripMenuItem.Text = "Transformation Procedures";
+            this.tTransformationProcedures.Name = "tTransformationProcedures";
+            this.tTransformationProcedures.Size = new System.Drawing.Size(217, 22);
+            this.tTransformationProcedures.Text = "Transformation Procedures";
             // 
-            // loadToolStripMenuItem
+            // tsLoad
             // 
-            this.loadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadTablesToolStripMenuItem,
-            this.destinationTablesToolStripMenuItem,
-            this.destinationViewsToolStripMenuItem});
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(45, 26);
-            this.loadToolStripMenuItem.Text = "Load";
+            this.tsLoad.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lLoadTables,
+            this.lDestinationTables,
+            this.lDestinationViews});
+            this.tsLoad.Name = "tsLoad";
+            this.tsLoad.Size = new System.Drawing.Size(45, 26);
+            this.tsLoad.Text = "Load";
             // 
-            // loadTablesToolStripMenuItem
+            // lLoadTables
             // 
-            this.loadTablesToolStripMenuItem.Name = "loadTablesToolStripMenuItem";
-            this.loadTablesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.loadTablesToolStripMenuItem.Text = "Load Tables";
+            this.lLoadTables.Name = "lLoadTables";
+            this.lLoadTables.Size = new System.Drawing.Size(170, 22);
+            this.lLoadTables.Text = "Load Tables";
             // 
-            // destinationTablesToolStripMenuItem
+            // lDestinationTables
             // 
-            this.destinationTablesToolStripMenuItem.Name = "destinationTablesToolStripMenuItem";
-            this.destinationTablesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.destinationTablesToolStripMenuItem.Text = "Destination Tables";
+            this.lDestinationTables.Name = "lDestinationTables";
+            this.lDestinationTables.Size = new System.Drawing.Size(170, 22);
+            this.lDestinationTables.Text = "Destination Tables";
             // 
-            // destinationViewsToolStripMenuItem
+            // lDestinationViews
             // 
-            this.destinationViewsToolStripMenuItem.Name = "destinationViewsToolStripMenuItem";
-            this.destinationViewsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.destinationViewsToolStripMenuItem.Text = "Destination Views";
+            this.lDestinationViews.Name = "lDestinationViews";
+            this.lDestinationViews.Size = new System.Drawing.Size(170, 22);
+            this.lDestinationViews.Text = "Destination Views";
             // 
-            // allToolStripMenuItem
+            // tsAll
             // 
-            this.allToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allObjectsToolStripMenuItem,
-            this.allTablesToolStripMenuItem,
-            this.allProceduresToolStripMenuItem});
-            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(33, 26);
-            this.allToolStripMenuItem.Text = "All";
+            this.tsAll.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aAll,
+            this.aTables,
+            this.aProcedures});
+            this.tsAll.Name = "tsAll";
+            this.tsAll.Size = new System.Drawing.Size(33, 26);
+            this.tsAll.Text = "All";
             // 
-            // allObjectsToolStripMenuItem
+            // aAll
             // 
-            this.allObjectsToolStripMenuItem.Name = "allObjectsToolStripMenuItem";
-            this.allObjectsToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.allObjectsToolStripMenuItem.Text = "All Objects";
+            this.aAll.Name = "aAll";
+            this.aAll.Size = new System.Drawing.Size(150, 22);
+            this.aAll.Text = "All Objects";
             // 
-            // allTablesToolStripMenuItem
+            // aTables
             // 
-            this.allTablesToolStripMenuItem.Name = "allTablesToolStripMenuItem";
-            this.allTablesToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.allTablesToolStripMenuItem.Text = "All Tables";
+            this.aTables.Name = "aTables";
+            this.aTables.Size = new System.Drawing.Size(150, 22);
+            this.aTables.Text = "All Tables";
             // 
-            // allProceduresToolStripMenuItem
+            // aProcedures
             // 
-            this.allProceduresToolStripMenuItem.Name = "allProceduresToolStripMenuItem";
-            this.allProceduresToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.allProceduresToolStripMenuItem.Text = "All Procedures";
+            this.aProcedures.Name = "aProcedures";
+            this.aProcedures.Size = new System.Drawing.Size(150, 22);
+            this.aProcedures.Text = "All Procedures";
             // 
             // dataTableView
             // 
             this.dataTableView.AllowUserToOrderColumns = true;
+            this.dataTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataTableView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataTableView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataTableView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataTableView.Location = new System.Drawing.Point(3, 33);
             this.dataTableView.Name = "dataTableView";
             this.dataTableView.Size = new System.Drawing.Size(715, 407);
             this.dataTableView.TabIndex = 1;
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem1,
-            this.openToolStripMenuItem1,
-            this.saveToolStripMenuItem2});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(116, 27);
-            this.toolStripDropDownButton1.Text = "Object Operations";
-            // 
-            // saveToolStripMenuItem1
-            // 
-            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
-            this.saveToolStripMenuItem1.Text = "New";
-            // 
-            // openToolStripMenuItem1
-            // 
-            this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
-            this.openToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
-            this.openToolStripMenuItem1.Text = "Open";
-            // 
-            // saveToolStripMenuItem2
-            // 
-            this.saveToolStripMenuItem2.Name = "saveToolStripMenuItem2";
-            this.saveToolStripMenuItem2.Size = new System.Drawing.Size(103, 22);
-            this.saveToolStripMenuItem2.Text = "Save";
-            // 
-            // btnClearCode
-            // 
-            this.btnClearCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnClearCode.Image = ((System.Drawing.Image)(resources.GetObject("btnClearCode.Image")));
-            this.btnClearCode.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnClearCode.Name = "btnClearCode";
-            this.btnClearCode.Size = new System.Drawing.Size(38, 27);
-            this.btnClearCode.Text = "Clear";
             // 
             // codeEdit
             // 
@@ -678,8 +681,8 @@
             this.objectsTab.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStripObjectsOverview.ResumeLayout(false);
+            this.menuStripObjectsOverview.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -716,35 +719,35 @@
         private System.Windows.Forms.ListBox lbDesignerMode;
         private System.Windows.Forms.TabPage objectsTab;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem extractionLayerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem transformationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sourceTablesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem extractionTablesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem extractionProceduresToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem transformationViewsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem transformationProceduresToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadTablesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allObjectsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allTablesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allProceduresToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStripObjectsOverview;
+        private System.Windows.Forms.ToolStripMenuItem tsExtraction;
+        private System.Windows.Forms.ToolStripMenuItem tsTransformation;
+        private System.Windows.Forms.ToolStripMenuItem eSourceTables;
+        private System.Windows.Forms.ToolStripMenuItem eExtractionTables;
+        private System.Windows.Forms.ToolStripMenuItem eExtractionProcedures;
+        private System.Windows.Forms.ToolStripMenuItem tTransformationViews;
+        private System.Windows.Forms.ToolStripMenuItem tTransformationProcedures;
+        private System.Windows.Forms.ToolStripMenuItem tsLoad;
+        private System.Windows.Forms.ToolStripMenuItem lLoadTables;
+        private System.Windows.Forms.ToolStripMenuItem tsAll;
+        private System.Windows.Forms.ToolStripMenuItem aAll;
+        private System.Windows.Forms.ToolStripMenuItem aTables;
+        private System.Windows.Forms.ToolStripMenuItem aProcedures;
         private System.Windows.Forms.DataGridView dataTableView;
         private System.Windows.Forms.TableLayoutPanel talbeLay4;
         private System.Windows.Forms.Panel visualPanel;
         private System.Windows.Forms.ToolStrip tsObjectProperties;
         private System.Windows.Forms.ToolStripLabel tsLabelObjectName;
         private System.Windows.Forms.ToolStripTextBox tsTextBoxObjectName;
-        private System.Windows.Forms.ToolStripMenuItem destinationTablesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem destinationViewsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lDestinationTables;
+        private System.Windows.Forms.ToolStripMenuItem lDestinationViews;
         private System.Windows.Forms.ToolStrip tsCodeTools;
         private System.Windows.Forms.ToolStripButton tsButtonGenerateCode;
         private System.Windows.Forms.ToolStripButton tsButtonExport;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripDropDownButton tsDropDownOperations;
+        private System.Windows.Forms.ToolStripMenuItem tsNew;
+        private System.Windows.Forms.ToolStripMenuItem tsOpen;
+        private System.Windows.Forms.ToolStripMenuItem tsSave;
         private System.Windows.Forms.ToolStripButton btnClearCode;
     }
 }

@@ -15,6 +15,9 @@ namespace DP_ETL_TOOL.Forms
         public EditJoinForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
     }
 }

@@ -34,9 +34,9 @@
             this.lblColumnType = new System.Windows.Forms.Label();
             this.combMainColumn = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.combChilColumn = new System.Windows.Forms.ComboBox();
             this.btnAddPair = new System.Windows.Forms.Button();
-            this.lblDeleteJoin = new System.Windows.Forms.Label();
+            this.lblDeleteJoinPair = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -93,13 +93,13 @@
             this.label1.TabIndex = 48;
             this.label1.Text = "Child Table Column";
             // 
-            // comboBox1
+            // combChilColumn
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(115, 208);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(158, 21);
-            this.comboBox1.TabIndex = 47;
+            this.combChilColumn.FormattingEnabled = true;
+            this.combChilColumn.Location = new System.Drawing.Point(115, 208);
+            this.combChilColumn.Name = "combChilColumn";
+            this.combChilColumn.Size = new System.Drawing.Size(158, 21);
+            this.combChilColumn.TabIndex = 47;
             // 
             // btnAddPair
             // 
@@ -110,15 +110,15 @@
             this.btnAddPair.Text = "Add Column Pair";
             this.btnAddPair.UseVisualStyleBackColor = true;
             // 
-            // lblDeleteJoin
+            // lblDeleteJoinPair
             // 
-            this.lblDeleteJoin.AutoSize = true;
-            this.lblDeleteJoin.ForeColor = System.Drawing.Color.Red;
-            this.lblDeleteJoin.Location = new System.Drawing.Point(202, 332);
-            this.lblDeleteJoin.Name = "lblDeleteJoin";
-            this.lblDeleteJoin.Size = new System.Drawing.Size(60, 13);
-            this.lblDeleteJoin.TabIndex = 52;
-            this.lblDeleteJoin.Text = "Delete Join";
+            this.lblDeleteJoinPair.AutoSize = true;
+            this.lblDeleteJoinPair.ForeColor = System.Drawing.Color.Red;
+            this.lblDeleteJoinPair.Location = new System.Drawing.Point(192, 335);
+            this.lblDeleteJoinPair.Name = "lblDeleteJoinPair";
+            this.lblDeleteJoinPair.Size = new System.Drawing.Size(81, 13);
+            this.lblDeleteJoinPair.TabIndex = 52;
+            this.lblDeleteJoinPair.Text = "Delete Join Pair";
             // 
             // btnCancel
             // 
@@ -143,19 +143,19 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(289, 357);
-            this.Controls.Add(this.lblDeleteJoin);
+            this.Controls.Add(this.lblDeleteJoinPair);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnAddPair);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.combChilColumn);
             this.Controls.Add(this.lblColumnType);
             this.Controls.Add(this.combMainColumn);
             this.Controls.Add(this.btnDeleteSelected);
             this.Controls.Add(this.lbColumnPairs);
             this.Controls.Add(this.lblColumnPairs);
             this.Name = "EditJoinForm";
-            this.Text = "EditJoinForm";
+            this.Text = "Edit Join";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,9 +169,9 @@
         private System.Windows.Forms.Label lblColumnType;
         private System.Windows.Forms.ComboBox combMainColumn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox combChilColumn;
         private System.Windows.Forms.Button btnAddPair;
-        private System.Windows.Forms.Label lblDeleteJoin;
+        private System.Windows.Forms.Label lblDeleteJoinPair;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOk;
     }

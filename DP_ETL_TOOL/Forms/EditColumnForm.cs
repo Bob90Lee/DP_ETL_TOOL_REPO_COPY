@@ -9,6 +9,9 @@ namespace DP_ETL_TOOL.Forms
             InitializeComponent();
 
             chckIsUnique.Enabled = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
     }
 }

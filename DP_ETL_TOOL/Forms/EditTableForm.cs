@@ -7,6 +7,9 @@ namespace DP_ETL_TOOL.Forms
         public EditTableForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
 
         }
 

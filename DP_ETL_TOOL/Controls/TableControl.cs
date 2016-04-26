@@ -65,7 +65,7 @@ namespace DP_ETL_TOOL.Controls
 
         protected override void OnCreateControl()
         {            
-            this.Text = tableEntity.GetName();
+            this.Text = tableEntity.GetSchema() + "." + tableEntity.GetName();
 
             this.AutoSize = true;
 
@@ -98,11 +98,7 @@ namespace DP_ETL_TOOL.Controls
 
             }
 
-            GUICoordsEntity coords = this.tableEntity.GetCoords();
-            coords.SetPosX(this.Bounds.X);
-            coords.SetPosY(this.Bounds.Y);
-            coords.SetWidth(this.Width);
-            coords.SetHeight(this.Height);
+            SetGuiCoords();
 
         }
 
@@ -114,6 +110,9 @@ namespace DP_ETL_TOOL.Controls
                 newPoint.Offset(offset);
                 this.Location = newPoint;
             }
+
+            SetGuiCoords();
+
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
@@ -121,6 +120,9 @@ namespace DP_ETL_TOOL.Controls
             this.BackColor = tableColor;
 
             this.isDragged = false;
+
+            SetGuiCoords();
+
         }
 
         protected override void OnMouseHover(EventArgs e)
@@ -152,6 +154,15 @@ namespace DP_ETL_TOOL.Controls
             senderControl.Parent.Parent.Dispose();
         }
 
+
+        public void SetGuiCoords()
+        {
+            GUICoordsEntity coords = this.tableEntity.GetCoords();
+            coords.SetPosX(this.Bounds.X);
+            coords.SetPosY(this.Bounds.Y);
+            coords.SetWidth(this.Width);
+            coords.SetHeight(this.Height);
+        }
         
 
     }

@@ -1,6 +1,8 @@
-﻿using DP_ETL_TOOL.Types;
+﻿using DP_ETL_TOOL.Controls;
+using DP_ETL_TOOL.Types;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Windows.Forms;
 
 namespace DP_ETL_TOOL.Entities
 {
@@ -22,7 +24,27 @@ namespace DP_ETL_TOOL.Entities
             joinEntities = new List<JoinEntity>();
             this.layerType = layerType;
             this.memberName = memberName;
-        }        
+        }
+
+        public void ClassifyControlTypes(List<Control> controls)
+        {
+            tableEntities.Clear();
+            joinEntities.Clear();
+
+            foreach (Control c in controls)
+            {
+                if (c.GetType() == typeof(TableControl))
+                {
+                    TableControl tc = (TableControl)c;
+                    tableEntities.Add(tc.GetTableEntity());
+                }
+                else if (c.GetType() == typeof(JoinControl))
+                {
+                    JoinControl jc = (JoinControl)c;
+                    joinEntities.Add(jc.GetJoinEntity());
+                }
+            }
+        }
 
         public void SetMemberName(string memberName)
         {

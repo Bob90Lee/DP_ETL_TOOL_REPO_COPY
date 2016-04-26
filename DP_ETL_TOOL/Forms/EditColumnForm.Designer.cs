@@ -37,7 +37,7 @@
             this.tbColumnName = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.lblDeleteTable = new System.Windows.Forms.Label();
+            this.lblDeleteColumn = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblColumnLength
@@ -117,22 +117,22 @@
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
             // 
-            // lblDeleteTable
+            // lblDeleteColumn
             // 
-            this.lblDeleteTable.AutoSize = true;
-            this.lblDeleteTable.ForeColor = System.Drawing.Color.Red;
-            this.lblDeleteTable.Location = new System.Drawing.Point(200, 152);
-            this.lblDeleteTable.Name = "lblDeleteTable";
-            this.lblDeleteTable.Size = new System.Drawing.Size(68, 13);
-            this.lblDeleteTable.TabIndex = 44;
-            this.lblDeleteTable.Text = "Delete Table";
+            this.lblDeleteColumn.AutoSize = true;
+            this.lblDeleteColumn.ForeColor = System.Drawing.Color.Red;
+            this.lblDeleteColumn.Location = new System.Drawing.Point(200, 152);
+            this.lblDeleteColumn.Name = "lblDeleteColumn";
+            this.lblDeleteColumn.Size = new System.Drawing.Size(76, 13);
+            this.lblDeleteColumn.TabIndex = 44;
+            this.lblDeleteColumn.Text = "Delete Column";
             // 
             // EditColumnForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(282, 174);
-            this.Controls.Add(this.lblDeleteTable);
+            this.Controls.Add(this.lblDeleteColumn);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.lblColumnLength);
@@ -160,6 +160,6 @@
         private System.Windows.Forms.TextBox tbColumnName;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Label lblDeleteTable;
+        private System.Windows.Forms.Label lblDeleteColumn;
     }
 }

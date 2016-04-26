@@ -48,6 +48,7 @@
             this.chListBoxTableList.FormattingEnabled = true;
             this.chListBoxTableList.Location = new System.Drawing.Point(12, 12);
             this.chListBoxTableList.Name = "chListBoxTableList";
+            this.chListBoxTableList.ScrollAlwaysVisible = true;
             this.chListBoxTableList.Size = new System.Drawing.Size(372, 109);
             this.chListBoxTableList.TabIndex = 0;
             // 

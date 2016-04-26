@@ -10,6 +10,7 @@ using System.Text;
 using DP_ETL_TOOL.Forms;
 using System.Runtime.Serialization;
 using System.Xml;
+using System.Data;
 
 namespace DP_ETL_TOOL
 {
@@ -24,6 +25,8 @@ namespace DP_ETL_TOOL
         private string lastSelectedMode;
         private Enums.Layer layer = Enums.Layer.Extraction_Layer;
         private int objectCount = 0;
+
+        private bool objectWasDeleted = false;
 
         public MainForm()
         {
@@ -43,8 +46,20 @@ namespace DP_ETL_TOOL
             exitToolStripMenuItem.Click += new EventHandler(ExitApplication);
             lbDesignerList.SelectedValueChanged += new EventHandler(DesignerListValueChanged);
             lbDesignerMode.SelectedValueChanged += new EventHandler(DesignerModeValueChanged);
-
             rightTabs.SelectedIndexChanged += new EventHandler(OnRightTabsChanged);
+
+            foreach (ToolStripMenuItem tsItem in menuStripObjectsOverview.Items)
+            {
+                if (tsItem.Name.Substring(0, 2) == "ts")
+                {
+                    foreach (ToolStripDropDownItem ddItem in tsItem.DropDownItems)
+                    {
+                        ddItem.Click += new EventHandler(ObjectsOverviewSelect);
+                    }
+                }
+            }
+
+            tsSave.Click += new EventHandler(OnClickObjectPropertiesSave);
 
         }
 
@@ -91,7 +106,15 @@ namespace DP_ETL_TOOL
                         project.AddTable(tableControl);
                         tableControl.Location = coordinates;
                         visualPanel.Controls.Add(tableControl);
+
+                        LayerMemberEntity member = new LayerMemberEntity(tableControl.GetTableEntity().GetName(), Enums.Layer.All_Tables);
+                        List<Control> controls = new List<Control>();
+                        controls.Add(tableControl);
+                        member.ClassifyControlTypes(controls);
+                        project.AddLayerMember(member, Enums.Layer.All_Tables);
+
                         createTableForm.Dispose();
+
                     };
 
                     createTableForm.Controls["btnAdd"].Click += (s, a) =>
@@ -103,7 +126,15 @@ namespace DP_ETL_TOOL
                             foreach (TableControl tc in project.GetTables())
                             {
                                 TableEntity te = tc.GetTableEntity();
-                                if (te.GetName().ToUpper().Equals(tableArraySplit[1].ToUpper()))
+
+                                string schema = te.GetSchema();
+
+                                if (schema == null)
+                                {
+                                    schema = "";
+                                }
+
+                                if (te.GetName().ToUpper().Equals(tableArraySplit[1].ToUpper()) && schema.Equals(tableArraySplit[0].ToUpper()))
                                 {
                                     visualPanel.Controls.Add(tc);
                                 }
@@ -172,7 +203,7 @@ namespace DP_ETL_TOOL
                         SelectColumnForm selectColumnForm = new SelectColumnForm();
                         ComboBox comboColumn = (ComboBox)selectColumnForm.Controls["combColumnName"];
                         ColumnEntity column = null;
-                        populateComboBoxColumn(comboColumn, te);
+                        PopulateComboBoxColumn(comboColumn, te);
 
                         selectColumnForm.Controls["btnOk"].Click += (s, a) =>
                         {
@@ -304,6 +335,15 @@ namespace DP_ETL_TOOL
 
             b.SelectedItem = b.Items[0];
             lastSelectedMode = b.SelectedItem.ToString();
+
+            if (b.SelectedItem.ToString().ToUpper() == "TABLE")
+            {
+                tsObjectProperties.Enabled = false;
+            }
+            else
+            {
+                tsObjectProperties.Enabled = true;
+            }
         }
 
         private void DesignerListValueChanged(object sender, EventArgs e)
@@ -325,6 +365,7 @@ namespace DP_ETL_TOOL
 
             if (visualPanel.Controls.Count > 0 && lb.SelectedItem.ToString() != lastSelectedMode)
             {
+
                 var confirmResult = MessageBox.Show("Are you sure you want to change designer mode? Changing so results will result in clearing of current workspace ( Your object will not be lost. ).",
                          "Confirm mode change!",
                          MessageBoxButtons.YesNo);
@@ -333,6 +374,8 @@ namespace DP_ETL_TOOL
                     lbDesignerList.Items.Clear();
                     visualPanel.Controls.Clear();
                     PopulateObjectList(lbDesignerList, lb);
+
+
                 }
                 else
                 {
@@ -345,6 +388,15 @@ namespace DP_ETL_TOOL
             }
 
             lastSelectedMode = lb.SelectedItem.ToString();
+
+            if (lb.SelectedItem.ToString().ToUpper() == "TABLE")
+            {
+                tsObjectProperties.Enabled = false;
+            }
+            else
+            {
+                tsObjectProperties.Enabled = true;
+            }
         }
 
         private void ParseObjectsToCode(Enums.ModeType modeType, List<Control> ctrls)
@@ -379,9 +431,9 @@ namespace DP_ETL_TOOL
                 editForm.Controls["btnEditJoin"].Enabled = false;
             }
 
-            populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
-            populateComboBoxColumnType((ComboBox)editForm.Controls["combColumnType"]);
-            populateComboBoxJoins((ComboBox)editForm.Controls["combJoins"], project.GetJoins(), te.GetName());
+            PopulateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
+            PopulateComboBoxColumnType((ComboBox)editForm.Controls["combColumnType"]);
+            PopulateComboBoxJoins((ComboBox)editForm.Controls["combJoins"], project.GetJoins(), te);
 
             editForm.Controls["tbTableName"].Text = te.GetName();
             editForm.Controls["tbSchemaName"].Text = te.GetSchema();
@@ -404,7 +456,7 @@ namespace DP_ETL_TOOL
 
                     te.AddColumn(editForm.Controls["tbColumnName"].Text.ToString(), cb.SelectedItem.ToString(), length, check.Checked);
 
-                    populateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
+                    PopulateComboBoxColumn((ComboBox)editForm.Controls["combColumn"], te);
                 }
             };
 
@@ -426,7 +478,7 @@ namespace DP_ETL_TOOL
 
                     check.Checked = column.GetColumnIsUnique();
 
-                    populateComboBoxColumnType((ComboBox)editColumnForm.Controls["combColumnType"]);
+                    PopulateComboBoxColumnType((ComboBox)editColumnForm.Controls["combColumnType"]);
 
                     editColumnForm.Controls["btnOk"].Click += (innerSender, innerArgs) =>
                     {
@@ -444,6 +496,25 @@ namespace DP_ETL_TOOL
                     editColumnForm.Controls["btnCancel"].Click += (innerSender, innerArgs) =>
                     {
                         editColumnForm.Dispose();
+                    };
+
+                    editColumnForm.Controls["lblDeleteColumn"].Click += (innerSender, innerArgs) =>
+                    {
+                        var confirmResult = MessageBox.Show("Are you sure you want to delete column? Doing so, will remove column and all its join deendencies. Only use when you know what are you doing.",
+                         "Confirm join deletion!",
+                         MessageBoxButtons.YesNo);
+                        if (confirmResult == DialogResult.Yes)
+                        {
+                            List<JoinControl> jc = project.DeleteColumnAndAllDependencies(te, column);
+                            if (jc != null && jc.Count > 0)
+                            {
+                                foreach (JoinControl join in jc)
+                                {
+                                    visualPanel.Controls.Remove(join);
+                                }
+                            }
+                            editColumnForm.Dispose();
+                        }
                     };
 
                     editColumnForm.ShowDialog(this);
@@ -491,6 +562,44 @@ namespace DP_ETL_TOOL
                             columnPairsList.Items.Add(columnPair.GetParentColumn().GetColumnName() + " on " + columnPair.GetChildColumn().GetColumnName());
                         }
 
+                        PopulateComboBoxColumn((ComboBox)editJoinForm.Controls["combMainColumn"], currentJoin.GetMainTable());
+                        PopulateComboBoxColumn((ComboBox)editJoinForm.Controls["combChilColumn"], currentJoin.GetChildTable());
+
+                        editJoinForm.Controls["btnAddPair"].Click += (e, a) =>
+                        {
+                            TableEntity main = currentJoin.GetMainTable();
+                            TableEntity child = currentJoin.GetChildTable();
+
+                            ComboBox cbMain = (ComboBox)editJoinForm.Controls["combMainColumn"];
+                            ComboBox cbChild = (ComboBox)editJoinForm.Controls["combChilColumn"];
+
+                            ColumnEntity mainSelectedColumn = main.GetColumnByName(cbMain.SelectedItem.ToString());
+                            ColumnEntity childSelectedColumn = main.GetColumnByName(cbChild.SelectedItem.ToString());
+
+                            currentJoin.AddJoinPair(new ColumnPairEntity(mainSelectedColumn, childSelectedColumn));
+
+                            columnPairsList.Items.Clear();
+                            foreach (ColumnPairEntity columnPair in currentJoin.GetJoinPairs())
+                            {
+                                columnPairsList.Items.Add(columnPair.GetParentColumn().GetColumnName() + " on " + columnPair.GetChildColumn().GetColumnName());
+                            }
+                        };
+
+                        editJoinForm.Controls["btnOk"].Click += (e, a) =>
+                        {
+                            editJoinForm.Dispose();
+                        };
+
+                        editJoinForm.Controls["btnCancel"].Click += (e, a) =>
+                        {
+                            editJoinForm.Dispose();
+                        };
+
+                        editJoinForm.Controls["lblDeleteJoinPair"].Click += (e, a) =>
+                        {
+                            editJoinForm.Dispose();
+                        };
+
                         editJoinForm.ShowDialog(this);
                         editJoinForm.Location = this.PointToClient(Control.MousePosition);
 
@@ -502,9 +611,7 @@ namespace DP_ETL_TOOL
             { // save form
                 te.SetTableName(editForm.Controls["tbTableName"].Text);
                 te.SetSchemaName(editForm.Controls["tbSchemaName"].Text);
-
                 tc.Text = te.GetName();
-
                 editForm.Dispose();
 
             };
@@ -514,18 +621,32 @@ namespace DP_ETL_TOOL
                 editForm.Dispose();
             };
 
+            editForm.Controls["lblDeleteTable"].Click += (sender, args) =>
+            {
+                var confirmResult = MessageBox.Show("Are you sure you want to delete table? Doing so, will remove object and all its dependencies. Only use when you know what are you doing.",
+                         "Confirm table deletion!",
+                         MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    project.DeleteTableAndAllDependenciesByTableName(te.GetSchema(), te.GetName());
+                    objectWasDeleted = true;
+                    editForm.Dispose();
+                    visualPanel.Controls.Remove(tc);
+                }
+            };
+
             editForm.ShowDialog(this);
             editForm.Location = this.PointToClient(Control.MousePosition);
 
         }
 
-        private void populateComboBoxColumnType(ComboBox cb)
+        private void PopulateComboBoxColumnType(ComboBox cb)
         {
             cb.Items.Add("VARCHAR2");
             cb.Items.Add("NUMBER");
         }
 
-        private void populateComboBoxColumn(ComboBox cb, TableEntity te)
+        private void PopulateComboBoxColumn(ComboBox cb, TableEntity te)
         {
             cb.Items.Clear();
 
@@ -540,7 +661,7 @@ namespace DP_ETL_TOOL
             }
         }
 
-        private void populateComboBoxJoins(ComboBox cb, List<JoinControl> jc, string tableName)
+        private void PopulateComboBoxJoins(ComboBox cb, List<JoinControl> jc, TableEntity mainTable)
         {
             cb.Items.Clear();
 
@@ -554,8 +675,11 @@ namespace DP_ETL_TOOL
 
                     foreach (ColumnPairEntity columnPair in joinEntity.GetJoinPairs())
                     {
-                        String s = columnPair.GetParentColumn().GetColumnName() + " ( " + joinEntity.GetJoinType().ToString() + " ) " + columnPair.GetChildColumn().GetColumnName();
-                        cb.Items.Add(s);
+                        if (joinEntity.GetMainTable() == mainTable)
+                        {
+                            String s = columnPair.GetParentColumn().GetColumnName() + " ( " + joinEntity.GetJoinType().ToString() + " ) " + columnPair.GetChildColumn().GetColumnName() + " " + joinEntity.GetChildTableName();
+                            cb.Items.Add(s);
+                        }
                     }
 
                 }
@@ -639,13 +763,13 @@ namespace DP_ETL_TOOL
             return true; // success
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItemClick(object sender, EventArgs e)
         {
             project.PrepareForSerializationToXML();
             SaveToFile();
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItemClick(object sender, EventArgs e)
         {
             this.project = null;
             GC.Collect();
@@ -663,7 +787,7 @@ namespace DP_ETL_TOOL
                 GUICoordsEntity guiCoords = tc.GetTableEntity().GetCoords();
                 tc.SetBounds(guiCoords.GetPosX(), guiCoords.GetPosY(), guiCoords.GetWidth(), guiCoords.GetHeight());
 
-                visualPanel.Controls.Add(tc);
+                //visualPanel.Controls.Add(tc);
             }
 
             foreach (JoinControl jc in project.GetJoins())
@@ -683,7 +807,7 @@ namespace DP_ETL_TOOL
                     }
                 }
 
-                visualPanel.Controls.Add(jc);
+                //visualPanel.Controls.Add(jc);
             }
 
             this.Invalidate();
@@ -691,12 +815,12 @@ namespace DP_ETL_TOOL
 
 
 
-        private void codeDecoration_Click(object sender, EventArgs e)
+        private void CodeDecorationClick(object sender, EventArgs e)
         {
             codeEdit.Focus();
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewToolStripMenuItemClick(object sender, EventArgs e)
         {
             this.project = null;
             GC.Collect();
@@ -704,10 +828,10 @@ namespace DP_ETL_TOOL
             visualPanel.Controls.Clear();
         }
 
-        private void tsButtonGenerateCode_Click(object sender, EventArgs e)
+        private void TSButtonGenerateCodeClick(object sender, EventArgs e)
         {
             // parser mode
-            Enums.ModeType mode = GetSelectedMode(lbDesignerMode);
+            Enums.ModeType mode = GetSelectedModeType(lbDesignerMode);
             ParseObjectsToCode(mode, GetActiveDesignerObjectList());
             codeEdit.RefreshSyntax();
         }
@@ -724,7 +848,7 @@ namespace DP_ETL_TOOL
             return ctrls;
         }
 
-        private Enums.ModeType GetSelectedMode(ListBox lbDesignerMode)
+        private Enums.ModeType GetSelectedModeType(ListBox lbDesignerMode)
         {
             string mode = lbDesignerMode.SelectedItem.ToString();
 
@@ -755,16 +879,157 @@ namespace DP_ETL_TOOL
             return Enums.ModeType.NULL;
         }
 
+        private Enums.Layer GetSelectedLayer(ListBox lbDesignerMode)
+        {
+            string mode = lbDesignerMode.SelectedItem.ToString();
+
+            switch (mode.ToUpper())
+            {
+                case ("TABLE"):
+                    {
+                        Enums.TableType tableType = SelectTableType(lbDesignerList);
+                        switch (tableType)
+                        {
+                            case (Enums.TableType.Extraction_Table):
+                                {
+                                    return Enums.Layer.Extraction_Layer;
+                                };
+                            case (Enums.TableType.Source_Table):
+                                {
+                                    return Enums.Layer.Extraction_Layer;
+                                };
+                            case (Enums.TableType.Load_Table):
+                                {
+                                    return Enums.Layer.Transformation_Layer;
+                                };
+                            case (Enums.TableType.Destination_Table):
+                                {
+                                    return Enums.Layer.Load_Layer;
+                                };
+                            case (Enums.TableType.NULL):
+                                {
+                                    return Enums.Layer.NULL;
+                                };
+                        }
+
+                        break;
+                    }
+                case ("EXTRACTION PROCEDURE"):
+                    {
+                        return Enums.Layer.Extraction_Layer;
+                    }
+                case ("TRANSFORMATION VIEW"):
+                    {
+                        return Enums.Layer.Transformation_Layer;
+
+                    }
+                case ("TRANSFORMATION PROCEDURE"):
+                    {
+                        return Enums.Layer.Transformation_Layer;
+
+                    }
+                case ("DESTINATION VIEW"):
+                    {
+                        return Enums.Layer.Load_Layer;
+
+                    }
+            }
+
+            return Enums.Layer.NULL;
+        }
+
         private void OnRightTabsChanged(object sender, EventArgs e)
         {
             TabControl tabControl = (TabControl)sender;
 
-            if (tabControl.SelectedIndex == 1)
+            if (tabControl.SelectedIndex == 1 && objectWasDeleted)
             {
-                // call populate layer objects
+                dataTableView.Columns.Clear();
+                dataTableView.Rows.Clear();
+
+                objectWasDeleted = false;
             }
         }
 
+        private void OnClickObjectPropertiesSave(object sender, EventArgs e)
+        {
+            List<Control> controls = GetActiveDesignerObjectList();
+            string s = tsTextBoxObjectName.Text.Trim().ToUpper();
+            if (s.Length > 0)
+            {
+                LayerMemberEntity member = new LayerMemberEntity(s, GetSelectedLayer(lbDesignerMode));
+                member.ClassifyControlTypes(controls);
+                project.AddLayerMember(member, GetSelectedLayer(lbDesignerMode));
+            }
+
+        }
+
+        private void ObjectsOverviewSelect(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
+
+            switch (clickedItem.Text.ToUpper())
+            {
+                case ("SOURCE TABLES"):
+                    {
+                        FillTables(Enums.TableType.Source_Table);
+                        break;
+                    }
+                case ("EXTRACTION TABLES"):
+                    {
+                        FillTables(Enums.TableType.Extraction_Table);
+                        break;
+                    }
+                case ("LOAD TABLES"):
+                    {
+                        FillTables(Enums.TableType.Load_Table);
+                        break;
+                    }
+                case ("DESTINATION TABLES"):
+                    {
+                        FillTables(Enums.TableType.Destination_Table);
+                        break;
+                    }
+                case ("ALL TABLES"):
+                    {
+                        FillTables(Enums.TableType.NULL);
+                        break;
+                    }
+                default:
+                    {
+                        dataTableView.Rows.Clear();
+                        dataTableView.Columns.Clear();
+                        break;
+                    }
+            }
+
+        }
+
+        private void FillTables(Enums.TableType tableType)
+        {
+            dataTableView.Rows.Clear();
+            dataTableView.Columns.Clear();
+
+            dataTableView.Columns.Add("schemaName", "Schema Name");
+            dataTableView.Columns.Add("tableName", "Table Name");
+
+            foreach (LayerMemberEntity member in project.GetLayerMembers(Enums.Layer.All_Tables))
+            {
+                List<TableEntity> te = member.GetTables();
+
+                foreach (TableEntity t in te)
+                {
+                    if (tableType != Enums.TableType.NULL && t.GetTableType() == tableType)
+                    {
+                        dataTableView.Rows.Add(t.GetSchema(), t.GetName());
+                    }
+                    else if (tableType == Enums.TableType.NULL)
+                    {
+                        dataTableView.Rows.Add(t.GetSchema(), t.GetName());
+                    }
+                }
+            }
+        }
 
     }
 }

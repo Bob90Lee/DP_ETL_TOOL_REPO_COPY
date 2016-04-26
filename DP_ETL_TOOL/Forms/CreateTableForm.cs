@@ -14,6 +14,9 @@ namespace DP_ETL_TOOL.Forms
         public CreateTableForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
         }
     }
 }

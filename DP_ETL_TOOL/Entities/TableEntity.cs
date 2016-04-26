@@ -25,16 +25,24 @@ namespace DP_ETL_TOOL.Entities
 
         public TableEntity(Enums.TableType tableType)
         {
-            this.tableName = "TableNEW" + new Random().Next(10, 99);
+            this.tableName = "TABLE_NEW" + new Random().Next(10, 99);
+            this.tableSchema = "SCHEMA";
+            this.tableName = this.tableName.ToUpper().Trim();
             this.coords = new GUICoordsEntity();
             this.tableType = tableType;
+
+            this.tableColumns.Add(new ColumnEntity("ID", "NUMBER", 12, true));
         }
 
         public TableEntity(String tableName, Enums.TableType tableType)
         {
             this.tableName = tableName;
+            this.tableSchema = "SCHEMA";
             this.coords = new GUICoordsEntity();
             this.tableType = tableType;
+
+            this.tableColumns.Add(new ColumnEntity("ID", "NUMBER", 12, true));
+
         }
 
         public void SetTableName(String tableName)
@@ -110,6 +118,19 @@ namespace DP_ETL_TOOL.Entities
                 }
             }
         }
+        public void RemoveColumnEntity(ColumnEntity ce)
+        {
+            if (tableColumns != null)
+            {
+                List<ColumnEntity> tableColumnsTemp = new List<ColumnEntity>(tableColumns);
+
+                foreach (ColumnEntity ColumnEntity in tableColumnsTemp)
+                {
+                        tableColumns.Remove(ColumnEntity);
+                }
+            }
+        }
+
 
         public void RemoveIndex(String indexName)
         {
